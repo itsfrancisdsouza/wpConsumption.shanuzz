@@ -108,12 +108,6 @@
         }
         .grid-2 { grid-template-columns: 1fr; }
 
-        .photo-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--lk-space-md);
-        }
-
         .quantity-unit-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
@@ -249,98 +243,6 @@
             width: 100%;
         }
 
-        /* Photo Upload Styles */
-        .photo-upload {
-            position: relative;
-            border: 2px dashed var(--lk-outline);
-            border-radius: var(--lk-radius-md);
-            padding: var(--lk-space-lg);
-            text-align: center;
-            background: var(--lk-surface-container);
-            transition: all 0.2s ease;
-            cursor: pointer;
-            min-height: 200px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .photo-upload:hover {
-            border-color: var(--lk-primary);
-            background: var(--lk-surface);
-        }
-
-        .photo-upload.has-image {
-            padding: 0;
-            border: none;
-            background: transparent;
-        }
-
-        .photo-upload input[type="file"] {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        .photo-upload-content {
-            pointer-events: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: var(--lk-space-sm);
-        }
-
-        .photo-upload-icon {
-            font-size: 2rem;
-            color: var(--lk-primary);
-        }
-
-        .photo-upload-text {
-            color: var(--lk-on-surface-variant);
-            font-size: var(--lk-text-label);
-            text-align: center;
-        }
-
-        .photo-preview {
-            position: relative;
-            width: 100%;
-            height: 200px;
-            border-radius: var(--lk-radius-md);
-            overflow: hidden;
-            display: none;
-        }
-
-        .photo-preview img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .photo-remove {
-            position: absolute;
-            top: var(--lk-space-sm);
-            right: var(--lk-space-sm);
-            background: var(--lk-error);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 32px;
-            height: 32px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-        }
-
-        .photo-remove:hover {
-            background: #DC2626;
-        }
-
         .toast {
             position: fixed;
             top: 20px;
@@ -352,10 +254,15 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             transform: translateX(400px);
             transition: transform 0.3s ease;
-            z-index: 1000;
+            z-index: 9999;
+            max-width: 300px;
+            font-weight: 500;
         }
         .toast.show {
             transform: translateX(0);
+        }
+        .toast.error {
+            background: var(--lk-error);
         }
 
         .loading {
@@ -431,12 +338,6 @@
             background: var(--lk-accent);
         }
 
-        @media (max-width: 600px) {
-            .photo-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
         @media (min-width: 600px) {
             .grid-2 { grid-template-columns: repeat(2, 1fr); }
             .container {
@@ -498,51 +399,6 @@
                         <option value="returning">Returning Client</option>
                         <option value="walk-in">Walk-in</option>
                     </select>
-                </div>
-            </div>
-        </div>
-
-        <!-- Photos Section -->
-        <div class="section">
-            <div class="section-title">
-                <span>📸</span> Before & After Photos
-            </div>
-            
-            <div class="photo-grid">
-                <div class="field">
-                    <label class="label">Before Photo</label>
-                    <div class="photo-upload" id="beforePhotoUpload">
-                        <input type="file" id="beforePhoto" name="beforePhoto" accept="image/*" capture="environment">
-                        <div class="photo-upload-content">
-                            <div class="photo-upload-icon">📷</div>
-                            <div class="photo-upload-text">
-                                <strong>Tap to take or upload photo</strong><br>
-                                <small>Before treatment</small>
-                            </div>
-                        </div>
-                        <div class="photo-preview" id="beforePhotoPreview">
-                            <img id="beforePhotoImg" src="" alt="Before photo">
-                            <button type="button" class="photo-remove" onclick="SalonForm.removePhoto('before')" aria-label="Remove before photo">×</button>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="field">
-                    <label class="label">After Photo</label>
-                    <div class="photo-upload" id="afterPhotoUpload">
-                        <input type="file" id="afterPhoto" name="afterPhoto" accept="image/*" capture="environment">
-                        <div class="photo-upload-content">
-                            <div class="photo-upload-icon">📷</div>
-                            <div class="photo-upload-text">
-                                <strong>Tap to take or upload photo</strong><br>
-                                <small>After treatment</small>
-                            </div>
-                        </div>
-                        <div class="photo-preview" id="afterPhotoPreview">
-                            <img id="afterPhotoImg" src="" alt="After photo">
-                            <button type="button" class="photo-remove" onclick="SalonForm.removePhoto('after')" aria-label="Remove after photo">×</button>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -637,13 +493,13 @@
             <div class="section-title">
                 <span>🧴</span> Product Consumption & Inventory
             </div>
-            <button type="button" class="btn btn-success" onclick="SalonForm.addProductEntry()">
+            <button type="button" class="btn btn-success add-product-btn">
                 <span class="icon">+</span> Add Product Used
             </button>
             <div class="space-after-btn"></div>
             <div id="productContainer">
                 <div class="product-entry">
-                    <button type="button" class="btn btn-error" onclick="SalonForm.removeProductEntry(this)" aria-label="Remove product entry">Remove</button>
+                    <button type="button" class="btn btn-error remove-product-btn" aria-label="Remove product entry">Remove</button>
                     <div class="grid-1">
                         <div class="field">
                             <label class="label">Product Name</label>
@@ -675,13 +531,13 @@
             <div class="section-title">
                 <span>✨</span> Service Details & Results
             </div>
-            <button type="button" class="btn btn-success" onclick="SalonForm.addStylistEntry()">
+            <button type="button" class="btn btn-success add-stylist-btn">
                 <span class="icon">+</span> Add Stylist / Incentive
             </button>
             <div class="space-after-btn"></div>
             <div id="stylistContainer">
                 <div class="stylist-entry">
-                    <button type="button" class="btn btn-error" onclick="SalonForm.removeStylistEntry(this)" aria-label="Remove stylist entry">Remove</button>
+                    <button type="button" class="btn btn-error remove-stylist-btn" aria-label="Remove stylist entry">Remove</button>
                     <div class="grid-1">
                         <div class="field">
                             <label class="label" for="stylistName0">
@@ -733,7 +589,7 @@
 
 <template id="productTemplate">
     <div class="product-entry">
-        <button type="button" class="btn btn-error" onclick="SalonForm.removeProductEntry(this)" aria-label="Remove product entry">Remove</button>
+        <button type="button" class="btn btn-error remove-product-btn" aria-label="Remove product entry">Remove</button>
         <div class="grid-1">
             <div class="field">
                 <label class="label">Product Name</label>
@@ -761,7 +617,7 @@
 
 <template id="stylistTemplate">
     <div class="stylist-entry">
-        <button type="button" class="btn btn-error" onclick="SalonForm.removeStylistEntry(this)" aria-label="Remove stylist entry">Remove</button>
+        <button type="button" class="btn btn-error remove-stylist-btn" aria-label="Remove stylist entry">Remove</button>
         <div class="grid-1">
             <div class="field">
                 <label class="label">
@@ -783,8 +639,6 @@
     'use strict';
     
     const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQwMeJAvIhiingIL1otFVM08kZedwZKC-u3uXplgXJmwcBlcWRFGuMQbcH-gSLu7Iqr-GFSyLKTxJdO/pub?gid=970040881&single=true&output=csv";
-    
-    // Your Google Apps Script Web App URL
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbynE1KRwABodBVmrzC3jep5LweAP0B53pUPW89PgL_EGrx8IKH5ikMj2EN3QWY6a2ZThQ/exec';
     
     let products = [];
@@ -796,7 +650,6 @@
             this.bindEvents();
             this.updateTotalCost();
             this.loadProducts();
-            this.setupPhotoUpload();
         },
 
         async loadProducts() {
@@ -816,72 +669,6 @@
             }
         },
 
-        setupPhotoUpload() {
-            // Setup before photo upload
-            const beforeInput = document.getElementById('beforePhoto');
-            beforeInput.addEventListener('change', (e) => this.handlePhotoUpload(e, 'before'));
-
-            // Setup after photo upload
-            const afterInput = document.getElementById('afterPhoto');
-            afterInput.addEventListener('change', (e) => this.handlePhotoUpload(e, 'after'));
-        },
-
-        handlePhotoUpload(event, type) {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            // Validate file type
-            if (!file.type.startsWith('image/')) {
-                this.showToast('Please select a valid image file', 'error');
-                return;
-            }
-
-            // Validate file size (max 5MB)
-            if (file.size > 5 * 1024 * 1024) {
-                this.showToast('Image file size must be less than 5MB', 'error');
-                return;
-            }
-
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                this.displayPhotoPreview(e.target.result, type);
-            };
-            reader.readAsDataURL(file);
-        },
-
-        displayPhotoPreview(imageSrc, type) {
-            const uploadArea = document.getElementById(`${type}PhotoUpload`);
-            const preview = document.getElementById(`${type}PhotoPreview`);
-            const img = document.getElementById(`${type}PhotoImg`);
-            const uploadContent = uploadArea.querySelector('.photo-upload-content');
-
-            img.src = imageSrc;
-            uploadContent.style.display = 'none';
-            preview.style.display = 'block';
-            uploadArea.classList.add('has-image');
-        },
-
-        removePhoto(type) {
-            const uploadArea = document.getElementById(`${type}PhotoUpload`);
-            const preview = document.getElementById(`${type}PhotoPreview`);
-            const input = document.getElementById(`${type}Photo`);
-            const uploadContent = uploadArea.querySelector('.photo-upload-content');
-
-            input.value = '';
-            preview.style.display = 'none';
-            uploadContent.style.display = 'flex';
-            uploadArea.classList.remove('has-image');
-        },
-
-        convertImageToBase64(file) {
-            return new Promise((resolve, reject) => {
-                const reader = new FileReader();
-                reader.onload = () => resolve(reader.result);
-                reader.onerror = reject;
-                reader.readAsDataURL(file);
-            });
-        },
-
         parseCSV(text) {
             const lines = text.trim().split('\n');
             const parsedProducts = [];
@@ -891,7 +678,6 @@
                 const line = lines[i].trim();
                 if (!line) continue;
                 
-                // Simple CSV parsing - handles quoted fields
                 const fields = [];
                 let current = '';
                 let inQuotes = false;
@@ -909,14 +695,12 @@
                 }
                 fields.push(current.trim());
                 
-                // Column mapping: B=Product Name, C=Product Type, E=Unit, J=Stylist Name
                 if (fields.length >= 10) {
-                    const productName = fields[1].replace(/^"|"$/g, '').trim();    // Column B
-                    const productType = fields[2].replace(/^"|"$/g, '').trim();    // Column C
-                    const unit = fields[4].replace(/^"|"$/g, '').trim();           // Column E
-                    const stylistName = fields[9].replace(/^"|"$/g, '').trim();   // Column J (index 9)
+                    const productName = fields[1].replace(/^"|"$/g, '').trim();
+                    const productType = fields[2].replace(/^"|"$/g, '').trim();
+                    const unit = fields[4].replace(/^"|"$/g, '').trim();
+                    const stylistName = fields[9].replace(/^"|"$/g, '').trim();
                     
-                    // Add product if valid
                     if (productName && productType && productName !== 'Product Name') {
                         parsedProducts.push({ 
                             name: productName, 
@@ -925,7 +709,6 @@
                         });
                     }
                     
-                    // Add stylist if valid and unique
                     if (stylistName && stylistName !== 'Stylist Name' && stylistName !== 'stylist name' && !parsedStylists.includes(stylistName)) {
                         parsedStylists.push(stylistName);
                     }
@@ -938,22 +721,65 @@
             };
         },
 
+        bindEvents() {
+            const form = document.getElementById('salonForm');
+            form.addEventListener('submit', this.handleSubmit.bind(this));
+            
+            // Event delegation for buttons
+            document.addEventListener('click', (e) => {
+                if (e.target.classList.contains('add-product-btn')) {
+                    this.addProductEntry();
+                } else if (e.target.classList.contains('remove-product-btn')) {
+                    this.removeProductEntry(e.target);
+                } else if (e.target.classList.contains('add-stylist-btn')) {
+                    this.addStylistEntry();
+                } else if (e.target.classList.contains('remove-stylist-btn')) {
+                    this.removeStylistEntry(e.target);
+                }
+            });
+            
+            // Bind initial incentive input listeners
+            document.querySelectorAll('.stylist-incentive-input').forEach(input => {
+                input.addEventListener('input', this.updateTotalCost.bind(this));
+            });
+            
+            // Event delegation for dynamic incentive inputs
+            document.getElementById('stylistContainer').addEventListener('input', (e) => {
+                if (e.target && e.target.classList.contains('stylist-incentive-input')) {
+                    this.updateTotalCost();
+                }
+            });
+            
+            // Hide suggestions when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.field')) {
+                    document.querySelectorAll('.unit-pills').forEach(pills => {
+                        pills.style.display = 'none';
+                    });
+                    document.querySelectorAll('.autocomplete-suggestions').forEach(suggestions => {
+                        suggestions.style.display = 'none';
+                    });
+                }
+            });
+            
+            // Real-time validation
+            form.addEventListener('input', this.clearFieldError.bind(this));
+            form.addEventListener('change', this.clearFieldError.bind(this));
+        },
+
         setupAutocomplete() {
-            // Setup autocomplete for existing product inputs
             document.querySelectorAll('.product-name-input').forEach(input => {
                 this.bindAutocomplete(input);
             });
         },
 
         setupStylistAutocomplete() {
-            // Setup autocomplete for existing stylist inputs
             document.querySelectorAll('.stylist-name-input').forEach(input => {
                 this.bindStylistAutocomplete(input);
             });
         },
 
         setupInitialUnitSuggestions() {
-            // Setup unit suggestions for existing unit inputs
             document.querySelectorAll('.unit-input').forEach(input => {
                 this.bindUnitSuggestions(input);
             });
@@ -1077,7 +903,6 @@
                 }
             });
             
-            // Hide suggestions when clicking outside
             document.addEventListener('click', (e) => {
                 if (!input.contains(e.target) && !suggestionBox.contains(e.target)) {
                     suggestionBox.style.display = 'none';
@@ -1087,8 +912,6 @@
 
         bindUnitSuggestions(unitInput) {
             const unitPills = unitInput.nextElementSibling;
-            
-            // Show common unit suggestions initially
             this.updateUnitSuggestions(unitInput, null);
             
             unitInput.addEventListener('focus', () => {
@@ -1100,32 +923,26 @@
             const unitPills = unitInput.nextElementSibling;
             unitPills.innerHTML = '';
             
-            // Get all unique units from the products list
             const allUnits = [...new Set(products.map(p => p.unit).filter(Boolean))];
             
-            // If a product is selected, prioritize its unit and similar units
             let suggestedUnits = [];
             if (selectedProduct && selectedProduct.unit) {
                 suggestedUnits = [selectedProduct.unit];
-                // Add other units that aren't already included
                 allUnits.forEach(unit => {
                     if (!suggestedUnits.includes(unit)) {
                         suggestedUnits.push(unit);
                     }
                 });
             } else {
-                // Default: show all available units
                 suggestedUnits = allUnits;
             }
             
-            // Limit to first 8 units for better UX
             suggestedUnits.slice(0, 8).forEach((unit, index) => {
                 const pill = document.createElement('button');
                 pill.type = 'button';
                 pill.className = 'unit-pill';
                 pill.textContent = unit;
                 
-                // Mark the exact match with special styling
                 if (selectedProduct && unit === selectedProduct.unit) {
                     pill.classList.add('exact-match');
                 }
@@ -1140,52 +957,6 @@
             });
         },
 
-        setInitialDate() {
-            const today = new Date();
-            const yesterday = new Date(today);
-            yesterday.setDate(yesterday.getDate() - 1);
-            const nextMonth = new Date(today);
-            nextMonth.setMonth(nextMonth.getMonth() + 1);
-            
-            const visitDateInput = document.getElementById('visitDate');
-            visitDateInput.valueAsDate = today;
-            visitDateInput.min = yesterday.toISOString().split('T')[0];
-            visitDateInput.max = nextMonth.toISOString().split('T')[0];
-        },
-
-        bindEvents() {
-            const form = document.getElementById('salonForm');
-            form.addEventListener('submit', this.handleSubmit.bind(this));
-            
-            // Bind initial incentive input listeners
-            document.querySelectorAll('.stylist-incentive-input').forEach(input => {
-                input.addEventListener('input', this.updateTotalCost.bind(this));
-            });
-            
-            // Event delegation for dynamic incentive inputs
-            document.getElementById('stylistContainer').addEventListener('input', (e) => {
-                if (e.target && e.target.classList.contains('stylist-incentive-input')) {
-                    this.updateTotalCost();
-                }
-            });
-            
-            // Hide unit pills and suggestion boxes when clicking outside
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('.field')) {
-                    document.querySelectorAll('.unit-pills').forEach(pills => {
-                        pills.style.display = 'none';
-                    });
-                    document.querySelectorAll('.autocomplete-suggestions').forEach(suggestions => {
-                        suggestions.style.display = 'none';
-                    });
-                }
-            });
-            
-            // Real-time validation
-            form.addEventListener('input', this.clearFieldError.bind(this));
-            form.addEventListener('change', this.clearFieldError.bind(this));
-        },
-
         addProductEntry() {
             const container = document.getElementById('productContainer');
             const template = document.getElementById('productTemplate');
@@ -1193,7 +964,6 @@
             
             container.appendChild(clone);
             
-            // Setup autocomplete and unit suggestions for the new inputs
             const addedEntry = container.lastElementChild;
             const newProductInput = addedEntry.querySelector('.product-name-input');
             const newUnitInput = addedEntry.querySelector('.unit-input');
@@ -1203,7 +973,8 @@
         },
 
         removeProductEntry(button) {
-            if (document.querySelectorAll('.product-entry').length > 1) {
+            const entries = document.querySelectorAll('.product-entry');
+            if (entries.length > 1) {
                 button.closest('.product-entry').remove();
             } else {
                 this.showToast('At least one product entry is required.', 'error');
@@ -1215,7 +986,6 @@
             const template = document.getElementById('stylistTemplate');
             const clone = document.importNode(template.content, true);
             
-            // Add unique IDs to the cloned elements
             const count = container.querySelectorAll('.stylist-entry').length;
             const inputs = clone.querySelectorAll('input');
             inputs.forEach((input, index) => {
@@ -1228,7 +998,6 @@
             
             container.appendChild(clone);
             
-            // Setup stylist autocomplete for the new input
             const addedEntry = container.lastElementChild;
             const newStylistInput = addedEntry.querySelector('.stylist-name-input');
             this.bindStylistAutocomplete(newStylistInput);
@@ -1237,7 +1006,8 @@
         },
 
         removeStylistEntry(button) {
-            if (document.querySelectorAll('.stylist-entry').length > 1) {
+            const entries = document.querySelectorAll('.stylist-entry');
+            if (entries.length > 1) {
                 button.closest('.stylist-entry').remove();
                 this.updateTotalCost();
             } else {
@@ -1257,13 +1027,24 @@
             document.getElementById('totalCost').value = total.toFixed(2);
         },
 
+        setInitialDate() {
+            const today = new Date();
+            const yesterday = new Date(today);
+            yesterday.setDate(yesterday.getDate() - 1);
+            const nextMonth = new Date(today);
+            nextMonth.setMonth(nextMonth.getMonth() + 1);
+            
+            const visitDateInput = document.getElementById('visitDate');
+            visitDateInput.valueAsDate = today;
+            visitDateInput.min = yesterday.toISOString().split('T')[0];
+            visitDateInput.max = nextMonth.toISOString().split('T')[0];
+        },
+
         validateField(field) {
             const value = field.value.trim();
-            const fieldName = field.name || field.id;
             let isValid = true;
             let errorMessage = '';
 
-            // Clear previous error state
             field.classList.remove('error');
             
             if (field.hasAttribute('required') && !value) {
@@ -1311,7 +1092,6 @@
                 errorElement.classList.remove('show');
             }
             
-            // Clear services error when any service is selected
             if (field.name === 'services') {
                 const servicesError = document.getElementById('services-error');
                 if (servicesError) {
@@ -1335,14 +1115,11 @@
             const form = e.target;
             const submitButton = form.querySelector('.btn-submit');
             
-            // Show loading state
             submitButton.classList.add('loading');
             submitButton.textContent = 'Saving...';
             
-            // Validate form
             let isValid = true;
             
-            // Validate required fields
             const requiredFields = form.querySelectorAll('[required]');
             requiredFields.forEach(field => {
                 if (!this.validateField(field)) {
@@ -1350,13 +1127,11 @@
                 }
             });
             
-            // Validate email if provided
             const emailField = document.getElementById('email');
             if (emailField.value && !this.validateField(emailField)) {
                 isValid = false;
             }
             
-            // Validate services
             if (!this.validateServices()) {
                 isValid = false;
             }
@@ -1368,53 +1143,74 @@
                 return;
             }
             
-            // Collect form data
             const formData = new FormData(form);
-            const data = await this.processFormData(formData);
+            const data = this.processFormData(formData);
+            
+            console.log('Sending data to Google Sheets:', data);
             
             try {
-                // Post to Google Sheets via Apps Script
                 const response = await fetch(APPS_SCRIPT_URL, {
                     method: 'POST',
+                    mode: 'cors',
                     headers: {
                         'Content-Type': 'application/json',
                     },
                     body: JSON.stringify(data)
                 });
                 
-                const result = await response.json();
+                console.log('Response status:', response.status);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const responseText = await response.text();
+                console.log('Raw response:', responseText);
+                
+                let result;
+                try {
+                    result = JSON.parse(responseText);
+                } catch (parseError) {
+                    console.error('Failed to parse response as JSON:', parseError);
+                    throw new Error('Invalid response format from server');
+                }
+                
+                console.log('Parsed result:', result);
                 
                 if (result.success) {
-                    this.showToast('✅ Client record saved to Google Sheets successfully!', 'success');
+                    this.showToast('✅ Client record saved successfully!', 'success');
                     
-                    // Reset form after successful save
                     form.reset();
                     this.setInitialDate();
                     this.updateTotalCost();
-                    
-                    // Reset photo previews
-                    this.removePhoto('before');
-                    this.removePhoto('after');
                 } else {
                     throw new Error(result.message || 'Failed to save data');
                 }
                 
             } catch (error) {
                 console.error('Error saving to Google Sheets:', error);
-                this.showToast('❌ Failed to save to Google Sheets. Please check your connection and try again.', 'error');
                 
-                // Fallback: log data locally for development
+                let errorMessage = '❌ Failed to save to Google Sheets. ';
+                if (error.name === 'TypeError' && error.message.includes('fetch')) {
+                    errorMessage += 'Network error - please check your internet connection.';
+                } else if (error.message.includes('HTTP error')) {
+                    errorMessage += 'Server error - please try again later.';
+                } else {
+                    errorMessage += `Error: ${error.message}`;
+                }
+                
+                this.showToast(errorMessage, 'error');
+                
                 if (this.isDevelopment()) {
                     console.log('Salon Form Data (fallback):', data);
                 }
             } finally {
-                // Reset loading state
                 submitButton.classList.remove('loading');
                 submitButton.innerHTML = '<span class="icon">💾</span> Save Client Record';
             }
         },
 
-        async processFormData(formData) {
+        processFormData(formData) {
             const data = {};
             
             for (let [key, value] of formData.entries()) {
@@ -1427,32 +1223,11 @@
                 }
             }
             
-            // Process services checkboxes
             const services = [];
             document.querySelectorAll('input[name="services"]:checked').forEach(cb => {
                 services.push(cb.value);
             });
             data.services = services;
-            
-            // Process photo uploads
-            const beforePhotoFile = document.getElementById('beforePhoto').files[0];
-            const afterPhotoFile = document.getElementById('afterPhoto').files[0];
-            
-            if (beforePhotoFile) {
-                try {
-                    data.beforePhoto = await this.convertImageToBase64(beforePhotoFile);
-                } catch (error) {
-                    console.error('Error processing before photo:', error);
-                }
-            }
-            
-            if (afterPhotoFile) {
-                try {
-                    data.afterPhoto = await this.convertImageToBase64(afterPhotoFile);
-                } catch (error) {
-                    console.error('Error processing after photo:', error);
-                }
-            }
             
             return data;
         },
@@ -1465,7 +1240,7 @@
             
             setTimeout(() => {
                 toast.classList.remove('show');
-            }, 4000);
+            }, 5000);
         },
 
         isDevelopment() {
@@ -1473,9 +1248,6 @@
         }
     };
 
-    // Make SalonForm globally available for onclick handlers
-    window.SalonForm = SalonForm;
-    
     // Initialize when DOM is ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => SalonForm.init());
