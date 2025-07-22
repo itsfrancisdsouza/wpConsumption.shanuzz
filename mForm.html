@@ -285,12 +285,6 @@
             padding-top: var(--lk-space-lg);
         }
 
-        .photo-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--lk-space-lg);
-        }
-
         .photo-upload-box {
             border: 2px dashed var(--lk-outline);
             border-radius: var(--lk-radius-md);
@@ -300,6 +294,8 @@
             transition: all 0.2s;
             cursor: pointer;
             position: relative;
+            max-width: 400px;
+            margin: 0 auto;
         }
 
         .photo-upload-box:hover {
@@ -625,12 +621,6 @@
             background: var(--lk-accent);
         }
 
-        @media (max-width: 600px) {
-            .photo-container {
-                grid-template-columns: 1fr;
-            }
-        }
-
         @media (min-width: 600px) {
             .grid-2 { grid-template-columns: repeat(2, 1fr); }
             .container {
@@ -890,30 +880,17 @@
                 <span>✨</span> Service Details & Results
             </div>
             
-            <!-- Photos Before & After -->
+            <!-- Before Photo Only -->
             <div class="photo-section">
-                <h3 style="margin-bottom: var(--lk-space-md); font-size: 1.1rem; color: var(--lk-on-surface);">📸 Photos Before & After</h3>
-                <div class="photo-container">
-                    <div class="photo-upload-box" id="beforePhotoBox">
-                        <input type="file" id="beforePhoto" name="beforePhoto" class="photo-input" accept="image/*" capture="environment">
-                        <div class="photo-upload-icon">📷</div>
-                        <div class="photo-upload-text">📷 Take Before Photo</div>
-                        <img id="beforePhotoPreview" class="photo-preview" alt="Before photo preview">
-                        <div class="photo-controls" style="display: none;">
-                            <button type="button" class="photo-btn" onclick="SalonForm.retakePhoto('before')">🔄 Retake</button>
-                            <button type="button" class="photo-btn remove" onclick="SalonForm.removePhoto('before')">🗑️ Remove</button>
-                        </div>
-                    </div>
-                    
-                    <div class="photo-upload-box" id="afterPhotoBox">
-                        <input type="file" id="afterPhoto" name="afterPhoto" class="photo-input" accept="image/*" capture="environment">
-                        <div class="photo-upload-icon">📷</div>
-                        <div class="photo-upload-text">📷 Take After Photo</div>
-                        <img id="afterPhotoPreview" class="photo-preview" alt="After photo preview">
-                        <div class="photo-controls" style="display: none;">
-                            <button type="button" class="photo-btn" onclick="SalonForm.retakePhoto('after')">🔄 Retake</button>
-                            <button type="button" class="photo-btn remove" onclick="SalonForm.removePhoto('after')">🗑️ Remove</button>
-                        </div>
+                <h3 style="margin-bottom: var(--lk-space-md); font-size: 1.1rem; color: var(--lk-on-surface);">📸 Before Photo</h3>
+                <div class="photo-upload-box" id="beforePhotoBox">
+                    <input type="file" id="beforePhoto" name="beforePhoto" class="photo-input" accept="image/*" capture="environment">
+                    <div class="photo-upload-icon">📷</div>
+                    <div class="photo-upload-text">📷 Take Before Photo</div>
+                    <img id="beforePhotoPreview" class="photo-preview" alt="Before photo preview">
+                    <div class="photo-controls" style="display: none;">
+                        <button type="button" class="photo-btn" onclick="SalonForm.retakePhoto('before')">🔄 Retake</button>
+                        <button type="button" class="photo-btn remove" onclick="SalonForm.removePhoto('before')">🗑️ Remove</button>
                     </div>
                 </div>
             </div>
@@ -1041,9 +1018,8 @@
     let isDrawing = false;
     let signatureData = [];
     
-    // Photo storage
+    // Photo storage (only before photo)
     let beforePhotoData = null;
-    let afterPhotoData = null;
     
     // Unique Submit ID generator
     function generateSubmitId() {
@@ -1090,10 +1066,7 @@
 
         initPhotoHandlers() {
             const beforeInput = document.getElementById('beforePhoto');
-            const afterInput = document.getElementById('afterPhoto');
-            
             beforeInput.addEventListener('change', (e) => this.handlePhotoSelection(e, 'before'));
-            afterInput.addEventListener('change', (e) => this.handlePhotoSelection(e, 'after'));
         },
 
         handlePhotoSelection(event, type) {
@@ -1115,14 +1088,8 @@
             const reader = new FileReader();
             reader.onload = (e) => {
                 const photoData = e.target.result;
-                
-                if (type === 'before') {
-                    beforePhotoData = photoData;
-                    this.displayPhotoPreview('before', photoData);
-                } else {
-                    afterPhotoData = photoData;
-                    this.displayPhotoPreview('after', photoData);
-                }
+                beforePhotoData = photoData;
+                this.displayPhotoPreview('before', photoData);
             };
             reader.readAsDataURL(file);
         },
@@ -1141,7 +1108,7 @@
             uploadIcon.style.display = 'none';
             box.classList.add('has-photo');
             
-            this.showToast(`${type === 'before' ? 'Before' : 'After'} photo uploaded successfully!`, 'success');
+            this.showToast('Before photo uploaded successfully!', 'success');
         },
 
         retakePhoto(type) {
@@ -1165,13 +1132,8 @@
             box.classList.remove('has-photo');
             input.value = '';
             
-            if (type === 'before') {
-                beforePhotoData = null;
-            } else {
-                afterPhotoData = null;
-            }
-            
-            this.showToast(`${type === 'before' ? 'Before' : 'After'} photo removed`, 'success');
+            beforePhotoData = null;
+            this.showToast('Before photo removed', 'success');
         },
 
         initSignaturePad() {
@@ -1859,11 +1821,10 @@
             const formData = new FormData(form);
             const data = this.processFormData(formData);
             
-            // Add unique Submit ID, signature data, and photos
+            // Add unique Submit ID, signature data, and photo (only before photo)
             data.submitId = submitId;
             data.clientSignature = this.getSignatureData();
             data.beforePhoto = beforePhotoData;
-            data.afterPhoto = afterPhotoData;
             
             console.log('Sending data to Google Sheets with Submit ID:', submitId, data);
             
@@ -1886,9 +1847,8 @@
                 this.updateTotalCost();
                 this.clearSignature();
                 
-                // Reset photos
+                // Reset photo
                 this.removePhoto('before');
-                this.removePhoto('after');
                 
                 // Keep Submit ID visible for reference
                 submitIdDisplay.textContent = `✅ Last Submit ID: ${submitId}`;
