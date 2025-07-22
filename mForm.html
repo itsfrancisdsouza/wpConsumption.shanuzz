@@ -36,9 +36,6 @@
             --lk-on-surface-variant: #475569;
             --lk-success: #10B981;
             --lk-error: #EF4444;
-            --lk-sage-green: #87A96B;
-            --lk-sage-green-light: #9BB77D;
-            --lk-sage-green-bg: #F0F4EC;
         }
 
         html { box-sizing: border-box; }
@@ -92,24 +89,6 @@
             box-shadow: 0 1px 2px rgba(139,92,246,0.03);
         }
 
-        .consent-section {
-            margin-bottom: var(--lk-space-xl);
-            padding: var(--lk-space-lg);
-            background: var(--lk-sage-green-bg);
-            border: 2px solid var(--lk-sage-green);
-            border-radius: var(--lk-radius-md);
-            box-shadow: 0 2px 8px rgba(135, 169, 107, 0.1);
-        }
-
-        .signature-section {
-            margin-bottom: var(--lk-space-xl);
-            padding: var(--lk-space-lg);
-            background: var(--lk-surface);
-            border: 2px solid var(--lk-primary);
-            border-radius: var(--lk-radius-md);
-            box-shadow: 0 2px 8px rgba(139, 92, 246, 0.1);
-        }
-
         .section-title {
             font-size: 1.1rem;
             font-weight: 600;
@@ -122,265 +101,18 @@
             gap: var(--lk-space-sm);
         }
 
-        .consent-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--lk-sage-green);
-            margin-bottom: var(--lk-space-lg);
-            text-align: center;
-            padding-bottom: var(--lk-space-sm);
-            border-bottom: 2px solid var(--lk-sage-green);
-        }
-
-        .signature-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--lk-primary);
-            margin-bottom: var(--lk-space-lg);
-            text-align: center;
-            padding-bottom: var(--lk-space-sm);
-            border-bottom: 2px solid var(--lk-primary);
-        }
-
-        .consent-content {
-            font-size: var(--lk-text-body);
-            line-height: 1.6;
-            color: var(--lk-on-surface);
-            margin-bottom: var(--lk-space-lg);
-        }
-
-        .consent-item {
-            margin-bottom: var(--lk-space-md);
-            padding-left: var(--lk-space-sm);
-            position: relative;
-        }
-
-        .consent-item:before {
-            content: "•";
-            color: var(--lk-sage-green);
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-
-        .consent-agreement {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--lk-space-lg);
-            margin-top: var(--lk-space-lg);
-            padding: var(--lk-space-md);
-            background: white;
-            border-radius: var(--lk-radius-sm);
-            border: 1px solid var(--lk-sage-green-light);
-        }
-
-        .consent-option {
-            display: flex;
-            align-items: center;
-            gap: var(--lk-space-sm);
-            cursor: pointer;
-            padding: var(--lk-space-sm) var(--lk-space-md);
-            border-radius: var(--lk-radius-sm);
-            transition: background-color 0.2s;
-        }
-
-        .consent-option:hover {
-            background: var(--lk-sage-green-bg);
-        }
-
-        .consent-radio {
-            width: 20px;
-            height: 20px;
-            accent-color: var(--lk-sage-green);
-        }
-
-        .consent-label {
-            font-weight: 500;
-            color: var(--lk-on-surface);
-        }
-
-        /* Signature Pad Styles */
-        .signature-container {
-            text-align: center;
-            margin-bottom: var(--lk-space-lg);
-        }
-
-        .signature-instructions {
-            font-size: var(--lk-text-body);
-            color: var(--lk-on-surface-variant);
-            margin-bottom: var(--lk-space-md);
-        }
-
-        .signature-pad-wrapper {
-            position: relative;
-            border: 2px dashed var(--lk-primary);
-            border-radius: var(--lk-radius-md);
-            background: var(--lk-surface-variant);
-            margin: 0 auto var(--lk-space-md);
-            max-width: 400px;
-        }
-
-        .signature-pad {
-            display: block;
-            width: 100%;
-            height: 150px;
-            border: none;
-            border-radius: var(--lk-radius-md);
-            background: transparent;
-            cursor: crosshair;
-        }
-
-        .signature-controls {
-            display: flex;
-            justify-content: center;
-            gap: var(--lk-space-md);
-            flex-wrap: wrap;
-        }
-
-        .signature-btn {
-            padding: var(--lk-space-sm) var(--lk-space-md);
-            border: 1px solid var(--lk-primary);
-            border-radius: var(--lk-radius-sm);
-            background: white;
-            color: var(--lk-primary);
-            cursor: pointer;
-            font-size: var(--lk-text-caption);
-            transition: all 0.2s;
-        }
-
-        .signature-btn:hover {
-            background: var(--lk-primary);
-            color: white;
-        }
-
-        .signature-status {
-            margin-top: var(--lk-space-md);
-            padding: var(--lk-space-sm);
-            border-radius: var(--lk-radius-sm);
-            text-align: center;
-            font-size: var(--lk-text-caption);
-            display: none;
-        }
-
-        .signature-status.signed {
-            background: #ECFDF5;
-            color: var(--lk-success);
-            border: 1px solid var(--lk-success);
-            display: block;
-        }
-
-        .signature-status.empty {
-            background: #FEF2F2;
-            color: var(--lk-error);
-            border: 1px solid var(--lk-error);
-            display: block;
-        }
-
-        /* Photo Upload Styles */
-        .photo-section {
-            margin-top: var(--lk-space-lg);
-            border-top: 1px solid var(--lk-outline-variant);
-            padding-top: var(--lk-space-lg);
-        }
-
-        .photo-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--lk-space-lg);
-        }
-
-        .photo-upload-box {
-            border: 2px dashed var(--lk-outline);
-            border-radius: var(--lk-radius-md);
-            padding: var(--lk-space-lg);
-            text-align: center;
-            background: var(--lk-surface-variant);
-            transition: all 0.2s;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .photo-upload-box:hover {
-            border-color: var(--lk-primary);
-            background: rgba(139, 92, 246, 0.02);
-        }
-
-        .photo-upload-box.has-photo {
-            border-color: var(--lk-success);
-            background: #ECFDF5;
-        }
-
-        .photo-input {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        .photo-preview {
-            max-width: 100%;
-            max-height: 200px;
-            border-radius: var(--lk-radius-sm);
-            margin-bottom: var(--lk-space-sm);
-            display: none;
-        }
-
-        .photo-upload-text {
-            font-size: var(--lk-text-body);
-            color: var(--lk-on-surface-variant);
-            margin-bottom: var(--lk-space-sm);
-        }
-
-        .photo-upload-icon {
-            font-size: 2rem;
-            color: var(--lk-primary);
-            margin-bottom: var(--lk-space-sm);
-        }
-
-        .photo-controls {
-            display: flex;
-            justify-content: center;
-            gap: var(--lk-space-sm);
-            margin-top: var(--lk-space-sm);
-        }
-
-        .photo-btn {
-            padding: var(--lk-space-xs) var(--lk-space-sm);
-            border: 1px solid var(--lk-primary);
-            border-radius: var(--lk-radius-sm);
-            background: white;
-            color: var(--lk-primary);
-            cursor: pointer;
-            font-size: var(--lk-text-caption);
-            transition: all 0.2s;
-        }
-
-        .photo-btn:hover {
-            background: var(--lk-primary);
-            color: white;
-        }
-
-        .photo-btn.remove {
-            border-color: var(--lk-error);
-            color: var(--lk-error);
-        }
-
-        .photo-btn.remove:hover {
-            background: var(--lk-error);
-            color: white;
-        }
-
         .grid-1 {
             display: grid;
             gap: var(--lk-space-md);
             grid-template-columns: 1fr;
         }
         .grid-2 { grid-template-columns: 1fr; }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--lk-space-md);
+        }
 
         .quantity-unit-grid {
             display: grid;
@@ -517,6 +249,98 @@
             width: 100%;
         }
 
+        /* Photo Upload Styles */
+        .photo-upload {
+            position: relative;
+            border: 2px dashed var(--lk-outline);
+            border-radius: var(--lk-radius-md);
+            padding: var(--lk-space-lg);
+            text-align: center;
+            background: var(--lk-surface-container);
+            transition: all 0.2s ease;
+            cursor: pointer;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .photo-upload:hover {
+            border-color: var(--lk-primary);
+            background: var(--lk-surface);
+        }
+
+        .photo-upload.has-image {
+            padding: 0;
+            border: none;
+            background: transparent;
+        }
+
+        .photo-upload input[type="file"] {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .photo-upload-content {
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--lk-space-sm);
+        }
+
+        .photo-upload-icon {
+            font-size: 2rem;
+            color: var(--lk-primary);
+        }
+
+        .photo-upload-text {
+            color: var(--lk-on-surface-variant);
+            font-size: var(--lk-text-label);
+            text-align: center;
+        }
+
+        .photo-preview {
+            position: relative;
+            width: 100%;
+            height: 200px;
+            border-radius: var(--lk-radius-md);
+            overflow: hidden;
+            display: none;
+        }
+
+        .photo-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .photo-remove {
+            position: absolute;
+            top: var(--lk-space-sm);
+            right: var(--lk-space-sm);
+            background: var(--lk-error);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .photo-remove:hover {
+            background: #DC2626;
+        }
+
         .toast {
             position: fixed;
             top: 20px;
@@ -529,32 +353,14 @@
             transform: translateX(400px);
             transition: transform 0.3s ease;
             z-index: 1000;
-            font-size: var(--lk-text-body);
-            max-width: 350px;
         }
         .toast.show {
             transform: translateX(0);
-        }
-        .toast.error {
-            background: var(--lk-error);
         }
 
         .loading {
             opacity: 0.6;
             pointer-events: none;
-        }
-
-        /* Submit ID Display */
-        .submit-id-display {
-            background: var(--lk-primary);
-            color: white;
-            padding: var(--lk-space-sm);
-            border-radius: var(--lk-radius-sm);
-            margin-bottom: var(--lk-space-md);
-            text-align: center;
-            font-size: var(--lk-text-caption);
-            font-family: monospace;
-            display: none;
         }
 
         /* Autocomplete Styles */
@@ -625,6 +431,12 @@
             background: var(--lk-accent);
         }
 
+        @media (max-width: 600px) {
+            .photo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
         @media (min-width: 600px) {
             .grid-2 { grid-template-columns: repeat(2, 1fr); }
             .container {
@@ -649,74 +461,9 @@
     <div class="header">
         <h1 class="title">Salon Consultation</h1>
         <p class="subtitle">Complete client assessment and service record</p>
-        <div id="submitIdDisplay" class="submit-id-display"></div>
     </div>
 
     <form id="salonForm" autocomplete="off" novalidate>
-        <!-- Consent & Acknowledgment Section -->
-        <div class="consent-section">
-            <div class="consent-title">📋 Consent & Acknowledgment</div>
-            
-            <div class="consent-content">
-                <div class="consent-item">
-                    I confirm that the information provided above is accurate and complete to the best of my knowledge.
-                </div>
-                
-                <div class="consent-item">
-                    I understand that providing false or incomplete information may affect the quality or safety of the service.
-                </div>
-                
-                <div class="consent-item">
-                    I agree to inform my stylist/therapist of any changes to my health or medication during future visits.
-                </div>
-                
-                <div class="consent-item">
-                    I consent to Shanuzz Salon using my anonymous health information solely for the purpose of providing safe and effective treatments.
-                </div>
-                
-                <div class="consent-item">
-                    I consent to Shanuzz Salon the full rights to use photos/videos of my hair/skin/nails transformation for promotional purposes (e.g., social media, website). My identity will be kept confidential unless otherwise agreed.
-                </div>
-            </div>
-            
-            <div class="consent-agreement">
-                <label class="consent-option">
-                    <input type="radio" name="consent" value="yes" class="consent-radio" required>
-                    <span class="consent-label">✅ Yes</span>
-                </label>
-                <label class="consent-option">
-                    <input type="radio" name="consent" value="no" class="consent-radio" required>
-                    <span class="consent-label">❌ No</span>
-                </label>
-            </div>
-            <div class="error-message" id="consent-error">Please select your consent preference</div>
-        </div>
-
-        <!-- Digital Signature Section -->
-        <div class="signature-section">
-            <div class="signature-title">✍️ Digital Signature</div>
-            
-            <div class="signature-container">
-                <div class="signature-instructions">
-                    Please sign below to confirm your consent and agreement to the terms above
-                </div>
-                
-                <div class="signature-pad-wrapper">
-                    <canvas id="signaturePad" class="signature-pad" width="400" height="150"></canvas>
-                </div>
-                
-                <div class="signature-controls">
-                    <button type="button" id="clearSignature" class="signature-btn">🗑️ Clear</button>
-                    <button type="button" id="undoSignature" class="signature-btn">↶ Undo</button>
-                </div>
-                
-                <div id="signatureStatus" class="signature-status">
-                    ✅ Signature captured successfully
-                </div>
-                <div class="error-message" id="signature-error">Please provide your digital signature</div>
-            </div>
-        </div>
-
         <!-- Client Information Section -->
         <div class="section">
             <div class="section-title">
@@ -751,6 +498,51 @@
                         <option value="returning">Returning Client</option>
                         <option value="walk-in">Walk-in</option>
                     </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Photos Section -->
+        <div class="section">
+            <div class="section-title">
+                <span>📸</span> Before & After Photos
+            </div>
+            
+            <div class="photo-grid">
+                <div class="field">
+                    <label class="label">Before Photo</label>
+                    <div class="photo-upload" id="beforePhotoUpload">
+                        <input type="file" id="beforePhoto" name="beforePhoto" accept="image/*" capture="environment">
+                        <div class="photo-upload-content">
+                            <div class="photo-upload-icon">📷</div>
+                            <div class="photo-upload-text">
+                                <strong>Tap to take or upload photo</strong><br>
+                                <small>Before treatment</small>
+                            </div>
+                        </div>
+                        <div class="photo-preview" id="beforePhotoPreview">
+                            <img id="beforePhotoImg" src="" alt="Before photo">
+                            <button type="button" class="photo-remove" onclick="SalonForm.removePhoto('before')" aria-label="Remove before photo">×</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="field">
+                    <label class="label">After Photo</label>
+                    <div class="photo-upload" id="afterPhotoUpload">
+                        <input type="file" id="afterPhoto" name="afterPhoto" accept="image/*" capture="environment">
+                        <div class="photo-upload-content">
+                            <div class="photo-upload-icon">📷</div>
+                            <div class="photo-upload-text">
+                                <strong>Tap to take or upload photo</strong><br>
+                                <small>After treatment</small>
+                            </div>
+                        </div>
+                        <div class="photo-preview" id="afterPhotoPreview">
+                            <img id="afterPhotoImg" src="" alt="After photo">
+                            <button type="button" class="photo-remove" onclick="SalonForm.removePhoto('after')" aria-label="Remove after photo">×</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -883,38 +675,6 @@
             <div class="section-title">
                 <span>✨</span> Service Details & Results
             </div>
-            
-            <!-- Photos Before & After -->
-            <div class="photo-section">
-                <h3 style="margin-bottom: var(--lk-space-md); font-size: 1.1rem; color: var(--lk-on-surface);">📸 Photos Before & After</h3>
-                <div class="photo-container">
-                    <div class="photo-upload-box" id="beforePhotoBox">
-                        <input type="file" id="beforePhoto" name="beforePhoto" class="photo-input" accept="image/*" capture="environment">
-                        <div class="photo-upload-icon">📷</div>
-                        <div class="photo-upload-text">📷 Take Before Photo</div>
-                        <img id="beforePhotoPreview" class="photo-preview" alt="Before photo preview">
-                        <div class="photo-controls" style="display: none;">
-                            <button type="button" class="photo-btn" onclick="SalonForm.retakePhoto('before')">🔄 Retake</button>
-                            <button type="button" class="photo-btn remove" onclick="SalonForm.removePhoto('before')">🗑️ Remove</button>
-                        </div>
-                    </div>
-                    
-                    <div class="photo-upload-box" id="afterPhotoBox">
-                        <input type="file" id="afterPhoto" name="afterPhoto" class="photo-input" accept="image/*" capture="environment">
-                        <div class="photo-upload-icon">📷</div>
-                        <div class="photo-upload-text">📷 Take After Photo</div>
-                        <img id="afterPhotoPreview" class="photo-preview" alt="After photo preview">
-                        <div class="photo-controls" style="display: none;">
-                            <button type="button" class="photo-btn" onclick="SalonForm.retakePhoto('after')">🔄 Retake</button>
-                            <button type="button" class="photo-btn remove" onclick="SalonForm.removePhoto('after')">🗑️ Remove</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Additional Space Before Stylist Section -->
-            <div style="margin-top: var(--lk-space-xl);"></div>
-            
             <button type="button" class="btn btn-success" onclick="SalonForm.addStylistEntry()">
                 <span class="icon">+</span> Add Stylist / Incentive
             </button>
@@ -1030,292 +790,13 @@
     let products = [];
     let stylists = [];
     
-    // Signature Pad functionality
-    let signaturePad = null;
-    let isDrawing = false;
-    let signatureData = [];
-    
-    // Photo storage
-    let beforePhotoData = null;
-    let afterPhotoData = null;
-    
-    // Unique Submit ID generator
-    function generateSubmitId() {
-        const timestamp = new Date().toISOString().replace(/[-:.]/g, '').slice(0, 15);
-        const random = Math.random().toString(36).substr(2, 4).toUpperCase();
-        return `SLN${timestamp}${random}`;
-    }
-    
     const SalonForm = {
         init() {
             this.setInitialDate();
             this.bindEvents();
             this.updateTotalCost();
             this.loadProducts();
-            this.initSignaturePad();
-            this.initPhotoHandlers();
-        },
-
-        initPhotoHandlers() {
-            const beforeInput = document.getElementById('beforePhoto');
-            const afterInput = document.getElementById('afterPhoto');
-            
-            beforeInput.addEventListener('change', (e) => this.handlePhotoSelection(e, 'before'));
-            afterInput.addEventListener('change', (e) => this.handlePhotoSelection(e, 'after'));
-        },
-
-        handlePhotoSelection(event, type) {
-            const file = event.target.files[0];
-            if (!file) return;
-            
-            // Validate file size (max 5MB)
-            if (file.size > 5 * 1024 * 1024) {
-                this.showToast('Photo file size must be less than 5MB', 'error');
-                return;
-            }
-            
-            // Validate file type
-            if (!file.type.startsWith('image/')) {
-                this.showToast('Please select a valid image file', 'error');
-                return;
-            }
-            
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const photoData = e.target.result;
-                
-                if (type === 'before') {
-                    beforePhotoData = photoData;
-                    this.displayPhotoPreview('before', photoData);
-                } else {
-                    afterPhotoData = photoData;
-                    this.displayPhotoPreview('after', photoData);
-                }
-            };
-            reader.readAsDataURL(file);
-        },
-
-        displayPhotoPreview(type, photoData) {
-            const preview = document.getElementById(`${type}PhotoPreview`);
-            const box = document.getElementById(`${type}PhotoBox`);
-            const controls = box.querySelector('.photo-controls');
-            const uploadText = box.querySelector('.photo-upload-text');
-            const uploadIcon = box.querySelector('.photo-upload-icon');
-            
-            preview.src = photoData;
-            preview.style.display = 'block';
-            controls.style.display = 'flex';
-            uploadText.style.display = 'none';
-            uploadIcon.style.display = 'none';
-            box.classList.add('has-photo');
-            
-            this.showToast(`${type === 'before' ? 'Before' : 'After'} photo uploaded successfully!`, 'success');
-        },
-
-        retakePhoto(type) {
-            const input = document.getElementById(`${type}Photo`);
-            input.click();
-        },
-
-        removePhoto(type) {
-            const preview = document.getElementById(`${type}PhotoPreview`);
-            const box = document.getElementById(`${type}PhotoBox`);
-            const controls = box.querySelector('.photo-controls');
-            const uploadText = box.querySelector('.photo-upload-text');
-            const uploadIcon = box.querySelector('.photo-upload-icon');
-            const input = document.getElementById(`${type}Photo`);
-            
-            preview.style.display = 'none';
-            preview.src = '';
-            controls.style.display = 'none';
-            uploadText.style.display = 'block';
-            uploadIcon.style.display = 'block';
-            box.classList.remove('has-photo');
-            input.value = '';
-            
-            if (type === 'before') {
-                beforePhotoData = null;
-            } else {
-                afterPhotoData = null;
-            }
-            
-            this.showToast(`${type === 'before' ? 'Before' : 'After'} photo removed`, 'success');
-        },
-
-        initSignaturePad() {
-            const canvas = document.getElementById('signaturePad');
-            const ctx = canvas.getContext('2d');
-            
-            // Set canvas size
-            const rect = canvas.getBoundingClientRect();
-            canvas.width = rect.width;
-            canvas.height = rect.height;
-            
-            // Set up drawing context
-            ctx.strokeStyle = '#0F172A';
-            ctx.lineWidth = 2;
-            ctx.lineCap = 'round';
-            ctx.lineJoin = 'round';
-            
-            // Drawing event listeners
-            canvas.addEventListener('mousedown', this.startDrawing.bind(this));
-            canvas.addEventListener('mousemove', this.draw.bind(this));
-            canvas.addEventListener('mouseup', this.stopDrawing.bind(this));
-            canvas.addEventListener('mouseout', this.stopDrawing.bind(this));
-            
-            // Touch events for mobile
-            canvas.addEventListener('touchstart', this.handleTouchStart.bind(this));
-            canvas.addEventListener('touchmove', this.handleTouchMove.bind(this));
-            canvas.addEventListener('touchend', this.stopDrawing.bind(this));
-            
-            // Control buttons
-            document.getElementById('clearSignature').addEventListener('click', this.clearSignature.bind(this));
-            document.getElementById('undoSignature').addEventListener('click', this.undoSignature.bind(this));
-            
-            signaturePad = ctx;
-        },
-
-        startDrawing(e) {
-            isDrawing = true;
-            const rect = e.target.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            signaturePad.beginPath();
-            signaturePad.moveTo(x, y);
-            
-            // Save state for undo
-            this.saveSignatureState();
-        },
-
-        draw(e) {
-            if (!isDrawing) return;
-            
-            const rect = e.target.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            signaturePad.lineTo(x, y);
-            signaturePad.stroke();
-            
-            this.updateSignatureStatus();
-        },
-
-        stopDrawing() {
-            isDrawing = false;
-            signaturePad.beginPath();
-        },
-
-        handleTouchStart(e) {
-            e.preventDefault();
-            const touch = e.touches[0];
-            const mouseEvent = new MouseEvent('mousedown', {
-                clientX: touch.clientX,
-                clientY: touch.clientY
-            });
-            e.target.dispatchEvent(mouseEvent);
-        },
-
-        handleTouchMove(e) {
-            e.preventDefault();
-            const touch = e.touches[0];
-            const mouseEvent = new MouseEvent('mousemove', {
-                clientX: touch.clientX,
-                clientY: touch.clientY
-            });
-            e.target.dispatchEvent(mouseEvent);
-        },
-
-        saveSignatureState() {
-            const canvas = document.getElementById('signaturePad');
-            signatureData.push(canvas.toDataURL());
-            
-            // Keep only last 10 states for performance
-            if (signatureData.length > 10) {
-                signatureData.shift();
-            }
-        },
-
-        clearSignature() {
-            const canvas = document.getElementById('signaturePad');
-            signaturePad.clearRect(0, 0, canvas.width, canvas.height);
-            signatureData = [];
-            this.updateSignatureStatus();
-            this.clearSignatureError();
-        },
-
-        undoSignature() {
-            if (signatureData.length > 1) {
-                signatureData.pop(); // Remove current state
-                const previousState = signatureData[signatureData.length - 1];
-                
-                const canvas = document.getElementById('signaturePad');
-                const img = new Image();
-                img.onload = () => {
-                    signaturePad.clearRect(0, 0, canvas.width, canvas.height);
-                    signaturePad.drawImage(img, 0, 0);
-                    this.updateSignatureStatus();
-                };
-                img.src = previousState;
-            } else {
-                this.clearSignature();
-            }
-        },
-
-        updateSignatureStatus() {
-            const canvas = document.getElementById('signaturePad');
-            const isEmpty = this.isSignatureEmpty(canvas);
-            const statusElement = document.getElementById('signatureStatus');
-            
-            if (isEmpty) {
-                statusElement.className = 'signature-status empty';
-                statusElement.textContent = '⚠️ Please provide your signature';
-            } else {
-                statusElement.className = 'signature-status signed';
-                statusElement.textContent = '✅ Signature captured successfully';
-            }
-        },
-
-        isSignatureEmpty(canvas) {
-            const ctx = canvas.getContext('2d');
-            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            
-            for (let i = 0; i < imageData.data.length; i += 4) {
-                // Check if any pixel has been modified (not transparent)
-                if (imageData.data[i + 3] !== 0) {
-                    return false;
-                }
-            }
-            return true;
-        },
-
-        validateSignature() {
-            const canvas = document.getElementById('signaturePad');
-            const isEmpty = this.isSignatureEmpty(canvas);
-            
-            if (isEmpty) {
-                this.showSignatureError('Please provide your digital signature');
-                return false;
-            }
-            
-            this.clearSignatureError();
-            return true;
-        },
-
-        showSignatureError(message) {
-            const errorElement = document.getElementById('signature-error');
-            errorElement.textContent = message;
-            errorElement.classList.add('show');
-        },
-
-        clearSignatureError() {
-            const errorElement = document.getElementById('signature-error');
-            errorElement.classList.remove('show');
-        },
-
-        getSignatureData() {
-            const canvas = document.getElementById('signaturePad');
-            return canvas.toDataURL();
+            this.setupPhotoUpload();
         },
 
         async loadProducts() {
@@ -1333,6 +814,72 @@
                 console.error('Failed to load data:', error);
                 this.showToast('Failed to load data. Autocomplete will be limited.', 'error');
             }
+        },
+
+        setupPhotoUpload() {
+            // Setup before photo upload
+            const beforeInput = document.getElementById('beforePhoto');
+            beforeInput.addEventListener('change', (e) => this.handlePhotoUpload(e, 'before'));
+
+            // Setup after photo upload
+            const afterInput = document.getElementById('afterPhoto');
+            afterInput.addEventListener('change', (e) => this.handlePhotoUpload(e, 'after'));
+        },
+
+        handlePhotoUpload(event, type) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            // Validate file type
+            if (!file.type.startsWith('image/')) {
+                this.showToast('Please select a valid image file', 'error');
+                return;
+            }
+
+            // Validate file size (max 5MB)
+            if (file.size > 5 * 1024 * 1024) {
+                this.showToast('Image file size must be less than 5MB', 'error');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                this.displayPhotoPreview(e.target.result, type);
+            };
+            reader.readAsDataURL(file);
+        },
+
+        displayPhotoPreview(imageSrc, type) {
+            const uploadArea = document.getElementById(`${type}PhotoUpload`);
+            const preview = document.getElementById(`${type}PhotoPreview`);
+            const img = document.getElementById(`${type}PhotoImg`);
+            const uploadContent = uploadArea.querySelector('.photo-upload-content');
+
+            img.src = imageSrc;
+            uploadContent.style.display = 'none';
+            preview.style.display = 'block';
+            uploadArea.classList.add('has-image');
+        },
+
+        removePhoto(type) {
+            const uploadArea = document.getElementById(`${type}PhotoUpload`);
+            const preview = document.getElementById(`${type}PhotoPreview`);
+            const input = document.getElementById(`${type}Photo`);
+            const uploadContent = uploadArea.querySelector('.photo-upload-content');
+
+            input.value = '';
+            preview.style.display = 'none';
+            uploadContent.style.display = 'flex';
+            uploadArea.classList.remove('has-image');
+        },
+
+        convertImageToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
         },
 
         parseCSV(text) {
@@ -1392,18 +939,21 @@
         },
 
         setupAutocomplete() {
+            // Setup autocomplete for existing product inputs
             document.querySelectorAll('.product-name-input').forEach(input => {
                 this.bindAutocomplete(input);
             });
         },
 
         setupStylistAutocomplete() {
+            // Setup autocomplete for existing stylist inputs
             document.querySelectorAll('.stylist-name-input').forEach(input => {
                 this.bindStylistAutocomplete(input);
             });
         },
 
         setupInitialUnitSuggestions() {
+            // Setup unit suggestions for existing unit inputs
             document.querySelectorAll('.unit-input').forEach(input => {
                 this.bindUnitSuggestions(input);
             });
@@ -1527,6 +1077,7 @@
                 }
             });
             
+            // Hide suggestions when clicking outside
             document.addEventListener('click', (e) => {
                 if (!input.contains(e.target) && !suggestionBox.contains(e.target)) {
                     suggestionBox.style.display = 'none';
@@ -1536,6 +1087,8 @@
 
         bindUnitSuggestions(unitInput) {
             const unitPills = unitInput.nextElementSibling;
+            
+            // Show common unit suggestions initially
             this.updateUnitSuggestions(unitInput, null);
             
             unitInput.addEventListener('focus', () => {
@@ -1547,26 +1100,32 @@
             const unitPills = unitInput.nextElementSibling;
             unitPills.innerHTML = '';
             
+            // Get all unique units from the products list
             const allUnits = [...new Set(products.map(p => p.unit).filter(Boolean))];
             
+            // If a product is selected, prioritize its unit and similar units
             let suggestedUnits = [];
             if (selectedProduct && selectedProduct.unit) {
                 suggestedUnits = [selectedProduct.unit];
+                // Add other units that aren't already included
                 allUnits.forEach(unit => {
                     if (!suggestedUnits.includes(unit)) {
                         suggestedUnits.push(unit);
                     }
                 });
             } else {
+                // Default: show all available units
                 suggestedUnits = allUnits;
             }
             
+            // Limit to first 8 units for better UX
             suggestedUnits.slice(0, 8).forEach((unit, index) => {
                 const pill = document.createElement('button');
                 pill.type = 'button';
                 pill.className = 'unit-pill';
                 pill.textContent = unit;
                 
+                // Mark the exact match with special styling
                 if (selectedProduct && unit === selectedProduct.unit) {
                     pill.classList.add('exact-match');
                 }
@@ -1598,16 +1157,19 @@
             const form = document.getElementById('salonForm');
             form.addEventListener('submit', this.handleSubmit.bind(this));
             
+            // Bind initial incentive input listeners
             document.querySelectorAll('.stylist-incentive-input').forEach(input => {
                 input.addEventListener('input', this.updateTotalCost.bind(this));
             });
             
+            // Event delegation for dynamic incentive inputs
             document.getElementById('stylistContainer').addEventListener('input', (e) => {
                 if (e.target && e.target.classList.contains('stylist-incentive-input')) {
                     this.updateTotalCost();
                 }
             });
             
+            // Hide unit pills and suggestion boxes when clicking outside
             document.addEventListener('click', (e) => {
                 if (!e.target.closest('.field')) {
                     document.querySelectorAll('.unit-pills').forEach(pills => {
@@ -1619,6 +1181,7 @@
                 }
             });
             
+            // Real-time validation
             form.addEventListener('input', this.clearFieldError.bind(this));
             form.addEventListener('change', this.clearFieldError.bind(this));
         },
@@ -1630,6 +1193,7 @@
             
             container.appendChild(clone);
             
+            // Setup autocomplete and unit suggestions for the new inputs
             const addedEntry = container.lastElementChild;
             const newProductInput = addedEntry.querySelector('.product-name-input');
             const newUnitInput = addedEntry.querySelector('.unit-input');
@@ -1651,6 +1215,7 @@
             const template = document.getElementById('stylistTemplate');
             const clone = document.importNode(template.content, true);
             
+            // Add unique IDs to the cloned elements
             const count = container.querySelectorAll('.stylist-entry').length;
             const inputs = clone.querySelectorAll('input');
             inputs.forEach((input, index) => {
@@ -1663,6 +1228,7 @@
             
             container.appendChild(clone);
             
+            // Setup stylist autocomplete for the new input
             const addedEntry = container.lastElementChild;
             const newStylistInput = addedEntry.querySelector('.stylist-name-input');
             this.bindStylistAutocomplete(newStylistInput);
@@ -1693,9 +1259,11 @@
 
         validateField(field) {
             const value = field.value.trim();
+            const fieldName = field.name || field.id;
             let isValid = true;
             let errorMessage = '';
 
+            // Clear previous error state
             field.classList.remove('error');
             
             if (field.hasAttribute('required') && !value) {
@@ -1725,20 +1293,10 @@
             return true;
         },
 
-        validateConsent() {
-            const consent = document.querySelector('input[name="consent"]:checked');
-            if (!consent) {
-                this.showFieldError(document.querySelector('input[name="consent"]'), 'Please select your consent preference');
-                return false;
-            }
-            return true;
-        },
-
         showFieldError(field, message) {
             field.classList.add('error');
             const errorElement = document.getElementById(`${field.id || field.name}-error`) || 
-                               document.getElementById('services-error') ||
-                               document.getElementById('consent-error');
+                               document.getElementById('services-error');
             if (errorElement) {
                 errorElement.textContent = message;
                 errorElement.classList.add('show');
@@ -1753,17 +1311,11 @@
                 errorElement.classList.remove('show');
             }
             
+            // Clear services error when any service is selected
             if (field.name === 'services') {
                 const servicesError = document.getElementById('services-error');
                 if (servicesError) {
                     servicesError.classList.remove('show');
-                }
-            }
-            
-            if (field.name === 'consent') {
-                const consentError = document.getElementById('consent-error');
-                if (consentError) {
-                    consentError.classList.remove('show');
                 }
             }
         },
@@ -1783,20 +1335,12 @@
             const form = e.target;
             const submitButton = form.querySelector('.btn-submit');
             
+            // Show loading state
             submitButton.classList.add('loading');
             submitButton.textContent = 'Saving...';
             
+            // Validate form
             let isValid = true;
-            
-            // Validate consent first
-            if (!this.validateConsent()) {
-                isValid = false;
-            }
-            
-            // Validate signature
-            if (!this.validateSignature()) {
-                isValid = false;
-            }
             
             // Validate required fields
             const requiredFields = form.querySelectorAll('[required]');
@@ -1824,67 +1368,53 @@
                 return;
             }
             
-            // Generate unique Submit ID
-            const submitId = generateSubmitId();
-            
-            // Show Submit ID to user
-            const submitIdDisplay = document.getElementById('submitIdDisplay');
-            submitIdDisplay.textContent = `Submit ID: ${submitId}`;
-            submitIdDisplay.style.display = 'block';
-            
             // Collect form data
             const formData = new FormData(form);
-            const data = this.processFormData(formData);
-            
-            // Add unique Submit ID, signature data, and photos
-            data.submitId = submitId;
-            data.clientSignature = this.getSignatureData();
-            data.beforePhoto = beforePhotoData;
-            data.afterPhoto = afterPhotoData;
-            
-            console.log('Sending data to Google Sheets with Submit ID:', submitId, data);
+            const data = await this.processFormData(formData);
             
             try {
+                // Post to Google Sheets via Apps Script
                 const response = await fetch(APPS_SCRIPT_URL, {
                     method: 'POST',
-                    mode: 'no-cors',
                     headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
+                        'Content-Type': 'application/json',
                     },
-                    body: 'formData=' + encodeURIComponent(JSON.stringify(data))
+                    body: JSON.stringify(data)
                 });
                 
-                // Always show success toast since no-cors doesn't give us response details
-                this.showToast(`✅ Client record saved! Submit ID: ${submitId}`, 'success');
+                const result = await response.json();
                 
-                // Reset form
-                form.reset();
-                this.setInitialDate();
-                this.updateTotalCost();
-                this.clearSignature();
-                
-                // Reset photos
-                this.removePhoto('before');
-                this.removePhoto('after');
-                
-                // Keep Submit ID visible for reference
-                submitIdDisplay.textContent = `✅ Last Submit ID: ${submitId}`;
+                if (result.success) {
+                    this.showToast('✅ Client record saved to Google Sheets successfully!', 'success');
+                    
+                    // Reset form after successful save
+                    form.reset();
+                    this.setInitialDate();
+                    this.updateTotalCost();
+                    
+                    // Reset photo previews
+                    this.removePhoto('before');
+                    this.removePhoto('after');
+                } else {
+                    throw new Error(result.message || 'Failed to save data');
+                }
                 
             } catch (error) {
                 console.error('Error saving to Google Sheets:', error);
-                // Even if there's an error, the data might have been saved due to no-cors mode
-                this.showToast(`⚠️ Data submitted (ID: ${submitId}). Please verify in Google Sheets.`, 'success');
+                this.showToast('❌ Failed to save to Google Sheets. Please check your connection and try again.', 'error');
                 
+                // Fallback: log data locally for development
                 if (this.isDevelopment()) {
                     console.log('Salon Form Data (fallback):', data);
                 }
             } finally {
+                // Reset loading state
                 submitButton.classList.remove('loading');
                 submitButton.innerHTML = '<span class="icon">💾</span> Save Client Record';
             }
         },
 
-        processFormData(formData) {
+        async processFormData(formData) {
             const data = {};
             
             for (let [key, value] of formData.entries()) {
@@ -1897,11 +1427,32 @@
                 }
             }
             
+            // Process services checkboxes
             const services = [];
             document.querySelectorAll('input[name="services"]:checked').forEach(cb => {
                 services.push(cb.value);
             });
             data.services = services;
+            
+            // Process photo uploads
+            const beforePhotoFile = document.getElementById('beforePhoto').files[0];
+            const afterPhotoFile = document.getElementById('afterPhoto').files[0];
+            
+            if (beforePhotoFile) {
+                try {
+                    data.beforePhoto = await this.convertImageToBase64(beforePhotoFile);
+                } catch (error) {
+                    console.error('Error processing before photo:', error);
+                }
+            }
+            
+            if (afterPhotoFile) {
+                try {
+                    data.afterPhoto = await this.convertImageToBase64(afterPhotoFile);
+                } catch (error) {
+                    console.error('Error processing after photo:', error);
+                }
+            }
             
             return data;
         },
@@ -1914,7 +1465,7 @@
             
             setTimeout(() => {
                 toast.classList.remove('show');
-            }, 6000);
+            }, 4000);
         },
 
         isDevelopment() {
@@ -1922,8 +1473,10 @@
         }
     };
 
+    // Make SalonForm globally available for onclick handlers
     window.SalonForm = SalonForm;
     
+    // Initialize when DOM is ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', () => SalonForm.init());
     } else {
