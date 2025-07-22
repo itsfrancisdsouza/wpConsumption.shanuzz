@@ -1,1918 +1,1448 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Salon Client Consultation & Product Consumption Form</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Professional Salon Client Form</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    <!-- Font Awesome Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <!-- Signature Pad Library -->
+    <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.7/dist/signature_pad.umd.min.js"></script>
+    
     <style>
         :root {
-            --lk-golden: 1.618;
-            --lk-base: 15px;
-            --lk-space-xs: calc(var(--lk-base) / var(--lk-golden) / var(--lk-golden));
-            --lk-space-sm: calc(var(--lk-base) / var(--lk-golden));
-            --lk-space-md: var(--lk-base);
-            --lk-space-lg: calc(var(--lk-base) * var(--lk-golden));
-            --lk-space-xl: calc(var(--lk-base) * var(--lk-golden) * var(--lk-golden));
-            --lk-space-2xl: calc(var(--lk-base) * var(--lk-golden) * var(--lk-golden) * var(--lk-golden));
-            --lk-text-caption: calc(var(--lk-base) / var(--lk-golden) / var(--lk-golden));
-            --lk-text-label: calc(var(--lk-base) / var(--lk-golden));
-            --lk-text-body: var(--lk-base);
-            --lk-text-subtitle: calc(var(--lk-base) * var(--lk-golden));
-            --lk-text-title: calc(var(--lk-base) * var(--lk-golden) * var(--lk-golden));
-            --lk-text-display: calc(var(--lk-base) * var(--lk-golden) * var(--lk-golden) * var(--lk-golden));
-            --lk-radius-sm: 7px;
-            --lk-radius-md: 10px;
-            --lk-radius-lg: 14px;
-            --lk-primary: #8B5CF6;
-            --lk-primary-light: #A78BFA;
-            --lk-secondary: #06B6D4;
-            --lk-accent: #F59E0B;
-            --lk-surface: #FFFFFF;
-            --lk-surface-variant: #F8FAFC;
-            --lk-surface-container: #F1F5F9;
-            --lk-outline: #E2E8F0;
-            --lk-outline-variant: #CBD5E1;
-            --lk-on-surface: #0F172A;
-            --lk-on-surface-variant: #475569;
-            --lk-success: #10B981;
-            --lk-error: #EF4444;
-            --lk-sage-green: #87A96B;
-            --lk-sage-green-light: #9BB77D;
-            --lk-sage-green-bg: #F0F4EC;
+            --primary-color: #8B5CF6;
+            --primary-dark: #7C3AED;
+            --accent-color: #F59E0B;
+            --text-color: #374151;
+            --light-bg: #F8FAFC;
+            --border-color: #E5E7EB;
+            --success-color: #10B981;
+            --error-color: #EF4444;
         }
-
-        html { box-sizing: border-box; }
-        *, *:before, *:after { box-sizing: inherit; }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            font-size: var(--lk-text-body);
-            line-height: var(--lk-golden);
-            background: var(--lk-surface-variant);
-            color: var(--lk-on-surface);
-            min-height: 100vh;
-            margin: 0;
-        }
-
-        .container {
-            max-width: 100%;
-            margin: 0;
-            padding: var(--lk-space-xl) var(--lk-space-md);
-            background: var(--lk-surface);
-            border-radius: 0;
-            box-shadow: none;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--light-bg) 0%, #EDE9FE 100%);
+            color: var(--text-color);
             min-height: 100vh;
         }
 
-        .header {
+        .form-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(139, 92, 246, 0.1);
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+
+        .form-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            padding: 2.5rem 2rem;
             text-align: center;
-            margin-bottom: var(--lk-space-xl);
         }
 
-        .title {
-            font-size: 1.8rem;
+        .form-header h1 {
+            font-size: 2.5rem;
             font-weight: 700;
-            color: var(--lk-primary);
-            margin-bottom: var(--lk-space-xs);
-            letter-spacing: -0.02em;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
-        .subtitle {
-            font-size: var(--lk-text-label);
-            color: var(--lk-on-surface-variant);
-            font-weight: 400;
-        }
-
-        .section {
-            margin-bottom: var(--lk-space-xl);
-            padding: var(--lk-space-md);
-            background: var(--lk-surface);
-            border: 1px solid var(--lk-outline-variant);
-            border-radius: var(--lk-radius-md);
-            box-shadow: 0 1px 2px rgba(139,92,246,0.03);
-        }
-
-        .consent-section {
-            margin-bottom: var(--lk-space-xl);
-            padding: var(--lk-space-lg);
-            background: var(--lk-sage-green-bg);
-            border: 2px solid var(--lk-sage-green);
-            border-radius: var(--lk-radius-md);
-            box-shadow: 0 2px 8px rgba(135, 169, 107, 0.1);
-        }
-
-        .signature-section {
-            margin-bottom: var(--lk-space-xl);
-            padding: var(--lk-space-lg);
-            background: var(--lk-surface);
-            border: 2px solid var(--lk-primary);
-            border-radius: var(--lk-radius-md);
-            box-shadow: 0 2px 8px rgba(139, 92, 246, 0.1);
-        }
-
-        .section-title {
+        .form-header p {
             font-size: 1.1rem;
-            font-weight: 600;
-            color: var(--lk-on-surface);
-            margin-bottom: var(--lk-space-md);
-            padding-bottom: var(--lk-space-xs);
-            border-bottom: 2px solid var(--lk-primary);
+            opacity: 0.95;
+            margin: 0;
+        }
+
+        .form-body {
+            padding: 3rem 2rem;
+        }
+
+        .step-indicator {
             display: flex;
-            align-items: center;
-            gap: var(--lk-space-sm);
-        }
-
-        .consent-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--lk-sage-green);
-            margin-bottom: var(--lk-space-lg);
-            text-align: center;
-            padding-bottom: var(--lk-space-sm);
-            border-bottom: 2px solid var(--lk-sage-green);
-        }
-
-        .signature-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--lk-primary);
-            margin-bottom: var(--lk-space-lg);
-            text-align: center;
-            padding-bottom: var(--lk-space-sm);
-            border-bottom: 2px solid var(--lk-primary);
-        }
-
-        .consent-content {
-            font-size: var(--lk-text-body);
-            line-height: 1.6;
-            color: var(--lk-on-surface);
-            margin-bottom: var(--lk-space-lg);
-        }
-
-        .consent-item {
-            margin-bottom: var(--lk-space-md);
-            padding-left: var(--lk-space-sm);
+            justify-content: center;
+            margin-bottom: 3rem;
             position: relative;
         }
 
-        .consent-item:before {
-            content: "•";
-            color: var(--lk-sage-green);
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-
-        .consent-agreement {
+        .step {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: var(--lk-space-lg);
-            margin-top: var(--lk-space-lg);
-            padding: var(--lk-space-md);
-            background: white;
-            border-radius: var(--lk-radius-sm);
-            border: 1px solid var(--lk-sage-green-light);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--border-color);
+            color: #6B7280;
+            font-weight: 600;
+            margin: 0 1rem;
+            position: relative;
+            transition: all 0.3s ease;
         }
 
-        .consent-option {
+        .step.active {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .step.completed {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .step::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            width: 2rem;
+            height: 2px;
+            background: var(--border-color);
+            transform: translateY(-50%);
+        }
+
+        .step:last-child::after {
+            display: none;
+        }
+
+        .form-step {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .form-step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-section {
+            background: var(--light-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
             display: flex;
             align-items: center;
-            gap: var(--lk-space-sm);
-            cursor: pointer;
-            padding: var(--lk-space-sm) var(--lk-space-md);
-            border-radius: var(--lk-radius-sm);
-            transition: background-color 0.2s;
+            gap: 0.5rem;
         }
 
-        .consent-option:hover {
-            background: var(--lk-sage-green-bg);
+        .form-control, .form-select {
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 0.875rem 1rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: white;
         }
 
-        .consent-radio {
-            width: 20px;
-            height: 20px;
-            accent-color: var(--lk-sage-green);
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(139, 92, 246, 0.25);
+            outline: none;
         }
 
-        .consent-label {
-            font-weight: 500;
-            color: var(--lk-on-surface);
+        .form-label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
         }
 
-        /* Signature Pad Styles */
         .signature-container {
+            border: 2px dashed var(--border-color);
+            border-radius: 15px;
+            padding: 1rem;
             text-align: center;
-            margin-bottom: var(--lk-space-lg);
+            background: white;
+            transition: all 0.3s ease;
         }
 
-        .signature-instructions {
-            font-size: var(--lk-text-body);
-            color: var(--lk-on-surface-variant);
-            margin-bottom: var(--lk-space-md);
+        .signature-container.active {
+            border-color: var(--primary-color);
+            background: #F8F5FF;
         }
 
-        .signature-pad-wrapper {
-            position: relative;
-            border: 2px dashed var(--lk-primary);
-            border-radius: var(--lk-radius-md);
-            background: var(--lk-surface-variant);
-            margin: 0 auto var(--lk-space-md);
-            max-width: 400px;
-        }
-
-        .signature-pad {
-            display: block;
-            width: 100%;
-            height: 150px;
-            border: none;
-            border-radius: var(--lk-radius-md);
-            background: transparent;
+        #signature-canvas {
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
             cursor: crosshair;
+            width: 100%;
+            height: 200px;
+            display: block;
+            background: white;
         }
 
         .signature-controls {
             display: flex;
+            gap: 1rem;
             justify-content: center;
-            gap: var(--lk-space-md);
+            margin-top: 1rem;
             flex-wrap: wrap;
-        }
-
-        .signature-btn {
-            padding: var(--lk-space-sm) var(--lk-space-md);
-            border: 1px solid var(--lk-primary);
-            border-radius: var(--lk-radius-sm);
-            background: white;
-            color: var(--lk-primary);
-            cursor: pointer;
-            font-size: var(--lk-text-caption);
-            transition: all 0.2s;
-        }
-
-        .signature-btn:hover {
-            background: var(--lk-primary);
-            color: white;
-        }
-
-        .signature-status {
-            margin-top: var(--lk-space-md);
-            padding: var(--lk-space-sm);
-            border-radius: var(--lk-radius-sm);
-            text-align: center;
-            font-size: var(--lk-text-caption);
-            display: none;
-        }
-
-        .signature-status.signed {
-            background: #ECFDF5;
-            color: var(--lk-success);
-            border: 1px solid var(--lk-success);
-            display: block;
-        }
-
-        .signature-status.empty {
-            background: #FEF2F2;
-            color: var(--lk-error);
-            border: 1px solid var(--lk-error);
-            display: block;
-        }
-
-        /* Photo Upload Styles */
-        .photo-section {
-            margin-top: var(--lk-space-lg);
-            border-top: 1px solid var(--lk-outline-variant);
-            padding-top: var(--lk-space-lg);
-        }
-
-        .photo-upload-box {
-            border: 2px dashed var(--lk-outline);
-            border-radius: var(--lk-radius-md);
-            padding: var(--lk-space-lg);
-            text-align: center;
-            background: var(--lk-surface-variant);
-            transition: all 0.2s;
-            cursor: pointer;
-            position: relative;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        .photo-upload-box:hover {
-            border-color: var(--lk-primary);
-            background: rgba(139, 92, 246, 0.02);
-        }
-
-        .photo-upload-box.has-photo {
-            border-color: var(--lk-success);
-            background: #ECFDF5;
-        }
-
-        .photo-input {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        .photo-preview {
-            max-width: 100%;
-            max-height: 200px;
-            border-radius: var(--lk-radius-sm);
-            margin-bottom: var(--lk-space-sm);
-            display: none;
-        }
-
-        .photo-upload-text {
-            font-size: var(--lk-text-body);
-            color: var(--lk-on-surface-variant);
-            margin-bottom: var(--lk-space-sm);
-        }
-
-        .photo-upload-icon {
-            font-size: 2rem;
-            color: var(--lk-primary);
-            margin-bottom: var(--lk-space-sm);
-        }
-
-        .photo-controls {
-            display: flex;
-            justify-content: center;
-            gap: var(--lk-space-sm);
-            margin-top: var(--lk-space-sm);
-        }
-
-        .photo-btn {
-            padding: var(--lk-space-xs) var(--lk-space-sm);
-            border: 1px solid var(--lk-primary);
-            border-radius: var(--lk-radius-sm);
-            background: white;
-            color: var(--lk-primary);
-            cursor: pointer;
-            font-size: var(--lk-text-caption);
-            transition: all 0.2s;
-        }
-
-        .photo-btn:hover {
-            background: var(--lk-primary);
-            color: white;
-        }
-
-        .photo-btn.remove {
-            border-color: var(--lk-error);
-            color: var(--lk-error);
-        }
-
-        .photo-btn.remove:hover {
-            background: var(--lk-error);
-            color: white;
-        }
-
-        .grid-1 {
-            display: grid;
-            gap: var(--lk-space-md);
-            grid-template-columns: 1fr;
-        }
-        .grid-2 { grid-template-columns: 1fr; }
-
-        .quantity-unit-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: var(--lk-space-sm);
-        }
-
-        .field {
-            margin-bottom: var(--lk-space-sm);
-            position: relative;
-        }
-
-        .label {
-            display: block;
-            font-size: 1rem;
-            font-weight: 500;
-            color: var(--lk-on-surface);
-            margin-bottom: var(--lk-space-xs);
-        }
-
-        .required { color: var(--lk-error); margin-left: 2px; }
-
-        .input,
-        .textarea,
-        .select {
-            width: 100%;
-            min-height: 44px;
-            padding: 12px;
-            border: 1px solid var(--lk-outline);
-            border-radius: var(--lk-radius-sm);
-            font-size: 1rem;
-            background: var(--lk-surface);
-            color: var(--lk-on-surface);
-            transition: border-color 0.2s;
-            font-family: inherit;
-        }
-
-        .input:focus,
-        .textarea:focus,
-        .select:focus {
-            outline: none;
-            border-color: var(--lk-primary);
-            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.1);
-        }
-
-        .input.error,
-        .textarea.error,
-        .select.error {
-            border-color: var(--lk-error);
-            box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.1);
-        }
-
-        .textarea { resize: vertical; min-height: 64px; }
-
-        .error-message {
-            color: var(--lk-error);
-            font-size: var(--lk-text-caption);
-            margin-top: 4px;
-            display: none;
-        }
-
-        .error-message.show {
-            display: block;
-        }
-
-        .checkbox-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--lk-space-xs);
-            margin-top: 4px;
-        }
-        .checkbox-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px;
-            border-radius: var(--lk-radius-sm);
-            font-size: 1rem;
-            min-height: 36px;
-            user-select: none;
-            cursor: pointer;
-        }
-        .checkbox-item:hover { background: var(--lk-surface-container); }
-        .checkbox { width: 22px; height: 22px; accent-color: var(--lk-primary); }
-
-        .product-entry, .stylist-entry {
-            border: 1px solid var(--lk-outline-variant);
-            border-radius: var(--lk-radius-md);
-            padding: var(--lk-space-sm);
-            margin-bottom: var(--lk-space-sm);
-            background: var(--lk-surface-container);
-            position: relative;
         }
 
         .btn {
-            font-family: inherit;
+            border-radius: 12px;
+            font-weight: 600;
             font-size: 1rem;
-            font-weight: 500;
-            padding: 12px 20px;
+            padding: 0.875rem 1.5rem;
+            transition: all 0.3s ease;
             border: none;
-            border-radius: var(--lk-radius-sm);
-            cursor: pointer;
-            transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+            text-transform: none;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            letter-spacing: 0.005em;
-        }
-        .btn-primary { background: var(--lk-primary); color: white; }
-        .btn-primary:hover { background: var(--lk-primary-light); }
-        .btn-success { background: var(--lk-success); color: white; }
-        .btn-success:hover { background: #059669; }
-        .btn-error {
-            background: var(--lk-error); color: white;
-            font-size: 0.87rem; padding: 7px 14px;
-            position: absolute; top: 7px; right: 7px;
-        }
-        .btn-error:hover { background: #DC2626; }
-        .btn-submit {
-            width: 100%;
-            font-size: 1.2rem;
-            padding: 18px var(--lk-space-xl);
-            margin-top: var(--lk-space-xl);
-            background: linear-gradient(135deg, var(--lk-primary), var(--lk-secondary));
-        }
-        .btn-submit:hover {
-            transform: translateY(-1px) scale(1.01);
-            box-shadow: 0 7px 14px rgba(139,92,246,0.12);
-        }
-        .icon { margin-left: -3px; }
-        .space-after-btn {
-            display: block;
-            height: 18px;
-            width: 100%;
+            gap: 0.5rem;
         }
 
-        .toast {
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .btn-outline-primary {
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            background: transparent;
+        }
+
+        .btn-outline-primary:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-success {
+            background: var(--success-color);
+            color: white;
+        }
+
+        .btn-warning {
+            background: var(--accent-color);
+            color: white;
+        }
+
+        .file-upload-area {
+            border: 2px dashed var(--border-color);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-upload-area:hover {
+            border-color: var(--primary-color);
+            background: #F8F5FF;
+        }
+
+        .file-upload-area.dragover {
+            border-color: var(--primary-color);
+            background: #F0F9FF;
+            transform: scale(1.02);
+        }
+
+        .preview-image {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: 10px;
+            margin-top: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .form-navigation {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 2rem;
+        }
+
+        .progress-container {
+            margin-bottom: 2rem;
+        }
+
+        .progress {
+            height: 8px;
+            background: var(--border-color);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+            transition: width 0.5s ease;
+        }
+
+        .consent-section {
+            background: #FEF3C7;
+            border: 1px solid #F59E0B;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .form-check {
+            margin: 1rem 0;
+        }
+
+        .form-check-input:checked {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+
+        .toast-container {
             position: fixed;
             top: 20px;
             right: 20px;
-            background: var(--lk-success);
-            color: white;
-            padding: 12px 20px;
-            border-radius: var(--lk-radius-sm);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            transform: translateX(400px);
-            transition: transform 0.3s ease;
-            z-index: 9999;
-            max-width: 300px;
-            font-weight: 500;
-        }
-        .toast.show {
-            transform: translateX(0);
-        }
-        .toast.error {
-            background: var(--lk-error);
+            z-index: 1050;
         }
 
-        .loading {
-            opacity: 0.6;
-            pointer-events: none;
-        }
-
-        /* Submit ID Display */
-        .submit-id-display {
-            background: var(--lk-primary);
-            color: white;
-            padding: var(--lk-space-sm);
-            border-radius: var(--lk-radius-sm);
-            margin-bottom: var(--lk-space-md);
-            text-align: center;
-            font-size: var(--lk-text-caption);
-            font-family: monospace;
-            display: none;
-        }
-
-        /* Autocomplete Styles */
-        .autocomplete-suggestions {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: var(--lk-surface);
-            border: 1px solid var(--lk-outline);
-            border-top: none;
-            border-radius: 0 0 var(--lk-radius-sm) var(--lk-radius-sm);
-            max-height: 200px;
-            overflow-y: auto;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(139,92,246,0.08);
-            display: none;
-        }
-
-        .autocomplete-suggestion {
-            padding: 12px;
-            cursor: pointer;
-            border-bottom: 1px solid var(--lk-outline-variant);
-            font-size: 1rem;
-            transition: background-color 0.2s;
-        }
-
-        .autocomplete-suggestion:hover {
-            background: var(--lk-surface-container);
-        }
-
-        .autocomplete-suggestion:last-child {
-            border-bottom: none;
-        }
-
-        .autocomplete-suggestion .product-type {
-            color: var(--lk-on-surface-variant);
-            font-size: 0.9rem;
-            margin-left: 8px;
-        }
-
-        /* Unit Pills Styles */
-        .unit-pills {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 6px;
-        }
-
-        .unit-pill {
-            background: var(--lk-primary);
-            color: white;
-            font-size: 0.85rem;
-            padding: 4px 10px;
+        .toast {
             border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.2s;
             border: none;
-            font-family: inherit;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.15);
         }
 
-        .unit-pill:hover {
-            background: var(--lk-primary-light);
-            transform: translateY(-1px);
+        .invalid-feedback {
+            display: block;
+            color: var(--error-color);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
         }
 
-        .unit-pill.exact-match {
-            background: var(--lk-accent);
+        .is-invalid {
+            border-color: var(--error-color);
         }
 
-        @media (min-width: 600px) {
-            .grid-2 { grid-template-columns: repeat(2, 1fr); }
-            .container {
-                max-width: 490px;
-                margin: 32px auto;
-                border-radius: var(--lk-radius-lg);
-                box-shadow: 0 2px 14px 0 rgba(0,0,0,0.05);
+        .spinner-border-sm {
+            width: 1rem;
+            height: 1rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .form-body {
+                padding: 2rem 1.5rem;
             }
-            .space-after-btn { height: 22px; }
+            
+            .form-header {
+                padding: 2rem 1.5rem;
+            }
+            
+            .form-header h1 {
+                font-size: 2rem;
+            }
+            
+            .form-section {
+                padding: 1.5rem;
+            }
+            
+            .signature-controls {
+                flex-direction: column;
+            }
+            
+            .form-navigation {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            #signature-canvas {
+                height: 150px;
+            }
         }
-        @media (min-width: 900px) {
-            .container { max-width: 700px; }
-            .label, .input, .select, .checkbox-item { font-size: 1.1rem; }
-        }
-        @media (min-width: 1200px) {
-            .container { max-width: 900px; }
+
+        @media (max-width: 480px) {
+            .step-indicator {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .step {
+                width: 35px;
+                height: 35px;
+                margin: 0 0.5rem;
+            }
         }
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="header">
-        <h1 class="title">Salon Consultation</h1>
-        <p class="subtitle">Complete client assessment and service record</p>
-        <div id="submitIdDisplay" class="submit-id-display"></div>
-    </div>
+    <!-- Toast Container -->
+    <div class="toast-container"></div>
 
-    <form id="salonForm" autocomplete="off" novalidate>
-        <!-- Consent & Acknowledgment Section -->
-        <div class="consent-section">
-            <div class="consent-title">📋 Consent & Acknowledgment</div>
-            
-            <div class="consent-content">
-                <div class="consent-item">
-                    I confirm that the information provided above is accurate and complete to the best of my knowledge.
-                </div>
-                
-                <div class="consent-item">
-                    I understand that providing false or incomplete information may affect the quality or safety of the service.
-                </div>
-                
-                <div class="consent-item">
-                    I agree to inform my stylist/therapist of any changes to my health or medication during future visits.
-                </div>
-                
-                <div class="consent-item">
-                    I consent to Shanuzz Salon using my anonymous health information solely for the purpose of providing safe and effective treatments.
-                </div>
-                
-                <div class="consent-item">
-                    I consent to Shanuzz Salon the full rights to use photos/videos of my hair/skin/nails transformation for promotional purposes (e.g., social media, website). My identity will be kept confidential unless otherwise agreed.
-                </div>
-            </div>
-            
-            <div class="consent-agreement">
-                <label class="consent-option">
-                    <input type="radio" name="consent" value="yes" class="consent-radio" required>
-                    <span class="consent-label">✅ Yes</span>
-                </label>
-                <label class="consent-option">
-                    <input type="radio" name="consent" value="no" class="consent-radio" required>
-                    <span class="consent-label">❌ No</span>
-                </label>
-            </div>
-            <div class="error-message" id="consent-error">Please select your consent preference</div>
-        </div>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-xl-8">
+                <div class="form-container">
+                    <!-- Form Header -->
+                    <div class="form-header">
+                        <h1><i class="fas fa-scissors me-3"></i>Salon Client Form</h1>
+                        <p>Complete your service details and consultation information</p>
+                    </div>
 
-        <!-- Digital Signature Section -->
-        <div class="signature-section">
-            <div class="signature-title">✍️ Digital Signature</div>
-            
-            <div class="signature-container">
-                <div class="signature-instructions">
-                    Please sign below to confirm your consent and agreement to the terms above
-                </div>
-                
-                <div class="signature-pad-wrapper">
-                    <canvas id="signaturePad" class="signature-pad" width="400" height="150"></canvas>
-                </div>
-                
-                <div class="signature-controls">
-                    <button type="button" id="clearSignature" class="signature-btn">🗑️ Clear</button>
-                    <button type="button" id="undoSignature" class="signature-btn">↶ Undo</button>
-                </div>
-                
-                <div id="signatureStatus" class="signature-status">
-                    ✅ Signature captured successfully
-                </div>
-                <div class="error-message" id="signature-error">Please provide your digital signature</div>
-            </div>
-        </div>
-
-        <!-- Client Information Section -->
-        <div class="section">
-            <div class="section-title">
-                <span>👤</span> Client Information
-            </div>
-
-            <div class="grid-1">
-                <div class="field">
-                    <label class="label" for="clientName">Full Name<span class="required">*</span></label>
-                    <input type="text" id="clientName" name="clientName" class="input" required>
-                    <div class="error-message" id="clientName-error">Please enter the client's full name</div>
-                </div>
-                <div class="field">
-                    <label class="label" for="phone">Phone Number<span class="required">*</span></label>
-                    <input type="tel" id="phone" name="phone" class="input" required>
-                    <div class="error-message" id="phone-error">Please enter a valid phone number</div>
-                </div>
-                <div class="field">
-                    <label class="label" for="email">Email Address</label>
-                    <input type="email" id="email" name="email" class="input">
-                    <div class="error-message" id="email-error">Please enter a valid email address</div>
-                </div>
-                <div class="field">
-                    <label class="label" for="visitDate">Visit Date<span class="required">*</span></label>
-                    <input type="date" id="visitDate" name="visitDate" class="input" required>
-                    <div class="error-message" id="visitDate-error">Please select a valid visit date</div>
-                </div>
-                <div class="field">
-                    <label class="label" for="clientType">Client Type</label>
-                    <select id="clientType" name="clientType" class="select">
-                        <option value="new">New Client</option>
-                        <option value="returning">Returning Client</option>
-                        <option value="walk-in">Walk-in</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-
-        <!-- Consultation Section -->
-        <div class="section">
-            <div class="section-title">
-                <span>💬</span> Client Consultation
-            </div>
-
-            <div class="field">
-                <label class="label">
-                    Desired Services<span class="required">*</span>
-                </label>
-                <div class="checkbox-grid" role="group" aria-labelledby="services-label">
-                    <label class="checkbox-item">
-                        <input type="checkbox" class="checkbox" name="services" value="haircut">
-                        Haircut
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" class="checkbox" name="services" value="coloring">
-                        Hair Coloring
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" class="checkbox" name="services" value="styling">
-                        Hair Styling
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" class="checkbox" name="services" value="treatment">
-                        Hair Treatment
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" class="checkbox" name="services" value="facial">
-                        Facial
-                    </label>
-                    <label class="checkbox-item">
-                        <input type="checkbox" class="checkbox" name="services" value="manicure">
-                        Manicure/Pedicure
-                    </label>
-                </div>
-                <div class="error-message" id="services-error">Please select at least one service</div>
-            </div>
-
-            <div class="grid-1">
-                <div class="field">
-                    <label class="label" for="hairType">Hair Type</label>
-                    <select id="hairType" name="hairType" class="select">
-                        <option value="">Select Hair Type</option>
-                        <option value="straight">Straight</option>
-                        <option value="wavy">Wavy</option>
-                        <option value="curly">Curly</option>
-                        <option value="coily">Coily</option>
-                    </select>
-                </div>
-                <div class="field">
-                    <label class="label" for="hairTexture">Hair Texture</label>
-                    <select id="hairTexture" name="hairTexture" class="select">
-                        <option value="">Select Texture</option>
-                        <option value="fine">Fine</option>
-                        <option value="medium">Medium</option>
-                        <option value="thick">Thick</option>
-                    </select>
-                </div>
-                <div class="field">
-                    <label class="label" for="scalpCondition">Scalp Condition</label>
-                    <select id="scalpCondition" name="scalpCondition" class="select">
-                        <option value="">Select Condition</option>
-                        <option value="normal">Normal</option>
-                        <option value="oily">Oily</option>
-                        <option value="dry">Dry</option>
-                        <option value="sensitive">Sensitive</option>
-                        <option value="dandruff">Dandruff</option>
-                    </select>
-                </div>
-                <div class="field">
-                    <label class="label" for="previousTreatments">Previous Chemical Treatments</label>
-                    <input type="text" id="previousTreatments" name="previousTreatments" class="input" placeholder="e.g., Last color, relaxer, perm">
-                </div>
-                <div class="field">
-                    <label class="label" for="allergies">Allergies/Sensitivities</label>
-                    <textarea id="allergies" name="allergies" class="textarea" placeholder="Please list any known allergies or sensitivities"></textarea>
-                </div>
-                <div class="field">
-                    <label class="label" for="clientExpectations">Client Expectations & Notes</label>
-                    <textarea id="clientExpectations" name="clientExpectations" class="textarea" placeholder="Describe what the client wants to achieve, any concerns, or special requests"></textarea>
-                </div>
-            </div>
-        </div>
-
-        <!-- Product Consumption Section -->
-        <div class="section">
-            <div class="section-title">
-                <span>🧴</span> Product Consumption & Inventory
-            </div>
-            <button type="button" class="btn btn-success" id="addProductBtn">
-                <span class="icon">+</span> Add Product Used
-            </button>
-            <div class="space-after-btn"></div>
-            <div id="productContainer">
-                <div class="product-entry">
-                    <button type="button" class="btn btn-error remove-product-btn" aria-label="Remove product entry">Remove</button>
-                    <div class="grid-1">
-                        <div class="field">
-                            <label class="label">Product Name</label>
-                            <input type="text" name="productName[]" class="input product-name-input" placeholder="Start typing product name..." autocomplete="off">
-                            <div class="autocomplete-suggestions"></div>
-                        </div>
-                        <div class="field">
-                            <label class="label">Product Type</label>
-                            <input type="text" name="productType[]" class="input product-type-input" readonly placeholder="Auto-filled when product selected">
-                        </div>
-                        <div class="quantity-unit-grid">
-                            <div class="field">
-                                <label class="label">Quantity Used</label>
-                                <input type="text" name="quantityUsed[]" class="input" placeholder="e.g., 50, 100, 2">
+                    <!-- Form Body -->
+                    <div class="form-body">
+                        <!-- Progress Bar -->
+                        <div class="progress-container">
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" style="width: 20%"></div>
                             </div>
-                            <div class="field">
-                                <label class="label">Unit</label>
-                                <input type="text" name="unit[]" class="input unit-input" placeholder="Auto-filled">
-                                <div class="unit-pills"></div>
+                            <small class="text-muted mt-2 d-block text-center">Step <span id="current-step">1</span> of 5</small>
+                        </div>
+
+                        <!-- Step Indicator -->
+                        <div class="step-indicator">
+                            <div class="step active" data-step="1">1</div>
+                            <div class="step" data-step="2">2</div>
+                            <div class="step" data-step="3">3</div>
+                            <div class="step" data-step="4">4</div>
+                            <div class="step" data-step="5">5</div>
+                        </div>
+
+                        <!-- Main Form -->
+                        <form id="salon-form" novalidate>
+                            <!-- Step 1: Client Information -->
+                            <div class="form-step active" data-step="1">
+                                <div class="form-section">
+                                    <h3 class="section-title">
+                                        <i class="fas fa-user"></i>
+                                        Client Information
+                                    </h3>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="clientName" class="form-label">Full Name *</label>
+                                            <input type="text" class="form-control" id="clientName" name="clientName" required>
+                                            <div class="invalid-feedback">Please provide a valid name.</div>
+                                        </div>
+                                        
+                                        <div class="col-md-6 mb-3">
+                                            <label for="phone" class="form-label">Phone Number *</label>
+                                            <input type="tel" class="form-control" id="phone" name="phone" required>
+                                            <div class="invalid-feedback">Please provide a valid phone number.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="email" class="form-label">Email Address *</label>
+                                            <input type="email" class="form-control" id="email" name="email" required>
+                                            <div class="invalid-feedback">Please provide a valid email address.</div>
+                                        </div>
+                                        
+                                        <div class="col-md-6 mb-3">
+                                            <label for="visitDate" class="form-label">Visit Date *</label>
+                                            <input type="date" class="form-control" id="visitDate" name="visitDate" required>
+                                            <div class="invalid-feedback">Please select a visit date.</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="clientType" class="form-label">Client Type *</label>
+                                        <select class="form-select" id="clientType" name="clientType" required>
+                                            <option value="">Select client type</option>
+                                            <option value="new">New Client</option>
+                                            <option value="returning">Returning Client</option>
+                                            <option value="referral">Referral</option>
+                                        </select>
+                                        <div class="invalid-feedback">Please select a client type.</div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-        <!-- Service Details Section -->
-        <div class="section">
-            <div class="section-title">
-                <span>✨</span> Service Details & Results
-            </div>
-            
-            <!-- Before Photo Only -->
-            <div class="photo-section">
-                <h3 style="margin-bottom: var(--lk-space-md); font-size: 1.1rem; color: var(--lk-on-surface);">📸 Before Photo</h3>
-                <div class="photo-upload-box" id="beforePhotoBox">
-                    <input type="file" id="beforePhoto" name="beforePhoto" class="photo-input" accept="image/*" capture="environment">
-                    <div class="photo-upload-icon">📷</div>
-                    <div class="photo-upload-text">📷 Take Before Photo</div>
-                    <img id="beforePhotoPreview" class="photo-preview" alt="Before photo preview">
-                    <div class="photo-controls" style="display: none;">
-                        <button type="button" class="photo-btn" onclick="SalonForm.retakePhoto('before')">🔄 Retake</button>
-                        <button type="button" class="photo-btn remove" onclick="SalonForm.removePhoto('before')">🗑️ Remove</button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Additional Space Before Stylist Section -->
-            <div style="margin-top: var(--lk-space-xl);"></div>
-            
-            <button type="button" class="btn btn-success" id="addStylistBtn">
-                <span class="icon">+</span> Add Stylist / Incentive
-            </button>
-            <div class="space-after-btn"></div>
-            <div id="stylistContainer">
-                <div class="stylist-entry">
-                    <button type="button" class="btn btn-error remove-stylist-btn" aria-label="Remove stylist entry">Remove</button>
-                    <div class="grid-1">
-                        <div class="field">
-                            <label class="label" for="stylistName0">
-                                Stylist/Technician Name<span class="required">*</span>
-                            </label>
-                            <input type="text" id="stylistName0" name="stylistName[]" class="input stylist-name-input" required placeholder="Start typing stylist name..." autocomplete="off">
-                            <div class="autocomplete-suggestions"></div>
-                        </div>
-                        <div class="field">
-                            <label class="label" for="incentiveSplit0">Incentive Split (₹)</label>
-                            <input type="number" id="incentiveSplit0" name="incentiveSplit[]" class="input stylist-incentive-input" step="0.01" placeholder="Incentive amount">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="grid-1">
-                <div class="field">
-                    <label class="label" for="totalCost">Total Amount (₹)</label>
-                    <input type="number" id="totalCost" name="totalCost" class="input" readonly placeholder="Auto-calculated total" aria-live="polite">
-                </div>
-            </div>
-            <div class="field">
-                <label class="label" for="serviceNotes">Service Notes & Techniques Used</label>
-                <textarea id="serviceNotes" name="serviceNotes" class="textarea" placeholder="Document the process, techniques, formulations, timing, and important details"></textarea>
-            </div>
-            <div class="field">
-                <label class="label" for="clientSatisfaction">Client Satisfaction</label>
-                <select id="clientSatisfaction" name="clientSatisfaction" class="select">
-                    <option value="">Rate Satisfaction</option>
-                    <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
-                    <option value="4">⭐⭐⭐⭐ Very Good</option>
-                    <option value="3">⭐⭐⭐ Good</option>
-                    <option value="2">⭐⭐ Fair</option>
-                    <option value="1">⭐ Needs Improvement</option>
-                </select>
-            </div>
-            <div class="field">
-                <label class="label" for="followUp">Follow-up Recommendations</label>
-                <textarea id="followUp" name="followUp" class="textarea" placeholder="Next appointment suggestions, home care recommendations"></textarea>
-            </div>
-        </div>
-        <button type="submit" class="btn btn-primary btn-submit">
-            <span class="icon">💾</span> Save Client Record
-        </button>
-    </form>
-</div>
+                            <!-- Step 2: Service Details -->
+                            <div class="form-step" data-step="2">
+                                <div class="form-section">
+                                    <h3 class="section-title">
+                                        <i class="fas fa-cut"></i>
+                                        Service Details
+                                    </h3>
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">Services Required *</label>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" value="haircut" id="service1" name="services">
+                                                    <label class="form-check-label" for="service1">Haircut</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" value="coloring" id="service2" name="services">
+                                                    <label class="form-check-label" for="service2">Hair Coloring</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" value="styling" id="service3" name="services">
+                                                    <label class="form-check-label" for="service3">Hair Styling</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" value="treatment" id="service4" name="services">
+                                                    <label class="form-check-label" for="service4">Hair Treatment</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" value="highlights" id="service5" name="services">
+                                                    <label class="form-check-label" for="service5">Highlights</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" value="perm" id="service6" name="services">
+                                                    <label class="form-check-label" for="service6">Perm</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" value="manicure" id="service7" name="services">
+                                                    <label class="form-check-label" for="service7">Manicure</label>
+                                                </div>
+                                                <div class="form-check mb-2">
+                                                    <input class="form-check-input" type="checkbox" value="facial" id="service8" name="services">
+                                                    <label class="form-check-label" for="service8">Facial</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="invalid-feedback">Please select at least one service.</div>
+                                    </div>
 
-<div id="toast" class="toast" role="alert" aria-live="assertive"></div>
+                                    <div class="mb-3">
+                                        <label for="totalCost" class="form-label">Total Service Cost (₹) *</label>
+                                        <input type="number" class="form-control" id="totalCost" name="totalCost" min="0" step="0.01" required>
+                                        <div class="invalid-feedback">Please enter the total cost.</div>
+                                    </div>
 
-<template id="productTemplate">
-    <div class="product-entry">
-        <button type="button" class="btn btn-error remove-product-btn" aria-label="Remove product entry">Remove</button>
-        <div class="grid-1">
-            <div class="field">
-                <label class="label">Product Name</label>
-                <input type="text" name="productName[]" class="input product-name-input" placeholder="Start typing product name..." autocomplete="off">
-                <div class="autocomplete-suggestions"></div>
-            </div>
-            <div class="field">
-                <label class="label">Product Type</label>
-                <input type="text" name="productType[]" class="input product-type-input" readonly placeholder="Auto-filled when product selected">
-            </div>
-            <div class="quantity-unit-grid">
-                <div class="field">
-                    <label class="label">Quantity Used</label>
-                    <input type="text" name="quantityUsed[]" class="input" placeholder="e.g., 50, 100, 2">
-                </div>
-                <div class="field">
-                    <label class="label">Unit</label>
-                    <input type="text" name="unit[]" class="input unit-input" placeholder="Auto-filled">
-                    <div class="unit-pills"></div>
+                                    <div class="mb-3">
+                                        <label for="serviceNotes" class="form-label">Service Notes</label>
+                                        <textarea class="form-control" id="serviceNotes" name="serviceNotes" rows="3" placeholder="Any special instructions or notes about the service..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 3: Hair Analysis -->
+                            <div class="form-step" data-step="3">
+                                <div class="form-section">
+                                    <h3 class="section-title">
+                                        <i class="fas fa-search"></i>
+                                        Hair Analysis & Health
+                                    </h3>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label for="hairType" class="form-label">Hair Type</label>
+                                            <select class="form-select" id="hairType" name="hairType">
+                                                <option value="">Select hair type</option>
+                                                <option value="straight">Straight</option>
+                                                <option value="wavy">Wavy</option>
+                                                <option value="curly">Curly</option>
+                                                <option value="coily">Coily</option>
+                                            </select>
+                                        </div>
+                                        
+                                        <div class="col-md-6 mb-3">
+                                            <label for="hairTexture" class="form-label">Hair Texture</label>
+                                            <select class="form-select" id="hairTexture" name="hairTexture">
+                                                <option value="">Select hair texture</option>
+                                                <option value="fine">Fine</option>
+                                                <option value="medium">Medium</option>
+                                                <option value="thick">Thick</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="scalpCondition" class="form-label">Scalp Condition</label>
+                                        <select class="form-select" id="scalpCondition" name="scalpCondition">
+                                            <option value="">Select scalp condition</option>
+                                            <option value="normal">Normal</option>
+                                            <option value="oily">Oily</option>
+                                            <option value="dry">Dry</option>
+                                            <option value="sensitive">Sensitive</option>
+                                            <option value="dandruff">Dandruff</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="previousTreatments" class="form-label">Previous Treatments</label>
+                                        <textarea class="form-control" id="previousTreatments" name="previousTreatments" rows="2" placeholder="Any previous chemical treatments, colors, or procedures..."></textarea>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="allergies" class="form-label">Known Allergies</label>
+                                        <textarea class="form-control" id="allergies" name="allergies" rows="2" placeholder="Any known allergies to hair products or chemicals..."></textarea>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="clientExpectations" class="form-label">Client Expectations</label>
+                                        <textarea class="form-control" id="clientExpectations" name="clientExpectations" rows="3" placeholder="What are you hoping to achieve with today's service?"></textarea>
+                                    </div>
+
+                                    <!-- Before Photo Upload -->
+                                    <div class="mb-3">
+                                        <label class="form-label">Before Photo (Optional)</label>
+                                        <div class="file-upload-area" onclick="document.getElementById('beforePhoto').click()">
+                                            <input type="file" id="beforePhoto" name="beforePhoto" accept="image/*" style="display: none;">
+                                            <i class="fas fa-camera fa-3x mb-3 text-muted"></i>
+                                            <p class="mb-0">Click to upload or drag and drop a photo</p>
+                                            <small class="text-muted">PNG, JPG up to 5MB</small>
+                                        </div>
+                                        <div id="beforePhotoPreview"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 4: Products & Stylists -->
+                            <div class="form-step" data-step="4">
+                                <div class="form-section">
+                                    <h3 class="section-title">
+                                        <i class="fas fa-palette"></i>
+                                        Products & Stylists
+                                    </h3>
+                                    
+                                    <div id="product-section">
+                                        <div class="product-row mb-4 p-3 border rounded">
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="form-label">Product Name</label>
+                                                    <input type="text" class="form-control" name="productName" placeholder="e.g., L'Oreal Professional">
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="form-label">Product Type</label>
+                                                    <select class="form-select" name="productType">
+                                                        <option value="">Select product type</option>
+                                                        <option value="shampoo">Shampoo</option>
+                                                        <option value="conditioner">Conditioner</option>
+                                                        <option value="color">Hair Color</option>
+                                                        <option value="treatment">Treatment</option>
+                                                        <option value="styling">Styling Product</option>
+                                                        <option value="other">Other</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label class="form-label">Quantity Used</label>
+                                                    <input type="number" class="form-control" name="quantityUsed" min="0" step="0.1">
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label class="form-label">Unit</label>
+                                                    <select class="form-select" name="unit">
+                                                        <option value="">Select unit</option>
+                                                        <option value="ml">ml</option>
+                                                        <option value="grams">grams</option>
+                                                        <option value="pieces">pieces</option>
+                                                        <option value="tubes">tubes</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-4 mb-3 d-flex align-items-end">
+                                                    <button type="button" class="btn btn-outline-danger remove-product" style="display: none;">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <button type="button" id="add-product" class="btn btn-outline-primary mb-4">
+                                        <i class="fas fa-plus"></i> Add Another Product
+                                    </button>
+
+                                    <div id="stylist-section">
+                                        <div class="stylist-row mb-4 p-3 border rounded">
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label class="form-label">Stylist Name</label>
+                                                    <input type="text" class="form-control" name="stylistName" placeholder="e.g., Maria Silva">
+                                                </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label class="form-label">Incentive Split (₹)</label>
+                                                    <input type="number" class="form-control" name="incentiveSplit" min="0" step="0.01">
+                                                </div>
+                                                <div class="col-md-2 mb-3 d-flex align-items-end">
+                                                    <button type="button" class="btn btn-outline-danger remove-stylist" style="display: none;">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <button type="button" id="add-stylist" class="btn btn-outline-primary">
+                                        <i class="fas fa-plus"></i> Add Another Stylist
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Step 5: Consent & Signature -->
+                            <div class="form-step" data-step="5">
+                                <div class="form-section">
+                                    <h3 class="section-title">
+                                        <i class="fas fa-file-signature"></i>
+                                        Consent & Digital Signature
+                                    </h3>
+                                    
+                                    <!-- Consent Section -->
+                                    <div class="consent-section">
+                                        <h5 class="text-warning mb-3">
+                                            <i class="fas fa-exclamation-triangle me-2"></i>
+                                            Important Consent Information
+                                        </h5>
+                                        
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="checkbox" id="consent1" name="consent" value="service" required>
+                                            <label class="form-check-label" for="consent1">
+                                                I consent to receive the selected services and understand the potential risks involved.
+                                            </label>
+                                        </div>
+                                        
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="checkbox" id="consent2" name="consent" value="allergy" required>
+                                            <label class="form-check-label" for="consent2">
+                                                I have disclosed all known allergies and medical conditions that may affect the service.
+                                            </label>
+                                        </div>
+                                        
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="checkbox" id="consent3" name="consent" value="photos" required>
+                                            <label class="form-check-label" for="consent3">
+                                                I consent to photographs being taken for record-keeping purposes.
+                                            </label>
+                                        </div>
+                                        
+                                        <div class="form-check mb-3">
+                                            <input class="form-check-input" type="checkbox" id="consent4" name="consent" value="data" required>
+                                            <label class="form-check-label" for="consent4">
+                                                I agree to the salon's privacy policy and data handling practices.
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Digital Signature -->
+                                    <div class="signature-container">
+                                        <label class="form-label">Digital Signature *</label>
+                                        <p class="text-muted mb-3">Please sign below using your mouse, finger, or stylus</p>
+                                        
+                                        <canvas id="signature-canvas" width="600" height="200"></canvas>
+                                        
+                                        <div class="signature-controls">
+                                            <button type="button" id="clear-signature" class="btn btn-outline-warning">
+                                                <i class="fas fa-eraser"></i> Clear
+                                            </button>
+                                            <button type="button" id="undo-signature" class="btn btn-outline-secondary">
+                                                <i class="fas fa-undo"></i> Undo
+                                            </button>
+                                        </div>
+                                        <div class="invalid-feedback">Please provide your digital signature.</div>
+                                    </div>
+
+                                    <!-- Satisfaction & Follow-up -->
+                                    <div class="mt-4">
+                                        <div class="mb-3">
+                                            <label for="clientSatisfaction" class="form-label">Expected Satisfaction Level</label>
+                                            <select class="form-select" id="clientSatisfaction" name="clientSatisfaction">
+                                                <option value="">Rate your expectation</option>
+                                                <option value="1">1 - Basic Service</option>
+                                                <option value="2">2 - Good Service</option>
+                                                <option value="3">3 - Great Service</option>
+                                                <option value="4">4 - Excellent Service</option>
+                                                <option value="5">5 - Outstanding Service</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="followUp" class="form-label">Follow-up Preferences</label>
+                                            <textarea class="form-control" id="followUp" name="followUp" rows="2" placeholder="When would you like us to contact you for follow-up?"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Navigation Buttons -->
+                            <div class="form-navigation">
+                                <button type="button" id="prev-btn" class="btn btn-outline-primary" style="display: none;">
+                                    <i class="fas fa-arrow-left"></i> Previous
+                                </button>
+                                
+                                <div class="ms-auto">
+                                    <button type="button" id="next-btn" class="btn btn-primary">
+                                        Next <i class="fas fa-arrow-right"></i>
+                                    </button>
+                                    <button type="submit" id="submit-btn" class="btn btn-success" style="display: none;">
+                                        <span id="submit-spinner" class="spinner-border spinner-border-sm d-none me-2"></span>
+                                        <i class="fas fa-check me-2"></i> Submit Form
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</template>
 
-<template id="stylistTemplate">
-    <div class="stylist-entry">
-        <button type="button" class="btn btn-error remove-stylist-btn" aria-label="Remove stylist entry">Remove</button>
-        <div class="grid-1">
-            <div class="field">
-                <label class="label">
-                    Stylist/Technician Name<span class="required">*</span>
-                </label>
-                <input type="text" name="stylistName[]" class="input stylist-name-input" required placeholder="Start typing stylist name..." autocomplete="off">
-                <div class="autocomplete-suggestions"></div>
-            </div>
-            <div class="field">
-                <label class="label">Incentive Split (₹)</label>
-                <input type="number" name="incentiveSplit[]" class="input stylist-incentive-input" step="0.01" placeholder="Incentive amount">
-            </div>
-        </div>
-    </div>
-</template>
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
-<script>
-(function() {
-    'use strict';
-    
-    const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQwMeJAvIhiingIL1otFVM08kZedwZKC-u3uXplgXJmwcBlcWRFGuMQbcH-gSLu7Iqr-GFSyLKTxJdO/pub?gid=970040881&single=true&output=csv";
-    
-    // REPLACE WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
-    const APPS_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
-    
-    let products = [];
-    let stylists = [];
-    
-    // Signature Pad functionality
-    let signaturePad = null;
-    let isDrawing = false;
-    let signatureData = [];
-    
-    // Photo storage (only before photo)
-    let beforePhotoData = null;
-    
-    // Unique Submit ID generator
-    function generateSubmitId() {
-        const timestamp = new Date().toISOString().replace(/[-:.]/g, '').slice(0, 15);
-        const random = Math.random().toString(36).substr(2, 4).toUpperCase();
-        return `SLN${timestamp}${random}`;
-    }
-    
-    const SalonForm = {
-        init() {
-            this.setInitialDate();
-            this.bindEvents();
-            this.updateTotalCost();
-            this.loadProducts();
-            this.initSignaturePad();
-            this.initPhotoHandlers();
-            
-            // ✅ ADD REMOVE BUTTON FUNCTIONALITY
-            document.addEventListener('click', (e) => {
-                if (e.target.closest('.remove-product-btn')) {
-                    const entry = e.target.closest('.product-entry');
-                    const allEntries = document.querySelectorAll('.product-entry');
-                    if (allEntries.length > 1) {
-                        entry.remove();
-                        this.showToast('Product removed', 'success');
-                    } else {
-                        this.showToast('At least one product is required', 'error');
+    <script>
+        // Configuration
+        const CONFIG = {
+            APPS_SCRIPT_URL: 'YOUR_APPS_SCRIPT_URL_HERE', // Replace with your actual URL
+            MAX_FILE_SIZE: 5 * 1024 * 1024, // 5MB
+            ALLOWED_FILE_TYPES: ['image/jpeg', 'image/jpg', 'image/png', 'image/gif']
+        };
+
+        // Form Management Class
+        class SalonForm {
+            constructor() {
+                this.currentStep = 1;
+                this.totalSteps = 5;
+                this.signaturePad = null;
+                this.beforePhotoData = null;
+                
+                this.init();
+            }
+
+            init() {
+                this.initializeSignaturePad();
+                this.setupEventListeners();
+                this.setupFileUpload();
+                this.setupDynamicFields();
+                this.updateStepIndicator();
+            }
+
+            // Initialize Signature Pad with touch support[29][46][51]
+            initializeSignaturePad() {
+                const canvas = document.getElementById('signature-canvas');
+                if (!canvas) return;
+
+                this.signaturePad = new SignaturePad(canvas, {
+                    backgroundColor: 'rgba(255, 255, 255, 1)',
+                    penColor: 'rgb(0, 0, 0)',
+                    minWidth: 0.5,
+                    maxWidth: 2.5,
+                    throttle: 16,
+                    minDistance: 5,
+                });
+
+                // Make responsive
+                this.resizeSignatureCanvas();
+                window.addEventListener('resize', () => this.resizeSignatureCanvas());
+
+                // Clear signature button
+                document.getElementById('clear-signature').addEventListener('click', () => {
+                    this.signaturePad.clear();
+                });
+
+                // Undo signature button
+                document.getElementById('undo-signature').addEventListener('click', () => {
+                    const data = this.signaturePad.toData();
+                    if (data && data.length > 0) {
+                        data.pop();
+                        this.signaturePad.fromData(data);
                     }
-                }
+                });
+
+                // Visual feedback when signing
+                this.signaturePad.addEventListener('beginStroke', () => {
+                    document.querySelector('.signature-container').classList.add('active');
+                });
+            }
+
+            // Make signature canvas responsive[38][54]
+            resizeSignatureCanvas() {
+                const canvas = document.getElementById('signature-canvas');
+                if (!canvas || !this.signaturePad) return;
+
+                const ratio = Math.max(window.devicePixelRatio || 1, 1);
+                const rect = canvas.getBoundingClientRect();
                 
-                if (e.target.closest('.remove-stylist-btn')) {
-                    const entry = e.target.closest('.stylist-entry');
-                    const allEntries = document.querySelectorAll('.stylist-entry');
-                    if (allEntries.length > 1) {
-                        entry.remove();
-                        this.updateTotalCost();
-                        this.showToast('Stylist removed', 'success');
+                canvas.width = rect.width * ratio;
+                canvas.height = rect.height * ratio;
+                canvas.getContext('2d').scale(ratio, ratio);
+                
+                this.signaturePad.clear(); // Unfortunately, we need to clear on resize
+            }
+
+            // Setup all event listeners[41][42][45]
+            setupEventListeners() {
+                // Navigation buttons
+                document.getElementById('next-btn').addEventListener('click', () => this.nextStep());
+                document.getElementById('prev-btn').addEventListener('click', () => this.prevStep());
+                
+                // Form submission
+                document.getElementById('salon-form').addEventListener('submit', (e) => this.handleSubmit(e));
+                
+                // Real-time validation
+                this.setupRealTimeValidation();
+                
+                // Service checkboxes
+                this.setupServiceValidation();
+            }
+
+            // Setup real-time validation[42][48][50]
+            setupRealTimeValidation() {
+                const inputs = document.querySelectorAll('input[required], select[required], textarea[required]');
+                
+                inputs.forEach(input => {
+                    input.addEventListener('blur', () => this.validateField(input));
+                    input.addEventListener('input', () => this.clearFieldError(input));
+                });
+
+                // Email validation
+                document.getElementById('email').addEventListener('input', (e) => {
+                    const email = e.target;
+                    if (email.value && !this.isValidEmail(email.value)) {
+                        this.showFieldError(email, 'Please enter a valid email address.');
                     } else {
-                        this.showToast('At least one stylist is required', 'error');
+                        this.clearFieldError(email);
                     }
-                }
-            });
-        },
+                });
 
-        initPhotoHandlers() {
-            const beforeInput = document.getElementById('beforePhoto');
-            beforeInput.addEventListener('change', (e) => this.handlePhotoSelection(e, 'before'));
-        },
-
-        handlePhotoSelection(event, type) {
-            const file = event.target.files[0];
-            if (!file) return;
-            
-            // Validate file size (max 5MB)
-            if (file.size > 5 * 1024 * 1024) {
-                this.showToast('Photo file size must be less than 5MB', 'error');
-                return;
-            }
-            
-            // Validate file type
-            if (!file.type.startsWith('image/')) {
-                this.showToast('Please select a valid image file', 'error');
-                return;
-            }
-            
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const photoData = e.target.result;
-                beforePhotoData = photoData;
-                this.displayPhotoPreview('before', photoData);
-            };
-            reader.readAsDataURL(file);
-        },
-
-        displayPhotoPreview(type, photoData) {
-            const preview = document.getElementById(`${type}PhotoPreview`);
-            const box = document.getElementById(`${type}PhotoBox`);
-            const controls = box.querySelector('.photo-controls');
-            const uploadText = box.querySelector('.photo-upload-text');
-            const uploadIcon = box.querySelector('.photo-upload-icon');
-            
-            preview.src = photoData;
-            preview.style.display = 'block';
-            controls.style.display = 'flex';
-            uploadText.style.display = 'none';
-            uploadIcon.style.display = 'none';
-            box.classList.add('has-photo');
-            
-            this.showToast('Before photo uploaded successfully!', 'success');
-        },
-
-        retakePhoto(type) {
-            const input = document.getElementById(`${type}Photo`);
-            input.click();
-        },
-
-        removePhoto(type) {
-            const preview = document.getElementById(`${type}PhotoPreview`);
-            const box = document.getElementById(`${type}PhotoBox`);
-            const controls = box.querySelector('.photo-controls');
-            const uploadText = box.querySelector('.photo-upload-text');
-            const uploadIcon = box.querySelector('.photo-upload-icon');
-            const input = document.getElementById(`${type}Photo`);
-            
-            preview.style.display = 'none';
-            preview.src = '';
-            controls.style.display = 'none';
-            uploadText.style.display = 'block';
-            uploadIcon.style.display = 'block';
-            box.classList.remove('has-photo');
-            input.value = '';
-            
-            beforePhotoData = null;
-            this.showToast('Before photo removed', 'success');
-        },
-
-        initSignaturePad() {
-            const canvas = document.getElementById('signaturePad');
-            const ctx = canvas.getContext('2d');
-            
-            // Set canvas size
-            const rect = canvas.getBoundingClientRect();
-            canvas.width = rect.width;
-            canvas.height = rect.height;
-            
-            // Set up drawing context
-            ctx.strokeStyle = '#0F172A';
-            ctx.lineWidth = 2;
-            ctx.lineCap = 'round';
-            ctx.lineJoin = 'round';
-            
-            // Drawing event listeners
-            canvas.addEventListener('mousedown', this.startDrawing.bind(this));
-            canvas.addEventListener('mousemove', this.draw.bind(this));
-            canvas.addEventListener('mouseup', this.stopDrawing.bind(this));
-            canvas.addEventListener('mouseout', this.stopDrawing.bind(this));
-            
-            // Touch events for mobile
-            canvas.addEventListener('touchstart', this.handleTouchStart.bind(this));
-            canvas.addEventListener('touchmove', this.handleTouchMove.bind(this));
-            canvas.addEventListener('touchend', this.stopDrawing.bind(this));
-            
-            // Control buttons
-            document.getElementById('clearSignature').addEventListener('click', this.clearSignature.bind(this));
-            document.getElementById('undoSignature').addEventListener('click', this.undoSignature.bind(this));
-            
-            signaturePad = ctx;
-        },
-
-        startDrawing(e) {
-            isDrawing = true;
-            const rect = e.target.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            signaturePad.beginPath();
-            signaturePad.moveTo(x, y);
-            
-            // Save state for undo
-            this.saveSignatureState();
-        },
-
-        draw(e) {
-            if (!isDrawing) return;
-            
-            const rect = e.target.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            signaturePad.lineTo(x, y);
-            signaturePad.stroke();
-            
-            this.updateSignatureStatus();
-        },
-
-        stopDrawing() {
-            isDrawing = false;
-            signaturePad.beginPath();
-        },
-
-        handleTouchStart(e) {
-            e.preventDefault();
-            const touch = e.touches[0];
-            const mouseEvent = new MouseEvent('mousedown', {
-                clientX: touch.clientX,
-                clientY: touch.clientY
-            });
-            e.target.dispatchEvent(mouseEvent);
-        },
-
-        handleTouchMove(e) {
-            e.preventDefault();
-            const touch = e.touches[0];
-            const mouseEvent = new MouseEvent('mousemove', {
-                clientX: touch.clientX,
-                clientY: touch.clientY
-            });
-            e.target.dispatchEvent(mouseEvent);
-        },
-
-        saveSignatureState() {
-            const canvas = document.getElementById('signaturePad');
-            signatureData.push(canvas.toDataURL());
-            
-            // Keep only last 10 states for performance
-            if (signatureData.length > 10) {
-                signatureData.shift();
-            }
-        },
-
-        clearSignature() {
-            const canvas = document.getElementById('signaturePad');
-            signaturePad.clearRect(0, 0, canvas.width, canvas.height);
-            signatureData = [];
-            this.updateSignatureStatus();
-            this.clearSignatureError();
-        },
-
-        undoSignature() {
-            if (signatureData.length > 1) {
-                signatureData.pop(); // Remove current state
-                const previousState = signatureData[signatureData.length - 1];
-                
-                const canvas = document.getElementById('signaturePad');
-                const img = new Image();
-                img.onload = () => {
-                    signaturePad.clearRect(0, 0, canvas.width, canvas.height);
-                    signaturePad.drawImage(img, 0, 0);
-                    this.updateSignatureStatus();
-                };
-                img.src = previousState;
-            } else {
-                this.clearSignature();
-            }
-        },
-
-        updateSignatureStatus() {
-            const canvas = document.getElementById('signaturePad');
-            const isEmpty = this.isSignatureEmpty(canvas);
-            const statusElement = document.getElementById('signatureStatus');
-            
-            if (isEmpty) {
-                statusElement.className = 'signature-status empty';
-                statusElement.textContent = '⚠️ Please provide your signature';
-            } else {
-                statusElement.className = 'signature-status signed';
-                statusElement.textContent = '✅ Signature captured successfully';
-            }
-        },
-
-        isSignatureEmpty(canvas) {
-            const ctx = canvas.getContext('2d');
-            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            
-            for (let i = 0; i < imageData.data.length; i += 4) {
-                // Check if any pixel has been modified (not transparent)
-                if (imageData.data[i + 3] !== 0) {
-                    return false;
-                }
-            }
-            return true;
-        },
-
-        validateSignature() {
-            const canvas = document.getElementById('signaturePad');
-            const isEmpty = this.isSignatureEmpty(canvas);
-            
-            if (isEmpty) {
-                this.showSignatureError('Please provide your digital signature');
-                return false;
-            }
-            
-            this.clearSignatureError();
-            return true;
-        },
-
-        showSignatureError(message) {
-            const errorElement = document.getElementById('signature-error');
-            errorElement.textContent = message;
-            errorElement.classList.add('show');
-        },
-
-        clearSignatureError() {
-            const errorElement = document.getElementById('signature-error');
-            errorElement.classList.remove('show');
-        },
-
-        getSignatureData() {
-            const canvas = document.getElementById('signaturePad');
-            return canvas.toDataURL();
-        },
-
-        async loadProducts() {
-            try {
-                const response = await fetch(CSV_URL);
-                const csvText = await response.text();
-                const parsed = this.parseCSV(csvText);
-                products = parsed.products;
-                stylists = parsed.stylists;
-                this.setupAutocomplete();
-                this.setupInitialUnitSuggestions();
-                this.setupStylistAutocomplete();
-                console.log(`Loaded ${products.length} products and ${stylists.length} stylists from Google Sheets`);
-            } catch (error) {
-                console.error('Failed to load data:', error);
-                this.showToast('Failed to load data. Autocomplete will be limited.', 'error');
-            }
-        },
-
-        parseCSV(text) {
-            const lines = text.trim().split('\n');
-            const parsedProducts = [];
-            const parsedStylists = [];
-            
-            for (let i = 0; i < lines.length; i++) {
-                const line = lines[i].trim();
-                if (!line) continue;
-                
-                // Simple CSV parsing - handles quoted fields
-                const fields = [];
-                let current = '';
-                let inQuotes = false;
-                
-                for (let j = 0; j < line.length; j++) {
-                    const char = line[j];
-                    if (char === '"') {
-                        inQuotes = !inQuotes;
-                    } else if (char === ',' && !inQuotes) {
-                        fields.push(current.trim());
-                        current = '';
+                // Phone validation
+                document.getElementById('phone').addEventListener('input', (e) => {
+                    const phone = e.target;
+                    if (phone.value && !this.isValidPhone(phone.value)) {
+                        this.showFieldError(phone, 'Please enter a valid phone number.');
                     } else {
-                        current += char;
+                        this.clearFieldError(phone);
                     }
-                }
-                fields.push(current.trim());
-                
-                // Column mapping: B=Product Name, C=Product Type, E=Unit, J=Stylist Name
-                if (fields.length >= 10) {
-                    const productName = fields[1].replace(/^"|"$/g, '').trim();    // Column B
-                    const productType = fields[2].replace(/^"|"$/g, '').trim();    // Column C
-                    const unit = fields[4].replace(/^"|"$/g, '').trim();           // Column E
-                    const stylistName = fields[9].replace(/^"|"$/g, '').trim();   // Column J (index 9)
-                    
-                    // Add product if valid
-                    if (productName && productType && productName !== 'Product Name') {
-                        parsedProducts.push({ 
-                            name: productName, 
-                            type: productType, 
-                            unit: unit || 'ml'
+                });
+            }
+
+            // Setup service validation
+            setupServiceValidation() {
+                const serviceCheckboxes = document.querySelectorAll('input[name="services"]');
+                serviceCheckboxes.forEach(checkbox => {
+                    checkbox.addEventListener('change', () => {
+                        const isAnyChecked = Array.from(serviceCheckboxes).some(cb => cb.checked);
+                        serviceCheckboxes.forEach(cb => {
+                            if (isAnyChecked) {
+                                cb.setCustomValidity('');
+                                this.clearFieldError(cb);
+                            }
                         });
-                    }
-                    
-                    // Add stylist if valid and unique
-                    if (stylistName && stylistName !== 'Stylist Name' && stylistName !== 'stylist name' && !parsedStylists.includes(stylistName)) {
-                        parsedStylists.push(stylistName);
-                    }
-                }
+                    });
+                });
             }
-            
-            return {
-                products: parsedProducts,
-                stylists: parsedStylists
-            };
-        },
 
-        setupAutocomplete() {
-            document.querySelectorAll('.product-name-input').forEach(input => {
-                this.bindAutocomplete(input);
-            });
-        },
+            // Setup file upload with drag & drop[3][6][15]
+            setupFileUpload() {
+                const uploadArea = document.querySelector('.file-upload-area');
+                const fileInput = document.getElementById('beforePhoto');
 
-        setupStylistAutocomplete() {
-            document.querySelectorAll('.stylist-name-input').forEach(input => {
-                this.bindStylistAutocomplete(input);
-            });
-        },
+                // Click to upload
+                fileInput.addEventListener('change', (e) => this.handleFileSelect(e));
 
-        setupInitialUnitSuggestions() {
-            document.querySelectorAll('.unit-input').forEach(input => {
-                this.bindUnitSuggestions(input);
-            });
-        },
-
-        bindAutocomplete(input) {
-            const suggestionBox = input.nextElementSibling;
-            const productEntry = input.closest('.product-entry');
-            const productTypeInput = productEntry.querySelector('.product-type-input');
-            const unitInput = productEntry.querySelector('.unit-input');
-            
-            input.addEventListener('input', (e) => {
-                const value = e.target.value.toLowerCase();
-                suggestionBox.innerHTML = '';
-                
-                if (!value) {
-                    suggestionBox.style.display = 'none';
-                    return;
-                }
-                
-                const matches = products
-                    .filter(p => p.name.toLowerCase().includes(value))
-                    .slice(0, 8);
-                
-                if (matches.length === 0) {
-                    suggestionBox.style.display = 'none';
-                    return;
-                }
-                
-                matches.forEach(product => {
-                    const option = document.createElement('div');
-                    option.className = 'autocomplete-suggestion';
-                    
-                    const nameIndex = product.name.toLowerCase().indexOf(value);
-                    let displayName = product.name;
-                    if (nameIndex !== -1) {
-                        displayName = product.name.substring(0, nameIndex) + 
-                                    '<strong>' + product.name.substring(nameIndex, nameIndex + value.length) + '</strong>' +
-                                    product.name.substring(nameIndex + value.length);
-                    }
-                    
-                    option.innerHTML = `${displayName}<span class="product-type">${product.type}</span>`;
-                    
-                    option.addEventListener('click', () => {
-                        input.value = product.name;
-                        productTypeInput.value = product.type;
-                        unitInput.value = product.unit;
-                        suggestionBox.innerHTML = '';
-                        suggestionBox.style.display = 'none';
-                        
-                        this.updateUnitSuggestions(unitInput, product);
-                    });
-                    
-                    suggestionBox.appendChild(option);
-                });
-                
-                suggestionBox.style.display = 'block';
-            });
-            
-            this.addKeyboardAndClickHandlers(input, suggestionBox);
-        },
-
-        bindStylistAutocomplete(input) {
-            const suggestionBox = input.nextElementSibling;
-            
-            input.addEventListener('input', (e) => {
-                const value = e.target.value.toLowerCase();
-                suggestionBox.innerHTML = '';
-                
-                if (!value) {
-                    suggestionBox.style.display = 'none';
-                    return;
-                }
-                
-                const matches = stylists
-                    .filter(name => name.toLowerCase().includes(value))
-                    .slice(0, 6);
-                
-                if (matches.length === 0) {
-                    suggestionBox.style.display = 'none';
-                    return;
-                }
-                
-                matches.forEach(stylistName => {
-                    const option = document.createElement('div');
-                    option.className = 'autocomplete-suggestion';
-                    
-                    const nameIndex = stylistName.toLowerCase().indexOf(value);
-                    let displayName = stylistName;
-                    if (nameIndex !== -1) {
-                        displayName = stylistName.substring(0, nameIndex) + 
-                                    '<strong>' + stylistName.substring(nameIndex, nameIndex + value.length) + '</strong>' +
-                                    stylistName.substring(nameIndex + value.length);
-                    }
-                    
-                    option.innerHTML = displayName;
-                    
-                    option.addEventListener('click', () => {
-                        input.value = stylistName;
-                        suggestionBox.innerHTML = '';
-                        suggestionBox.style.display = 'none';
-                    });
-                    
-                    suggestionBox.appendChild(option);
-                });
-                
-                suggestionBox.style.display = 'block';
-            });
-            
-            this.addKeyboardAndClickHandlers(input, suggestionBox);
-        },
-
-        addKeyboardAndClickHandlers(input, suggestionBox) {
-            input.addEventListener('keydown', (e) => {
-                const suggestions = suggestionBox.querySelectorAll('.autocomplete-suggestion');
-                if (e.key === 'Enter' && suggestions.length > 0) {
+                // Drag and drop
+                uploadArea.addEventListener('dragover', (e) => {
                     e.preventDefault();
-                    suggestions[0].click();
-                } else if (e.key === 'Escape') {
-                    suggestionBox.style.display = 'none';
-                }
-            });
-            
-            document.addEventListener('click', (e) => {
-                if (!input.contains(e.target) && !suggestionBox.contains(e.target)) {
-                    suggestionBox.style.display = 'none';
-                }
-            });
-        },
+                    uploadArea.classList.add('dragover');
+                });
 
-        bindUnitSuggestions(unitInput) {
-            const unitPills = unitInput.nextElementSibling;
-            this.updateUnitSuggestions(unitInput, null);
-            
-            unitInput.addEventListener('focus', () => {
-                unitPills.style.display = 'flex';
-            });
-        },
+                uploadArea.addEventListener('dragleave', () => {
+                    uploadArea.classList.remove('dragover');
+                });
 
-        updateUnitSuggestions(unitInput, selectedProduct) {
-            const unitPills = unitInput.nextElementSibling;
-            unitPills.innerHTML = '';
-            
-            const allUnits = [...new Set(products.map(p => p.unit).filter(Boolean))];
-            
-            let suggestedUnits = [];
-            if (selectedProduct && selectedProduct.unit) {
-                suggestedUnits = [selectedProduct.unit];
-                allUnits.forEach(unit => {
-                    if (!suggestedUnits.includes(unit)) {
-                        suggestedUnits.push(unit);
+                uploadArea.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    uploadArea.classList.remove('dragover');
+                    
+                    const files = e.dataTransfer.files;
+                    if (files.length > 0) {
+                        this.processFile(files[0]);
                     }
                 });
-            } else {
-                suggestedUnits = allUnits;
             }
-            
-            suggestedUnits.slice(0, 8).forEach((unit, index) => {
-                const pill = document.createElement('button');
-                pill.type = 'button';
-                pill.className = 'unit-pill';
-                pill.textContent = unit;
-                
-                if (selectedProduct && unit === selectedProduct.unit) {
-                    pill.classList.add('exact-match');
+
+            // Handle file selection and convert to base64[6][15]
+            handleFileSelect(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    this.processFile(file);
                 }
-                
-                pill.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    unitInput.value = unit;
-                    unitPills.style.display = 'none';
+            }
+
+            // Process file and convert to base64[6][15]
+            processFile(file) {
+                // Validate file type
+                if (!CONFIG.ALLOWED_FILE_TYPES.includes(file.type)) {
+                    this.showToast('Invalid file type. Please select a JPEG, PNG, or GIF image.', 'error');
+                    return;
+                }
+
+                // Validate file size
+                if (file.size > CONFIG.MAX_FILE_SIZE) {
+                    this.showToast('File size too large. Please select an image under 5MB.', 'error');
+                    return;
+                }
+
+                // Convert to base64
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    this.beforePhotoData = e.target.result;
+                    this.showPhotoPreview(e.target.result);
+                };
+                reader.readAsDataURL(file);
+            }
+
+            // Show photo preview
+            showPhotoPreview(dataUrl) {
+                const preview = document.getElementById('beforePhotoPreview');
+                preview.innerHTML = `
+                    <div class="mt-3">
+                        <img src="${dataUrl}" class="preview-image" alt="Before photo preview">
+                        <div class="mt-2">
+                            <button type="button" class="btn btn-sm btn-outline-danger" onclick="salonForm.removePhoto()">
+                                <i class="fas fa-trash"></i> Remove Photo
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Remove photo
+            removePhoto() {
+                this.beforePhotoData = null;
+                document.getElementById('beforePhoto').value = '';
+                document.getElementById('beforePhotoPreview').innerHTML = '';
+            }
+
+            // Setup dynamic product and stylist fields
+            setupDynamicFields() {
+                // Add product button
+                document.getElementById('add-product').addEventListener('click', () => {
+                    this.addProductRow();
                 });
-                
-                unitPills.appendChild(pill);
-            });
-        },
 
-        setInitialDate() {
-            const today = new Date();
-            const yesterday = new Date(today);
-            yesterday.setDate(yesterday.getDate() - 1);
-            const nextMonth = new Date(today);
-            nextMonth.setMonth(nextMonth.getMonth() + 1);
-            
-            const visitDateInput = document.getElementById('visitDate');
-            visitDateInput.valueAsDate = today;
-            visitDateInput.min = yesterday.toISOString().split('T')[0];
-            visitDateInput.max = nextMonth.toISOString().split('T')[0];
-        },
-
-        bindEvents() {
-            const form = document.getElementById('salonForm');
-            form.addEventListener('submit', this.handleSubmit.bind(this));
-            
-            document.getElementById('addProductBtn').addEventListener('click', () => {
-                this.addProductEntry();
-            });
-            
-            document.getElementById('addStylistBtn').addEventListener('click', () => {
-                this.addStylistEntry();
-            });
-            
-            document.querySelectorAll('.stylist-incentive-input').forEach(input => {
-                input.addEventListener('input', this.updateTotalCost.bind(this));
-            });
-            
-            document.getElementById('stylistContainer').addEventListener('input', (e) => {
-                if (e.target && e.target.classList.contains('stylist-incentive-input')) {
-                    this.updateTotalCost();
-                }
-            });
-            
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('.field')) {
-                    document.querySelectorAll('.unit-pills').forEach(pills => {
-                        pills.style.display = 'none';
-                    });
-                    document.querySelectorAll('.autocomplete-suggestions').forEach(suggestions => {
-                        suggestions.style.display = 'none';
-                    });
-                }
-            });
-            
-            form.addEventListener('input', this.clearFieldError.bind(this));
-            form.addEventListener('change', this.clearFieldError.bind(this));
-        },
-
-        addProductEntry() {
-            const container = document.getElementById('productContainer');
-            const template = document.getElementById('productTemplate');
-            const clone = document.importNode(template.content, true);
-            
-            container.appendChild(clone);
-            
-            const addedEntry = container.lastElementChild;
-            const newProductInput = addedEntry.querySelector('.product-name-input');
-            const newUnitInput = addedEntry.querySelector('.unit-input');
-            
-            this.bindAutocomplete(newProductInput);
-            this.bindUnitSuggestions(newUnitInput);
-        },
-
-        addStylistEntry() {
-            const container = document.getElementById('stylistContainer');
-            const template = document.getElementById('stylistTemplate');
-            const clone = document.importNode(template.content, true);
-            
-            const count = container.querySelectorAll('.stylist-entry').length;
-            const inputs = clone.querySelectorAll('input');
-            inputs.forEach((input, index) => {
-                if (input.type === 'text') {
-                    input.id = `stylistName${count}`;
-                } else if (input.type === 'number') {
-                    input.id = `incentiveSplit${count}`;
-                }
-            });
-            
-            container.appendChild(clone);
-            
-            const addedEntry = container.lastElementChild;
-            const newStylistInput = addedEntry.querySelector('.stylist-name-input');
-            this.bindStylistAutocomplete(newStylistInput);
-            
-            this.updateTotalCost();
-        },
-
-        updateTotalCost() {
-            const incentiveInputs = document.querySelectorAll('.stylist-incentive-input');
-            let total = 0;
-            incentiveInputs.forEach(input => {
-                const val = parseFloat(input.value);
-                if (!isNaN(val)) {
-                    total += val;
-                }
-            });
-            document.getElementById('totalCost').value = total.toFixed(2);
-        },
-
-        validateField(field) {
-            const value = field.value.trim();
-            let isValid = true;
-            let errorMessage = '';
-
-            field.classList.remove('error');
-            
-            if (field.hasAttribute('required') && !value) {
-                isValid = false;
-                errorMessage = `${this.getFieldLabel(field)} is required`;
-            } else if (field.type === 'email' && value && !this.isValidEmail(value)) {
-                isValid = false;
-                errorMessage = 'Please enter a valid email address';
-            } else if (field.type === 'tel' && value && value.length < 10) {
-                isValid = false;
-                errorMessage = 'Please enter a valid phone number';
-            }
-
-            if (!isValid) {
-                this.showFieldError(field, errorMessage);
-            }
-
-            return isValid;
-        },
-
-        validateServices() {
-            const services = document.querySelectorAll('input[name="services"]:checked');
-            if (services.length === 0) {
-                this.showFieldError(document.querySelector('input[name="services"]'), 'Please select at least one service');
-                return false;
-            }
-            return true;
-        },
-
-        validateConsent() {
-            const consent = document.querySelector('input[name="consent"]:checked');
-            if (!consent) {
-                this.showFieldError(document.querySelector('input[name="consent"]'), 'Please select your consent preference');
-                return false;
-            }
-            return true;
-        },
-
-        showFieldError(field, message) {
-            field.classList.add('error');
-            const errorElement = document.getElementById(`${field.id || field.name}-error`) || 
-                               document.getElementById('services-error') ||
-                               document.getElementById('consent-error');
-            if (errorElement) {
-                errorElement.textContent = message;
-                errorElement.classList.add('show');
-            }
-        },
-
-        clearFieldError(e) {
-            const field = e.target;
-            field.classList.remove('error');
-            const errorElement = document.getElementById(`${field.id || field.name}-error`);
-            if (errorElement) {
-                errorElement.classList.remove('show');
-            }
-            
-            if (field.name === 'services') {
-                const servicesError = document.getElementById('services-error');
-                if (servicesError) {
-                    servicesError.classList.remove('show');
-                }
-            }
-            
-            if (field.name === 'consent') {
-                const consentError = document.getElementById('consent-error');
-                if (consentError) {
-                    consentError.classList.remove('show');
-                }
-            }
-        },
-
-        getFieldLabel(field) {
-            const label = document.querySelector(`label[for="${field.id}"]`);
-            return label ? label.textContent.replace('*', '').trim() : field.name;
-        },
-
-        isValidEmail(email) {
-            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-        },
-
-        async handleSubmit(e) {
-            e.preventDefault();
-            
-            const form = e.target;
-            const submitButton = form.querySelector('.btn-submit');
-            
-            submitButton.classList.add('loading');
-            submitButton.textContent = 'Saving...';
-            
-            let isValid = true;
-            
-            // Validate consent first
-            if (!this.validateConsent()) {
-                isValid = false;
-            }
-            
-            // Validate signature
-            if (!this.validateSignature()) {
-                isValid = false;
-            }
-            
-            // Validate required fields
-            const requiredFields = form.querySelectorAll('[required]');
-            requiredFields.forEach(field => {
-                if (!this.validateField(field)) {
-                    isValid = false;
-                }
-            });
-            
-            // Validate email if provided
-            const emailField = document.getElementById('email');
-            if (emailField.value && !this.validateField(emailField)) {
-                isValid = false;
-            }
-            
-            // Validate services
-            if (!this.validateServices()) {
-                isValid = false;
-            }
-            
-            if (!isValid) {
-                submitButton.classList.remove('loading');
-                submitButton.innerHTML = '<span class="icon">💾</span> Save Client Record';
-                this.showToast('Please fix the errors above', 'error');
-                return;
-            }
-            
-            // Generate unique Submit ID
-            const submitId = generateSubmitId();
-            
-            // Show Submit ID to user
-            const submitIdDisplay = document.getElementById('submitIdDisplay');
-            submitIdDisplay.textContent = `Submit ID: ${submitId}`;
-            submitIdDisplay.style.display = 'block';
-            
-            // Collect form data
-            const formData = new FormData(form);
-            const data = this.processFormData(formData);
-            
-            // Add unique Submit ID, signature data, and photo (only before photo)
-            data.submitId = submitId;
-            data.clientSignature = this.getSignatureData();
-            data.beforePhoto = beforePhotoData;
-            
-            console.log('Sending data to Google Sheets with Submit ID:', submitId, data);
-            
-            try {
-                const response = await fetch(APPS_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: 'formData=' + encodeURIComponent(JSON.stringify(data))
+                // Add stylist button
+                document.getElementById('add-stylist').addEventListener('click', () => {
+                    this.addStylistRow();
                 });
-                
-                // Always show success toast since no-cors doesn't give us response details
-                this.showToast(`✅ Client record saved! Submit ID: ${submitId}`, 'success');
-                
-                // Reset form
-                form.reset();
-                this.setInitialDate();
-                this.updateTotalCost();
-                this.clearSignature();
-                
-                // Reset photo
-                this.removePhoto('before');
-                
-                // Keep Submit ID visible for reference
-                submitIdDisplay.textContent = `✅ Last Submit ID: ${submitId}`;
-                
-            } catch (error) {
-                console.error('Error saving to Google Sheets:', error);
-                // Even if there's an error, the data might have been saved due to no-cors mode
-                this.showToast(`⚠️ Data submitted (ID: ${submitId}). Please verify in Google Sheets.`, 'success');
-                
-                if (this.isDevelopment()) {
-                    console.log('Salon Form Data (fallback):', data);
-                }
-            } finally {
-                submitButton.classList.remove('loading');
-                submitButton.innerHTML = '<span class="icon">💾</span> Save Client Record';
             }
-        },
 
-        processFormData(formData) {
-            const data = {};
-            
-            for (let [key, value] of formData.entries()) {
-                if (key.endsWith('[]')) {
-                    const arrayKey = key.slice(0, -2);
-                    if (!data[arrayKey]) data[arrayKey] = [];
-                    data[arrayKey].push(value);
+            // Add product row
+            addProductRow() {
+                const section = document.getElementById('product-section');
+                const newRow = document.createElement('div');
+                newRow.className = 'product-row mb-4 p-3 border rounded';
+                newRow.innerHTML = `
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Product Name</label>
+                            <input type="text" class="form-control" name="productName" placeholder="e.g., L'Oreal Professional">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Product Type</label>
+                            <select class="form-select" name="productType">
+                                <option value="">Select product type</option>
+                                <option value="shampoo">Shampoo</option>
+                                <option value="conditioner">Conditioner</option>
+                                <option value="color">Hair Color</option>
+                                <option value="treatment">Treatment</option>
+                                <option value="styling">Styling Product</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Quantity Used</label>
+                            <input type="number" class="form-control" name="quantityUsed" min="0" step="0.1">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Unit</label>
+                            <select class="form-select" name="unit">
+                                <option value="">Select unit</option>
+                                <option value="ml">ml</option>
+                                <option value="grams">grams</option>
+                                <option value="pieces">pieces</option>
+                                <option value="tubes">tubes</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4 mb-3 d-flex align-items-end">
+                            <button type="button" class="btn btn-outline-danger remove-product">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+
+                section.appendChild(newRow);
+                
+                // Add remove functionality
+                newRow.querySelector('.remove-product').addEventListener('click', () => {
+                    newRow.remove();
+                });
+
+                // Show remove buttons on all rows
+                document.querySelectorAll('.remove-product').forEach(btn => {
+                    btn.style.display = 'block';
+                });
+            }
+
+            // Add stylist row
+            addStylistRow() {
+                const section = document.getElementById('stylist-section');
+                const newRow = document.createElement('div');
+                newRow.className = 'stylist-row mb-4 p-3 border rounded';
+                newRow.innerHTML = `
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Stylist Name</label>
+                            <input type="text" class="form-control" name="stylistName" placeholder="e.g., Maria Silva">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Incentive Split (₹)</label>
+                            <input type="number" class="form-control" name="incentiveSplit" min="0" step="0.01">
+                        </div>
+                        <div class="col-md-2 mb-3 d-flex align-items-end">
+                            <button type="button" class="btn btn-outline-danger remove-stylist">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+
+                section.appendChild(newRow);
+                
+                // Add remove functionality
+                newRow.querySelector('.remove-stylist').addEventListener('click', () => {
+                    newRow.remove();
+                });
+
+                // Show remove buttons on all rows
+                document.querySelectorAll('.remove-stylist').forEach(btn => {
+                    btn.style.display = 'block';
+                });
+            }
+
+            // Navigation methods
+            nextStep() {
+                if (this.validateCurrentStep()) {
+                    if (this.currentStep < this.totalSteps) {
+                        this.currentStep++;
+                        this.updateStepDisplay();
+                    }
+                }
+            }
+
+            prevStep() {
+                if (this.currentStep > 1) {
+                    this.currentStep--;
+                    this.updateStepDisplay();
+                }
+            }
+
+            // Update step display and progress
+            updateStepDisplay() {
+                // Hide all steps
+                document.querySelectorAll('.form-step').forEach(step => {
+                    step.classList.remove('active');
+                });
+
+                // Show current step
+                document.querySelector(`[data-step="${this.currentStep}"]`).classList.add('active');
+
+                // Update progress bar
+                const progress = (this.currentStep / this.totalSteps) * 100;
+                document.querySelector('.progress-bar').style.width = `${progress}%`;
+                document.getElementById('current-step').textContent = this.currentStep;
+
+                // Update step indicator
+                this.updateStepIndicator();
+
+                // Update navigation buttons
+                this.updateNavigationButtons();
+
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            updateStepIndicator() {
+                document.querySelectorAll('.step').forEach((step, index) => {
+                    const stepNum = index + 1;
+                    step.classList.remove('active', 'completed');
+                    
+                    if (stepNum < this.currentStep) {
+                        step.classList.add('completed');
+                    } else if (stepNum === this.currentStep) {
+                        step.classList.add('active');
+                    }
+                });
+            }
+
+            updateNavigationButtons() {
+                const prevBtn = document.getElementById('prev-btn');
+                const nextBtn = document.getElementById('next-btn');
+                const submitBtn = document.getElementById('submit-btn');
+
+                // Previous button
+                prevBtn.style.display = this.currentStep > 1 ? 'block' : 'none';
+
+                // Next/Submit button
+                if (this.currentStep < this.totalSteps) {
+                    nextBtn.style.display = 'block';
+                    submitBtn.style.display = 'none';
                 } else {
-                    data[key] = value;
+                    nextBtn.style.display = 'none';
+                    submitBtn.style.display = 'block';
                 }
             }
-            
-            const services = [];
-            document.querySelectorAll('input[name="services"]:checked').forEach(cb => {
-                services.push(cb.value);
-            });
-            data.services = services;
-            
-            return data;
-        },
 
-        showToast(message, type = 'success') {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.className = `toast ${type}`;
-            toast.classList.add('show');
-            
-            setTimeout(() => {
-                toast.classList.remove('show');
-            }, 6000);
-        },
+            // Validation methods[42][45][50]
+            validateCurrentStep() {
+                const currentStepElement = document.querySelector(`[data-step="${this.currentStep}"]`);
+                const requiredFields = currentStepElement.querySelectorAll('[required]');
+                let isValid = true;
 
-        isDevelopment() {
-            return window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-        }
-    };
+                requiredFields.forEach(field => {
+                    if (!this.validateField(field)) {
+                        isValid = false;
+                    }
+                });
 
-    window.SalonForm = SalonForm;
-    
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => SalonForm.init());
-    } else {
-        SalonForm.init();
-    }
-})();
-</script>
-</body>
-</html>
+                // Special validations
+                if (this.currentStep === 2) {
+                    // Validate at least one service is selected
+                    const serviceCheckboxes = document.querySelectorAll('input[name="services"]');
+                    const isAnyServiceSelected = Array.from(serviceCheckboxes).some(cb => cb.checked);
+                    
+                    if (!isAnyServiceSelected) {
+                        this.showFieldError(serviceCheckboxes[0], 'Please select at least one service.');
+                        isValid = false;
+                    }
+                }
+
+                if (this.currentStep === 5) {
+                    // Validate signature
+                    if (!this.signaturePad || this.signaturePad.isEmpty()) {
+                        this.showFieldError(document.getElementById('signature-canvas'), 'Please provide your digital signature.');
+                        isValid = false;
+                    }
+
+                    // Validate consent checkboxes
+                    const consentCheckboxes = document.querySelectorAll('input[name="consent"]');
+                    const allConsentsGiven = Array.from(consentCheckboxes).every(cb => cb.checked);
+                    
+                    if (!allConsentsGiven) {
+                        consentCheckboxes.forEach(cb => {
+                            if (!cb.checked) {
+                                this.showFieldError(cb, 'This consent is required.');
+                            }
+                        });
+                        isValid = false;
+                    }
+                }
+
+                return isValid;
+            }
+
+            validateField(field) {
+                if (field.type === 'email' && field.value) {
+                    if (!this.isValidEmail(field.value)) {
+                        this.showFieldError(field, 'Please enter a valid email address.');
+                        return false;
+                    }
+                }
+
+                if (field.type === 'tel' && field.value) {
+                    if (!this.isValidPhone(field.value)) {
+                        this.showFieldError(field, 'Please enter a valid phone number.');
+                        return false;
+                    }
+                }
+
+                if (field.hasAttribute('required')) {
+                    if (field.type === 'checkbox') {
+                        if (!field.checked) {
+                            this.showFieldError(field, 'This field is required.');
+                            return false;
+                        }
+                    } else if (!field.value.trim()) {
+                        this.showFieldError(field, 'This field is required.');
+                        return false;
+                    }
+                }
+
+                this.clearFieldError(field);
+                return true;
+            }
+
+            showFieldError(field, message) {
+                field.classList.add('is-invalid');
+                const feedback = field.parentElement.querySelector('.invalid-feedback');
+                if (feedback) {
+                    feedback.textContent = message;
+                    feedback.style.display = 'block';
+                }
+            }
+
+            clearFieldError(field) {
+                field.classList.remove('is-invalid');
+                const feedback = field.parentElement.querySelector('.invalid-feedback');
+                if (feedback) {
+                    feedback.style.display = 'none';
+                }
+            }
+
+            // Utility validation methods
+            isValidEmail(email) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return emailRegex.test(email);
+            }
+
+            isValidPhone(phone) {
+                const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+                return phoneRegex.test(phone.replace(/\s+/g, ''));
+            }
+
+            // Form submission with proper JSON formatting[2][5]
+            async handleSubmit(e) {
+                e.preventDefault();
+                
+                if (!this.validateCurrentStep()) {
+                    return;
+                }
+
+                const submitBtn = document.getElementById('submit-btn');
+                const spinner = document.getElementById('submit-spinner');
+                
+                // Show loading state
+                submitBtn.disabled = true;
+                spinner.classList.remove('d-none');
+
+                try {
+                    const formData = this.collectFormData();
+                    console.log('Form data collected:', formData);
+
+                    // Submit to Google Apps Script[2]
+                    const response = await fetch(CONFIG.APPS_SCRIPT_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ formData })
+                    });
+
+                    const result = await response.json();
+                    
+                    if (response.ok) {
+                        this.showToast('Form submitted successfully! Thank you for your submission.', 'success');
+                        this.resetForm();
+                    } else {
+                        throw new Error(result.status || 'Submission failed');
+                    }
+
+                } catch (error) {
+                    console.error('Submission error:', error);
+                    this.showToast('There was an error submitting the form. Please try again.', 'error');
+                } finally {
+                    // Reset loading state
+                    submitBtn.disabled = false;
+                    spinner.classList.add('d-none');
+                }
+            }
+
+            // Collect all form data including arrays and base64 images[8][11]
+            collectFormData() {
+                const formElement = document.getElementById('salon-form');
+                const formData = new FormData(formElement);
+                const data = {};
+
+                // Basic form fields
+                for (let [key, value] of formData.entries()) {
+                    if (data[key]) {
+                        if (Array.isArray(data[key])) {
+                            data[key].push(value);
+                        } else {
+                            data[key] = [data[key], value];
+                        }
+                    } else {
+                        data[key] = value;
+                    }
+                }
+
+                // Handle checkbox arrays
+                data.services = Array.from(document.querySelectorAll('input[name="services"]:checked'))
+                    .map(cb => cb.value);
+
+                data.consent = Array.from(document.querySelectorAll('input[name="consent"]:checked'))
+                    .map(cb => cb.value);
+
+                // Handle dynamic fields
+                data.productName = Array.from(document.querySelectorAll('input[name="productName"]'))
+                    .map(input => input.value).filter(val => val);
+
+                data.productType = Array.from(document.querySelectorAll('select[name="productType"]'))
+                    .map(select => select.value).filter(val => val);
+
+                data.quantityUsed = Array.from(document.querySelectorAll('input[name="quantityUsed"]'))
+                    .map(input => input.value).filter(val => val);
+
+                data.unit = Array.from(document.querySelectorAll('select[name="unit"]'))
+                    .map(select => select.value).filter(val => val);
+
+                data.stylistName = Array.from(document.querySelectorAll('input[name="stylistName"]'))
+                    .map(input => input.value).filter(val => val);
+
+                data.incentiveSplit = Array.from(document.querySelectorAll('input[name="incentiveSplit"]'))
+                    .map(input => input.value).filter(val => val);
+
+                // Add signature data
+                if (this.signaturePad && !this.signaturePad.isEmpty()) {
+                    data.clientSignature = this.signaturePad.toDataURL();
+                }
+
+                // Add before photo data
+                if (this.beforePhotoData) {
+                    data.beforePhoto = this.beforePhotoData;
+                }
+
+                return data;
+            }
+
+            // Reset form after successful submission
+            resetForm() {
+                document.getElementById('salon-form').reset();
+                this.signaturePad?.clear();
+                this.beforePhotoData = null;
+                document.getElementById('beforePhotoPreview').innerHTML = '';
+                this.currentStep = 1;
+                this.updateStepDisplay();
+                
+                // Reset dynamic fields
+                document.querySelectorAll('.product-row:not(:first-child)').forEach(row => row.remove());
+                document.querySelectorAll('.stylist-row:not(:first-child)').forEach(row => row.remove());
+                document.querySelectorAll('.remove-product, .remove-stylist').forEach(btn => {
+                    btn.style.display = 'none';
+                });
+            }
+
+            // Toast notification system
+            showToast(message, type = 'info') {
+                const toastContainer = document.querySelector('.toast-container');
+                const toastId = 'toast-' + Date.now();
+                
+                const toastHTML = `
+                    <div id="${toastId}" class="toast align-items-center text-white bg-${type === 'error' ? 'danger' : type === 'success' ? 'success' : 'primary'} border-0" role="alert" aria-live="assertive" aria-atomic="true">
+                        <div class="d-flex">
+                            <div class="toast-body">
+                                <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'} me-2"></i>
+                                ${message}
+                            </div>
+                            <button type="button" class="
