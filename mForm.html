@@ -156,7 +156,7 @@
         }
 
         .consent-item:before {
-            content: "â€¢";
+            content: "•";
             color: var(--lk-sage-green);
             font-weight: bold;
             position: absolute;
@@ -653,7 +653,7 @@
     <form id="salonForm" autocomplete="off" novalidate>
         <!-- Consent & Acknowledgment Section -->
         <div class="consent-section">
-            <div class="consent-title">ðŸ“‹ Consent & Acknowledgment</div>
+            <div class="consent-title">📋 Consent & Acknowledgment</div>
             
             <div class="consent-content">
                 <div class="consent-item">
@@ -680,11 +680,11 @@
             <div class="consent-agreement">
                 <label class="consent-option">
                     <input type="radio" name="consent" value="yes" class="consent-radio" required>
-                    <span class="consent-label">âœ… Yes</span>
+                    <span class="consent-label">✅ Yes</span>
                 </label>
                 <label class="consent-option">
                     <input type="radio" name="consent" value="no" class="consent-radio" required>
-                    <span class="consent-label">âŒ No</span>
+                    <span class="consent-label">❌ No</span>
                 </label>
             </div>
             <div class="error-message" id="consent-error">Please select your consent preference</div>
@@ -692,7 +692,7 @@
 
         <!-- Digital Signature Section -->
         <div class="signature-section">
-            <div class="signature-title">âœï¸ Digital Signature</div>
+            <div class="signature-title">✍️ Digital Signature</div>
             
             <div class="signature-container">
                 <div class="signature-instructions">
@@ -704,12 +704,12 @@
                 </div>
                 
                 <div class="signature-controls">
-                    <button type="button" id="clearSignature" class="signature-btn">ðŸ—‘ï¸ Clear</button>
-                    <button type="button" id="undoSignature" class="signature-btn">â†¶ Undo</button>
+                    <button type="button" id="clearSignature" class="signature-btn">🗑️ Clear</button>
+                    <button type="button" id="undoSignature" class="signature-btn">↶ Undo</button>
                 </div>
                 
                 <div id="signatureStatus" class="signature-status">
-                    âœ… Signature captured successfully
+                    ✅ Signature captured successfully
                 </div>
                 <div class="error-message" id="signature-error">Please provide your digital signature</div>
             </div>
@@ -718,7 +718,7 @@
         <!-- Client Information Section -->
         <div class="section">
             <div class="section-title">
-                <span>ðŸ‘¤</span> Client Information
+                <span>👤</span> Client Information
             </div>
 
             <div class="grid-1">
@@ -756,7 +756,7 @@
         <!-- Consultation Section -->
         <div class="section">
             <div class="section-title">
-                <span>ðŸ’¬</span> Client Consultation
+                <span>💬</span> Client Consultation
             </div>
 
             <div class="field">
@@ -841,7 +841,7 @@
         <!-- Product Consumption Section -->
         <div class="section">
             <div class="section-title">
-                <span>ðŸ§´</span> Product Consumption & Inventory
+                <span>🧴</span> Product Consumption & Inventory
             </div>
             <button type="button" class="btn btn-success" onclick="SalonForm.addProductEntry()">
                 <span class="icon">+</span> Add Product Used
@@ -879,36 +879,39 @@
         <!-- Service Details Section -->
         <div class="section">
             <div class="section-title">
-                <span>âœ¨</span> Service Details & Results
+                <span>✨</span> Service Details & Results
             </div>
             
             <!-- Photos Before & After -->
             <div class="photo-section">
-                <h3 style="margin-bottom: var(--lk-space-md); font-size: 1.1rem; color: var(--lk-on-surface);">ðŸ“¸ Photos Before & After</h3>
+                <h3 style="margin-bottom: var(--lk-space-md); font-size: 1.1rem; color: var(--lk-on-surface);">📸 Photos Before & After</h3>
                 <div class="photo-container">
                     <div class="photo-upload-box" id="beforePhotoBox">
                         <input type="file" id="beforePhoto" name="beforePhoto" class="photo-input" accept="image/*" capture="environment">
-                        <div class="photo-upload-icon">ðŸ“·</div>
+                        <div class="photo-upload-icon">📷</div>
                         <div class="photo-upload-text">Before Photo</div>
                         <img id="beforePhotoPreview" class="photo-preview" alt="Before photo preview">
                         <div class="photo-controls" style="display: none;">
-                            <button type="button" class="photo-btn" onclick="SalonForm.retakePhoto('before')">ðŸ”„ Retake</button>
-                            <button type="button" class="photo-btn remove" onclick="SalonForm.removePhoto('before')">ðŸ—‘ï¸ Remove</button>
+                            <button type="button" class="photo-btn" onclick="SalonForm.retakePhoto('before')">🔄 Retake</button>
+                            <button type="button" class="photo-btn remove" onclick="SalonForm.removePhoto('before')">🗑️ Remove</button>
                         </div>
                     </div>
                     
                     <div class="photo-upload-box" id="afterPhotoBox">
                         <input type="file" id="afterPhoto" name="afterPhoto" class="photo-input" accept="image/*" capture="environment">
-                        <div class="photo-upload-icon">ðŸ“·</div>
+                        <div class="photo-upload-icon">📷</div>
                         <div class="photo-upload-text">After Photo</div>
                         <img id="afterPhotoPreview" class="photo-preview" alt="After photo preview">
                         <div class="photo-controls" style="display: none;">
-                            <button type="button" class="photo-btn" onclick="SalonForm.retakePhoto('after')">ðŸ”„ Retake</button>
-                            <button type="button" class="photo-btn remove" onclick="SalonForm.removePhoto('after')">ðŸ—‘ï¸ Remove</button>
+                            <button type="button" class="photo-btn" onclick="SalonForm.retakePhoto('after')">🔄 Retake</button>
+                            <button type="button" class="photo-btn remove" onclick="SalonForm.removePhoto('after')">🗑️ Remove</button>
                         </div>
                     </div>
                 </div>
             </div>
+            
+            <!-- Additional Space Before Stylist Section -->
+            <div style="margin-top: var(--lk-space-xl);"></div>
             
             <button type="button" class="btn btn-success" onclick="SalonForm.addStylistEntry()">
                 <span class="icon">+</span> Add Stylist / Incentive
@@ -926,7 +929,7 @@
                             <div class="autocomplete-suggestions"></div>
                         </div>
                         <div class="field">
-                            <label class="label" for="incentiveSplit0">Incentive Split (â‚¹)</label>
+                            <label class="label" for="incentiveSplit0">Incentive Split (₹)</label>
                             <input type="number" id="incentiveSplit0" name="incentiveSplit[]" class="input stylist-incentive-input" step="0.01" placeholder="Incentive amount">
                         </div>
                     </div>
@@ -934,7 +937,7 @@
             </div>
             <div class="grid-1">
                 <div class="field">
-                    <label class="label" for="totalCost">Total Amount (â‚¹)</label>
+                    <label class="label" for="totalCost">Total Amount (₹)</label>
                     <input type="number" id="totalCost" name="totalCost" class="input" readonly placeholder="Auto-calculated total" aria-live="polite">
                 </div>
             </div>
@@ -946,11 +949,11 @@
                 <label class="label" for="clientSatisfaction">Client Satisfaction</label>
                 <select id="clientSatisfaction" name="clientSatisfaction" class="select">
                     <option value="">Rate Satisfaction</option>
-                    <option value="5">â­â­â­â­â­ Excellent</option>
-                    <option value="4">â­â­â­â­ Very Good</option>
-                    <option value="3">â­â­â­ Good</option>
-                    <option value="2">â­â­ Fair</option>
-                    <option value="1">â­ Needs Improvement</option>
+                    <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+                    <option value="4">⭐⭐⭐⭐ Very Good</option>
+                    <option value="3">⭐⭐⭐ Good</option>
+                    <option value="2">⭐⭐ Fair</option>
+                    <option value="1">⭐ Needs Improvement</option>
                 </select>
             </div>
             <div class="field">
@@ -959,7 +962,7 @@
             </div>
         </div>
         <button type="submit" class="btn btn-primary btn-submit">
-            <span class="icon">ðŸ’¾</span> Save Client Record
+            <span class="icon">💾</span> Save Client Record
         </button>
     </form>
 </div>
@@ -1006,7 +1009,7 @@
                 <div class="autocomplete-suggestions"></div>
             </div>
             <div class="field">
-                <label class="label">Incentive Split (â‚¹)</label>
+                <label class="label">Incentive Split (₹)</label>
                 <input type="number" name="incentiveSplit[]" class="input stylist-incentive-input" step="0.01" placeholder="Incentive amount">
             </div>
         </div>
@@ -1264,10 +1267,10 @@
             
             if (isEmpty) {
                 statusElement.className = 'signature-status empty';
-                statusElement.textContent = 'âš ï¸ Please provide your signature';
+                statusElement.textContent = '⚠️ Please provide your signature';
             } else {
                 statusElement.className = 'signature-status signed';
-                statusElement.textContent = 'âœ… Signature captured successfully';
+                statusElement.textContent = '✅ Signature captured successfully';
             }
         },
 
@@ -1814,7 +1817,7 @@
             
             if (!isValid) {
                 submitButton.classList.remove('loading');
-                submitButton.innerHTML = '<span class="icon">ðŸ’¾</span> Save Client Record';
+                submitButton.innerHTML = '<span class="icon">💾</span> Save Client Record';
                 this.showToast('Please fix the errors above', 'error');
                 return;
             }
@@ -1849,7 +1852,7 @@
                     body: 'formData=' + encodeURIComponent(JSON.stringify(data))
                 });
                 
-                this.showToast(`âœ… Client record saved! Submit ID: ${submitId}`, 'success');
+                this.showToast(`✅ Client record saved! Submit ID: ${submitId}`, 'success');
                 
                 // Reset form
                 form.reset();
@@ -1862,18 +1865,18 @@
                 this.removePhoto('after');
                 
                 // Keep Submit ID visible for reference
-                submitIdDisplay.textContent = `âœ… Last Submit ID: ${submitId}`;
+                submitIdDisplay.textContent = `✅ Last Submit ID: ${submitId}`;
                 
             } catch (error) {
                 console.error('Error saving to Google Sheets:', error);
-                this.showToast('âŒ Failed to save to Google Sheets. Please try again.', 'error');
+                this.showToast('❌ Failed to save to Google Sheets. Please try again.', 'error');
                 
                 if (this.isDevelopment()) {
                     console.log('Salon Form Data (fallback):', data);
                 }
             } finally {
                 submitButton.classList.remove('loading');
-                submitButton.innerHTML = '<span class="icon">ðŸ’¾</span> Save Client Record';
+                submitButton.innerHTML = '<span class="icon">💾</span> Save Client Record';
             }
         },
 
