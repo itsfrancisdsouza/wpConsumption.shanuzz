@@ -1816,12 +1816,10 @@
             console.log('Sending data to Google Sheets with Submit ID:', submitId, data);
             
             try {
-                // ✅ FIXED: Proper JSON submission with working URL
+                // ✅ CORS FIX: Remove Content-Type header to avoid preflight request
                 const response = await fetch(APPS_SCRIPT_URL, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    // NO headers - this makes it a "simple" CORS request
                     body: JSON.stringify({ formData: data })
                 });
                 
