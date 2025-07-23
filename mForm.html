@@ -994,7 +994,7 @@
     
     const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQwMeJAvIhiingIL1otFVM08kZedwZKC-u3uXplgXJmwcBlcWRFGuMQbcH-gSLu7Iqr-GFSyLKTxJdO/pub?gid=970040881&single=true&output=csv";
     
-    // ✅ FIXED: Your actual Google Apps Script URL
+    // ✅ FIXED: Your working Google Apps Script URL
     const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbynE1KRwABodBVmrzC3jep5LweAP0B53pUPW89PgL_EGrx8IKH5ikMj2EN3QWY6a2ZThQ/exec';
     
     let products = [];
@@ -1816,7 +1816,7 @@
             console.log('Sending data to Google Sheets with Submit ID:', submitId, data);
             
             try {
-                // ✅ FIXED: Proper JSON submission instead of URL-encoded
+                // ✅ FIXED: Proper JSON submission with working URL
                 const response = await fetch(APPS_SCRIPT_URL, {
                     method: 'POST',
                     headers: {
@@ -1825,9 +1825,12 @@
                     body: JSON.stringify({ formData: data })
                 });
                 
-                const result = await response.json();
+                console.log('Response status:', response.status);
                 
-                if (response.ok) {
+                const result = await response.json();
+                console.log('Response from server:', result);
+                
+                if (result.status === 'SUCCESS') {
                     this.showToast(`✅ Client record saved! Submit ID: ${submitId}`, 'success');
                     
                     // Reset form
@@ -1840,11 +1843,11 @@
                     // Keep Submit ID visible
                     submitIdDisplay.textContent = `✅ Last Submit ID: ${submitId}`;
                 } else {
-                    throw new Error(result.status || 'Submission failed');
+                    throw new Error(result.error || result.message || 'Submission failed');
                 }
                 
             } catch (error) {
-                console.error('Error saving to Google Sheets:', error);
+                console.error('Submission error:', error);
                 this.showToast(`❌ Error: ${error.message}`, 'error');
             } finally {
                 submitButton.classList.remove('loading');
