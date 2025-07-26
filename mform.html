@@ -469,6 +469,7 @@
             margin-bottom: var(--lk-space-sm);
             background: var(--lk-surface-container);
             position: relative;
+            padding-top: 48px; /* Extra space for remove button */
         }
 
         .btn {
@@ -621,6 +622,18 @@
             background: var(--lk-accent);
         }
 
+        .remove-product-btn,
+        .remove-stylist-btn {
+            border: 2px solid red !important;
+            cursor: pointer !important;
+            z-index: 9999 !important;
+            margin: 0 !important;
+            padding: 10px 24px !important;
+            position: absolute;
+            top: 8px;
+            right: 16px;
+        }
+
         @media (min-width: 600px) {
             .grid-2 { grid-template-columns: repeat(2, 1fr); }
             .container {
@@ -641,9 +654,18 @@
     </style>
 </head>
 <body>
-<div class="container">
+<div id="form-chooser" class="container">
     <div class="header">
-        <h1 class="title">Salon Consultation</h1>
+        <h1 class="title">Choose Form</h1>
+        <p class="subtitle">Select which form you want to fill</p>
+        <button id="show-client-consultation" class="btn btn-primary" style="margin: 16px;">Client Consultation</button>
+        <button id="show-consumption-form" class="btn btn-success" style="margin: 16px;">Consumption Form</button>
+    </div>
+</div>
+
+<div id="client-consultation-section" class="container" style="display: none;">
+    <div class="header">
+        <h1 class="title">Client Consultation</h1>
         <p class="subtitle">Complete client assessment and service record</p>
         <div id="submitIdDisplay" class="submit-id-display"></div>
     </div>
@@ -835,7 +857,27 @@
                 </div>
             </div>
         </div>
+        <button type="submit" class="btn btn-primary btn-submit">
+            <span class="icon">💾</span> Save Client Record
+        </button>
+    </form>
+    <button id="back-to-chooser-1" class="btn btn-error" style="margin-bottom: 24px;">Back</button>
+</div>
 
+<div id="consumption-form-section" class="container" style="display: none;">
+    <div class="header">
+        <h1 class="title">Consumption Form</h1>
+        <p class="subtitle">Complete Consumption record</p>
+        <div id="submitIdDisplay2" class="submit-id-display"></div>
+    </div>
+    <form id="consumptionForm" autocomplete="off" novalidate>
+        <div class="grid-1">
+            <div class="field">
+                <label class="label" for="consultationId">Consultation ID<span class="required">*</span></label>
+                <input type="text" id="consultationId" name="consultationId" class="input" required placeholder="Enter Consultation ID">
+                <div class="error-message" id="consultationId-error">Please enter the Consultation ID</div>
+            </div>
+        </div>
         <!-- Product Consumption Section -->
         <div class="section">
             <div class="section-title">
@@ -950,6 +992,7 @@
             <span class="icon">💾</span> Save Client Record
         </button>
     </form>
+    <button id="back-to-chooser-2" class="btn btn-error" style="margin-bottom: 24px;">Back</button>
 </div>
 
 <div id="toast" class="toast" role="alert" aria-live="assertive"></div>
@@ -1008,7 +1051,7 @@
     const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQwMeJAvIhiingIL1otFVM08kZedwZKC-u3uXplgXJmwcBlcWRFGuMQbcH-gSLu7Iqr-GFSyLKTxJdO/pub?gid=970040881&single=true&output=csv";
     
     // REPLACE WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
-    const APPS_SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbynE1KRwABodBVmrzC3jep5LweAP0B53pUPW89PgL_EGrx8IKH5ikMj2EN3QWY6a2ZThQ/exec';
     
     let products = [];
     let stylists = [];
@@ -1038,27 +1081,29 @@
             this.initPhotoHandlers();
             
             // ✅ ADD REMOVE BUTTON FUNCTIONALITY
-            document.addEventListener('click', (e) => {
+            document.addEventListener('click', function(e) {
                 if (e.target.closest('.remove-product-btn')) {
+                    alert('Remove product clicked!'); // DEBUG
                     const entry = e.target.closest('.product-entry');
                     const allEntries = document.querySelectorAll('.product-entry');
                     if (allEntries.length > 1) {
                         entry.remove();
-                        this.showToast('Product removed', 'success');
+                        SalonForm.showToast('Product removed', 'success');
                     } else {
-                        this.showToast('At least one product is required', 'error');
+                        SalonForm.showToast('At least one product is required', 'error');
                     }
                 }
                 
                 if (e.target.closest('.remove-stylist-btn')) {
+                    alert('Remove stylist clicked!'); // DEBUG
                     const entry = e.target.closest('.stylist-entry');
                     const allEntries = document.querySelectorAll('.stylist-entry');
                     if (allEntries.length > 1) {
                         entry.remove();
-                        this.updateTotalCost();
-                        this.showToast('Stylist removed', 'success');
+                        SalonForm.updateTotalCost();
+                        SalonForm.showToast('Stylist removed', 'success');
                     } else {
-                        this.showToast('At least one stylist is required', 'error');
+                        SalonForm.showToast('At least one stylist is required', 'error');
                     }
                 }
             });
@@ -1089,7 +1134,7 @@
             reader.onload = (e) => {
                 const photoData = e.target.result;
                 beforePhotoData = photoData;
-                this.displayPhotoPreview('before', photoData);
+                this.displayPhotoPreview(type, photoData);
             };
             reader.readAsDataURL(file);
         },
@@ -1638,6 +1683,9 @@
             
             this.bindAutocomplete(newProductInput);
             this.bindUnitSuggestions(newUnitInput);
+            // DEBUG LOGS
+            console.log('Added product row:', addedEntry);
+            console.log('All .remove-product-btn:', document.querySelectorAll('.remove-product-btn'));
         },
 
         addStylistEntry() {
@@ -1662,6 +1710,9 @@
             this.bindStylistAutocomplete(newStylistInput);
             
             this.updateTotalCost();
+            // DEBUG LOGS
+            console.log('Added stylist row:', addedEntry);
+            console.log('All .remove-stylist-btn:', document.querySelectorAll('.remove-stylist-btn'));
         },
 
         updateTotalCost() {
@@ -1913,6 +1964,33 @@
         SalonForm.init();
     }
 })();
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('show-client-consultation').onclick = function() {
+        document.getElementById('form-chooser').style.display = 'none';
+        document.getElementById('client-consultation-section').style.display = 'block';
+        document.getElementById('consumption-form-section').style.display = 'none';
+        if (window.SalonForm && typeof SalonForm.initSignaturePad === 'function') {
+            setTimeout(function() { SalonForm.initSignaturePad(); }, 100);
+        }
+    };
+    document.getElementById('show-consumption-form').onclick = function() {
+        document.getElementById('form-chooser').style.display = 'none';
+        document.getElementById('client-consultation-section').style.display = 'none';
+        document.getElementById('consumption-form-section').style.display = 'block';
+    };
+    document.getElementById('back-to-chooser-1').onclick = function() {
+        document.getElementById('form-chooser').style.display = 'block';
+        document.getElementById('client-consultation-section').style.display = 'none';
+        document.getElementById('consumption-form-section').style.display = 'none';
+    };
+    document.getElementById('back-to-chooser-2').onclick = function() {
+        document.getElementById('form-chooser').style.display = 'block';
+        document.getElementById('client-consultation-section').style.display = 'none';
+        document.getElementById('consumption-form-section').style.display = 'none';
+    };
+});
 </script>
 </body>
 </html>
