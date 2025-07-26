@@ -1074,6 +1074,7 @@
     // Photo storage (only before photo)
     let beforePhotoData = null;
     let afterPhotoData = null;
+    let isFormSubmitting = false;
     
     // Unique Submit ID generator
     function generateSubmitId() {
@@ -1151,12 +1152,12 @@
                 } else if (type === 'after') {
                     afterPhotoData = photoData;
                 }
-                this.displayPhotoPreview(type, photoData);
+                this.displayPhotoPreview(type, photoData, !isFormSubmitting);
             };
             reader.readAsDataURL(file);
         },
 
-        displayPhotoPreview(type, photoData) {
+        displayPhotoPreview(type, photoData, showToast = true) {
             const preview = document.getElementById(`${type}PhotoPreview`);
             const box = document.getElementById(`${type}PhotoBox`);
             const controls = box.querySelector('.photo-controls');
@@ -1170,7 +1171,9 @@
             uploadIcon.style.display = 'none';
             box.classList.add('has-photo');
             
-            this.showToast(`${type.charAt(0).toUpperCase() + type.slice(1)} photo uploaded successfully!`, 'success');
+            if (showToast) {
+                this.showToast(`${type.charAt(0).toUpperCase() + type.slice(1)} photo uploaded successfully!`, 'success');
+            }
         },
 
         retakePhoto(type) {
@@ -1200,6 +1203,30 @@
                 afterPhotoData = null;
             }
             this.showToast(`${type.charAt(0).toUpperCase() + type.slice(1)} photo removed`, 'success');
+        },
+
+        removePhotoSilently(type) {
+            const preview = document.getElementById(`${type}PhotoPreview`);
+            const box = document.getElementById(`${type}PhotoBox`);
+            const controls = box.querySelector('.photo-controls');
+            const uploadText = box.querySelector('.photo-upload-text');
+            const uploadIcon = box.querySelector('.photo-upload-icon');
+            const input = document.getElementById(`${type}Photo`);
+            
+            preview.style.display = 'none';
+            preview.src = '';
+            controls.style.display = 'none';
+            uploadText.style.display = 'block';
+            uploadIcon.style.display = 'block';
+            box.classList.remove('has-photo');
+            input.value = '';
+            
+            if (type === 'before') {
+                beforePhotoData = null;
+            } else if (type === 'after') {
+                afterPhotoData = null;
+            }
+            // No toast message for silent removal
         },
 
         initSignaturePad() {
@@ -1906,6 +1933,7 @@
             
             submitButton.classList.add('loading');
             submitButton.textContent = 'Saving...';
+            isFormSubmitting = true;
             
             let isValid = true;
             
@@ -1967,10 +1995,11 @@
             data.formType = formType;
             data.submitId = submitId;
             
-            // Add signature data and photo (only for consultation form)
+            // Add signature data and photos based on form type
             if (formType === 'consultation') {
                 data.clientSignature = this.getSignatureData();
                 data.beforePhoto = beforePhotoData;
+            } else if (formType === 'consumption') {
                 data.afterPhoto = afterPhotoData;
             }
             
@@ -1987,17 +2016,25 @@
                 });
                 
                 // Always show success toast since no-cors doesn't give us response details
-                this.showToast(`✅ ${formType === 'consultation' ? 'Consultation record' : 'Consumption record'} saved! Submit ID: ${submitId}`, 'success');
-                
-                // Reset form
-                form.reset();
                 if (formType === 'consultation') {
-                    this.setInitialDate();
-                    this.updateTotalCost();
-                    this.clearSignature();
-                    this.removePhoto('before');
-                    this.removePhoto('after');
+                    this.showToast(`✅ Client Consultation saved successfully! 📋\nSubmit ID: ${submitId}\nClient: ${data.clientName || 'N/A'}`, 'success');
+                } else if (formType === 'consumption') {
+                    this.showToast(`✅ Consumption Record saved successfully! 📊\nSubmit ID: ${submitId}\nConsultation ID: ${data.consultationId || 'N/A'}`, 'success');
                 }
+                
+                // Reset form after a short delay to ensure success message is shown first
+                setTimeout(() => {
+                    form.reset();
+                    if (formType === 'consultation') {
+                        this.setInitialDate();
+                        this.updateTotalCost();
+                        this.clearSignature();
+                        this.removePhotoSilently('before');
+                        this.removePhotoSilently('after');
+                    } else if (formType === 'consumption') {
+                        this.removePhotoSilently('after');
+                    }
+                }, 1000);
                 
                 // Keep Submit ID visible for reference
                 submitIdDisplay.textContent = `✅ Last Submit ID: ${submitId}`;
@@ -2005,7 +2042,11 @@
             } catch (error) {
                 console.error('Error saving to Google Sheets:', error);
                 // Even if there's an error, the data might have been saved due to no-cors mode
-                this.showToast(`⚠️ ${formType === 'consultation' ? 'Client' : 'Consumption'} data submitted (ID: ${submitId}). Please verify in Google Sheets.`, 'success');
+                if (formType === 'consultation') {
+                    this.showToast(`⚠️ Client Consultation submitted (ID: ${submitId})\nPlease verify in Google Sheets\nClient: ${data.clientName || 'N/A'}`, 'success');
+                } else if (formType === 'consumption') {
+                    this.showToast(`⚠️ Consumption Record submitted (ID: ${submitId})\nPlease verify in Google Sheets\nConsultation ID: ${data.consultationId || 'N/A'}`, 'success');
+                }
                 
                 if (this.isDevelopment()) {
                     console.log(`${formType} Form Data (fallback):`, data);
@@ -2015,6 +2056,7 @@
                 submitButton.innerHTML = formType === 'consultation' ? 
                     '<span class="icon">💾</span> Save Client Record' : 
                     '<span class="icon">💾</span> Save Consumption Record';
+                isFormSubmitting = false;
             }
         },
 
