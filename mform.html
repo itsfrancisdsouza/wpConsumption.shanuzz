@@ -857,6 +857,20 @@
                 </div>
             </div>
         </div>
+        <!-- Place the Before Photo section here -->
+        <div class="photo-section">
+            <h3 style="margin-bottom: var(--lk-space-md); font-size: 1.1rem; color: var(--lk-on-surface);">📸 Before Photo</h3>
+            <div class="photo-upload-box" id="beforePhotoBox">
+                <input type="file" id="beforePhoto" name="beforePhoto" class="photo-input" accept="image/*" capture="environment">
+                <div class="photo-upload-icon">📷</div>
+                <div class="photo-upload-text">📷 Take Before Photo</div>
+                <img id="beforePhotoPreview" class="photo-preview" alt="Before photo preview">
+                <div class="photo-controls" style="display: none;">
+                    <button type="button" class="photo-btn" onclick="SalonForm.retakePhoto('before')">🔄 Retake</button>
+                    <button type="button" class="photo-btn remove" onclick="SalonForm.removePhoto('before')">🗑️ Remove</button>
+                </div>
+            </div>
+        </div>
         <button type="submit" class="btn btn-primary btn-submit">
             <span class="icon">💾</span> Save Client Record
         </button>
@@ -875,7 +889,22 @@
             <div class="field">
                 <label class="label" for="consultationId">Consultation ID<span class="required">*</span></label>
                 <input type="text" id="consultationId" name="consultationId" class="input" required placeholder="Enter Consultation ID">
+                <div class="autocomplete-suggestions"></div>
                 <div class="error-message" id="consultationId-error">Please enter the Consultation ID</div>
+            </div>
+        </div>
+        <!-- After Photo Section -->
+        <div class="photo-section" style="margin-top: var(--lk-space-xl); margin-bottom: var(--lk-space-xl);">
+            <h3 style="margin-bottom: var(--lk-space-md); font-size: 1.1rem; color: var(--lk-on-surface);">📸 After Photo</h3>
+            <div class="photo-upload-box" id="afterPhotoBox">
+                <input type="file" id="afterPhoto" name="afterPhoto" class="photo-input" accept="image/*" capture="environment">
+                <div class="photo-upload-icon">📷</div>
+                <div class="photo-upload-text">📷 Take After Photo</div>
+                <img id="afterPhotoPreview" class="photo-preview" alt="After photo preview">
+                <div class="photo-controls" style="display: none;">
+                    <button type="button" class="photo-btn" onclick="SalonForm.retakePhoto('after')">🔄 Retake</button>
+                    <button type="button" class="photo-btn remove" onclick="SalonForm.removePhoto('after')">🗑️ Remove</button>
+                </div>
             </div>
         </div>
         <!-- Product Consumption Section -->
@@ -915,31 +944,11 @@
                 </div>
             </div>
         </div>
-
         <!-- Service Details Section -->
         <div class="section">
             <div class="section-title">
                 <span>✨</span> Service Details & Results
             </div>
-            
-            <!-- Before Photo Only -->
-            <div class="photo-section">
-                <h3 style="margin-bottom: var(--lk-space-md); font-size: 1.1rem; color: var(--lk-on-surface);">📸 Before Photo</h3>
-                <div class="photo-upload-box" id="beforePhotoBox">
-                    <input type="file" id="beforePhoto" name="beforePhoto" class="photo-input" accept="image/*" capture="environment">
-                    <div class="photo-upload-icon">📷</div>
-                    <div class="photo-upload-text">📷 Take Before Photo</div>
-                    <img id="beforePhotoPreview" class="photo-preview" alt="Before photo preview">
-                    <div class="photo-controls" style="display: none;">
-                        <button type="button" class="photo-btn" onclick="SalonForm.retakePhoto('before')">🔄 Retake</button>
-                        <button type="button" class="photo-btn remove" onclick="SalonForm.removePhoto('before')">🗑️ Remove</button>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Additional Space Before Stylist Section -->
-            <div style="margin-top: var(--lk-space-xl);"></div>
-            
             <button type="button" class="btn btn-success" id="addStylistBtn">
                 <span class="icon">+</span> Add Stylist / Incentive
             </button>
@@ -989,7 +998,7 @@
             </div>
         </div>
         <button type="submit" class="btn btn-primary btn-submit">
-            <span class="icon">💾</span> Save Client Record
+            <span class="icon">💾</span> Save Consumption Record
         </button>
     </form>
     <button id="back-to-chooser-2" class="btn btn-error" style="margin-bottom: 24px;">Back</button>
@@ -1055,6 +1064,7 @@
     
     let products = [];
     let stylists = [];
+    let consultationIds = [];
     
     // Signature Pad functionality
     let signaturePad = null;
@@ -1063,6 +1073,7 @@
     
     // Photo storage (only before photo)
     let beforePhotoData = null;
+    let afterPhotoData = null;
     
     // Unique Submit ID generator
     function generateSubmitId() {
@@ -1111,7 +1122,9 @@
 
         initPhotoHandlers() {
             const beforeInput = document.getElementById('beforePhoto');
-            beforeInput.addEventListener('change', (e) => this.handlePhotoSelection(e, 'before'));
+            if (beforeInput) beforeInput.addEventListener('change', (e) => this.handlePhotoSelection(e, 'before'));
+            const afterInput = document.getElementById('afterPhoto');
+            if (afterInput) afterInput.addEventListener('change', (e) => this.handlePhotoSelection(e, 'after'));
         },
 
         handlePhotoSelection(event, type) {
@@ -1133,7 +1146,11 @@
             const reader = new FileReader();
             reader.onload = (e) => {
                 const photoData = e.target.result;
-                beforePhotoData = photoData;
+                if (type === 'before') {
+                    beforePhotoData = photoData;
+                } else if (type === 'after') {
+                    afterPhotoData = photoData;
+                }
                 this.displayPhotoPreview(type, photoData);
             };
             reader.readAsDataURL(file);
@@ -1153,7 +1170,7 @@
             uploadIcon.style.display = 'none';
             box.classList.add('has-photo');
             
-            this.showToast('Before photo uploaded successfully!', 'success');
+            this.showToast(`${type.charAt(0).toUpperCase() + type.slice(1)} photo uploaded successfully!`, 'success');
         },
 
         retakePhoto(type) {
@@ -1177,8 +1194,12 @@
             box.classList.remove('has-photo');
             input.value = '';
             
-            beforePhotoData = null;
-            this.showToast('Before photo removed', 'success');
+            if (type === 'before') {
+                beforePhotoData = null;
+            } else if (type === 'after') {
+                afterPhotoData = null;
+            }
+            this.showToast(`${type.charAt(0).toUpperCase() + type.slice(1)} photo removed`, 'success');
         },
 
         initSignaturePad() {
@@ -1364,10 +1385,12 @@
                 const parsed = this.parseCSV(csvText);
                 products = parsed.products;
                 stylists = parsed.stylists;
+                consultationIds = parsed.consultationIds;
                 this.setupAutocomplete();
                 this.setupInitialUnitSuggestions();
                 this.setupStylistAutocomplete();
-                console.log(`Loaded ${products.length} products and ${stylists.length} stylists from Google Sheets`);
+                this.setupConsultationIdAutocomplete();
+                console.log(`Loaded ${products.length} products and ${stylists.length} stylists and ${consultationIds.length} consultation IDs from Google Sheets`);
             } catch (error) {
                 console.error('Failed to load data:', error);
                 this.showToast('Failed to load data. Autocomplete will be limited.', 'error');
@@ -1378,16 +1401,15 @@
             const lines = text.trim().split('\n');
             const parsedProducts = [];
             const parsedStylists = [];
-            
+            const parsedConsultationIds = [];
+            let headerSkipped = false;
             for (let i = 0; i < lines.length; i++) {
                 const line = lines[i].trim();
                 if (!line) continue;
-                
                 // Simple CSV parsing - handles quoted fields
                 const fields = [];
                 let current = '';
                 let inQuotes = false;
-                
                 for (let j = 0; j < line.length; j++) {
                     const char = line[j];
                     if (char === '"') {
@@ -1400,33 +1422,39 @@
                     }
                 }
                 fields.push(current.trim());
-                
-                // Column mapping: B=Product Name, C=Product Type, E=Unit, J=Stylist Name
-                if (fields.length >= 10) {
-                    const productName = fields[1].replace(/^"|"$/g, '').trim();    // Column B
-                    const productType = fields[2].replace(/^"|"$/g, '').trim();    // Column C
-                    const unit = fields[4].replace(/^"|"$/g, '').trim();           // Column E
-                    const stylistName = fields[9].replace(/^"|"$/g, '').trim();   // Column J (index 9)
-                    
-                    // Add product if valid
-                    if (productName && productType && productName !== 'Product Name') {
-                        parsedProducts.push({ 
-                            name: productName, 
-                            type: productType, 
-                            unit: unit || 'ml'
-                        });
-                    }
-                    
-                    // Add stylist if valid and unique
-                    if (stylistName && stylistName !== 'Stylist Name' && stylistName !== 'stylist name' && !parsedStylists.includes(stylistName)) {
-                        parsedStylists.push(stylistName);
-                    }
+                // Skip header row (first row)
+                if (!headerSkipped) {
+                    headerSkipped = true;
+                    continue;
+                }
+                // Column mapping: B=Product Name, C=Product Type, E=Unit, J=Stylist Name, R=Consultation ID
+                const productName = fields[1] ? fields[1].replace(/^"|"$/g, '').trim() : '';
+                const productType = fields[2] ? fields[2].replace(/^"|"$/g, '').trim() : '';
+                const unit = fields[4] ? fields[4].replace(/^"|"$/g, '').trim() : '';
+                const stylistName = fields[9] ? fields[9].replace(/^"|"$/g, '').trim() : '';
+                const consultationId = fields[17] ? fields[17].replace(/^"|"$/g, '').trim() : '';
+                // Add product if valid
+                if (productName && productType && productName !== 'Product Name') {
+                    parsedProducts.push({ 
+                        name: productName, 
+                        type: productType, 
+                        unit: unit || 'ml'
+                    });
+                }
+                // Add stylist if valid and unique
+                if (stylistName && stylistName.toLowerCase() !== 'stylist name' && !parsedStylists.includes(stylistName)) {
+                    parsedStylists.push(stylistName);
+                }
+                // Add consultation ID if valid and unique
+                if (consultationId && !parsedConsultationIds.includes(consultationId)) {
+                    parsedConsultationIds.push(consultationId);
                 }
             }
-            
+            console.log('Consultation IDs loaded:', parsedConsultationIds);
             return {
                 products: parsedProducts,
-                stylists: parsedStylists
+                stylists: parsedStylists,
+                consultationIds: parsedConsultationIds
             };
         },
 
@@ -1439,6 +1467,12 @@
         setupStylistAutocomplete() {
             document.querySelectorAll('.stylist-name-input').forEach(input => {
                 this.bindStylistAutocomplete(input);
+            });
+        },
+
+        setupConsultationIdAutocomplete() {
+            document.querySelectorAll('#consultationId').forEach(input => {
+                this.bindConsultationIdAutocomplete(input);
             });
         },
 
@@ -1542,6 +1576,56 @@
                     
                     option.addEventListener('click', () => {
                         input.value = stylistName;
+                        suggestionBox.innerHTML = '';
+                        suggestionBox.style.display = 'none';
+                    });
+                    
+                    suggestionBox.appendChild(option);
+                });
+                
+                suggestionBox.style.display = 'block';
+            });
+            
+            this.addKeyboardAndClickHandlers(input, suggestionBox);
+        },
+
+        bindConsultationIdAutocomplete(input) {
+            const suggestionBox = input.nextElementSibling;
+            
+            input.addEventListener('input', (e) => {
+                const value = e.target.value.toLowerCase();
+                suggestionBox.innerHTML = '';
+                
+                if (!value) {
+                    suggestionBox.style.display = 'none';
+                    return;
+                }
+                
+                const matches = consultationIds
+                    .filter(id => id.toLowerCase().includes(value))
+                    .slice(0, 6);
+                
+                if (matches.length === 0) {
+                    suggestionBox.style.display = 'none';
+                    return;
+                }
+                
+                matches.forEach(id => {
+                    const option = document.createElement('div');
+                    option.className = 'autocomplete-suggestion';
+                    
+                    const idIndex = id.toLowerCase().indexOf(value);
+                    let displayName = id;
+                    if (idIndex !== -1) {
+                        displayName = id.substring(0, idIndex) + 
+                                    '<strong>' + id.substring(idIndex, idIndex + value.length) + '</strong>' +
+                                    id.substring(idIndex + value.length);
+                    }
+                    
+                    option.innerHTML = displayName;
+                    
+                    option.addEventListener('click', () => {
+                        input.value = id;
                         suggestionBox.innerHTML = '';
                         suggestionBox.style.display = 'none';
                     });
@@ -1818,20 +1902,23 @@
             
             const form = e.target;
             const submitButton = form.querySelector('.btn-submit');
+            const formType = form.id === 'salonForm' ? 'consultation' : 'consumption';
             
             submitButton.classList.add('loading');
             submitButton.textContent = 'Saving...';
             
             let isValid = true;
             
-            // Validate consent first
-            if (!this.validateConsent()) {
-                isValid = false;
-            }
-            
-            // Validate signature
-            if (!this.validateSignature()) {
-                isValid = false;
+            // Validate consent first (only for consultation form)
+            if (formType === 'consultation') {
+                if (!this.validateConsent()) {
+                    isValid = false;
+                }
+                
+                // Validate signature (only for consultation form)
+                if (!this.validateSignature()) {
+                    isValid = false;
+                }
             }
             
             // Validate required fields
@@ -1844,18 +1931,20 @@
             
             // Validate email if provided
             const emailField = document.getElementById('email');
-            if (emailField.value && !this.validateField(emailField)) {
+            if (emailField && emailField.value && !this.validateField(emailField)) {
                 isValid = false;
             }
             
-            // Validate services
-            if (!this.validateServices()) {
+            // Validate services (only for consultation form)
+            if (formType === 'consultation' && !this.validateServices()) {
                 isValid = false;
             }
             
             if (!isValid) {
                 submitButton.classList.remove('loading');
-                submitButton.innerHTML = '<span class="icon">💾</span> Save Client Record';
+                submitButton.innerHTML = formType === 'consultation' ? 
+                    '<span class="icon">💾</span> Save Client Record' : 
+                    '<span class="icon">💾</span> Save Consumption Record';
                 this.showToast('Please fix the errors above', 'error');
                 return;
             }
@@ -1864,7 +1953,9 @@
             const submitId = generateSubmitId();
             
             // Show Submit ID to user
-            const submitIdDisplay = document.getElementById('submitIdDisplay');
+            const submitIdDisplay = formType === 'consultation' ? 
+                document.getElementById('submitIdDisplay') : 
+                document.getElementById('submitIdDisplay2');
             submitIdDisplay.textContent = `Submit ID: ${submitId}`;
             submitIdDisplay.style.display = 'block';
             
@@ -1872,12 +1963,18 @@
             const formData = new FormData(form);
             const data = this.processFormData(formData);
             
-            // Add unique Submit ID, signature data, and photo (only before photo)
+            // Add form type and unique Submit ID
+            data.formType = formType;
             data.submitId = submitId;
-            data.clientSignature = this.getSignatureData();
-            data.beforePhoto = beforePhotoData;
             
-            console.log('Sending data to Google Sheets with Submit ID:', submitId, data);
+            // Add signature data and photo (only for consultation form)
+            if (formType === 'consultation') {
+                data.clientSignature = this.getSignatureData();
+                data.beforePhoto = beforePhotoData;
+                data.afterPhoto = afterPhotoData;
+            }
+            
+            console.log(`Sending ${formType} data to Google Sheets with Submit ID:`, submitId, data);
             
             try {
                 const response = await fetch(APPS_SCRIPT_URL, {
@@ -1890,16 +1987,17 @@
                 });
                 
                 // Always show success toast since no-cors doesn't give us response details
-                this.showToast(`✅ Client record saved! Submit ID: ${submitId}`, 'success');
+                this.showToast(`✅ ${formType === 'consultation' ? 'Consultation record' : 'Consumption record'} saved! Submit ID: ${submitId}`, 'success');
                 
                 // Reset form
                 form.reset();
-                this.setInitialDate();
-                this.updateTotalCost();
-                this.clearSignature();
-                
-                // Reset photo
-                this.removePhoto('before');
+                if (formType === 'consultation') {
+                    this.setInitialDate();
+                    this.updateTotalCost();
+                    this.clearSignature();
+                    this.removePhoto('before');
+                    this.removePhoto('after');
+                }
                 
                 // Keep Submit ID visible for reference
                 submitIdDisplay.textContent = `✅ Last Submit ID: ${submitId}`;
@@ -1907,14 +2005,16 @@
             } catch (error) {
                 console.error('Error saving to Google Sheets:', error);
                 // Even if there's an error, the data might have been saved due to no-cors mode
-                this.showToast(`⚠️ Data submitted (ID: ${submitId}). Please verify in Google Sheets.`, 'success');
+                this.showToast(`⚠️ ${formType === 'consultation' ? 'Client' : 'Consumption'} data submitted (ID: ${submitId}). Please verify in Google Sheets.`, 'success');
                 
                 if (this.isDevelopment()) {
-                    console.log('Salon Form Data (fallback):', data);
+                    console.log(`${formType} Form Data (fallback):`, data);
                 }
             } finally {
                 submitButton.classList.remove('loading');
-                submitButton.innerHTML = '<span class="icon">💾</span> Save Client Record';
+                submitButton.innerHTML = formType === 'consultation' ? 
+                    '<span class="icon">💾</span> Save Client Record' : 
+                    '<span class="icon">💾</span> Save Consumption Record';
             }
         },
 
@@ -1990,6 +2090,10 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('client-consultation-section').style.display = 'none';
         document.getElementById('consumption-form-section').style.display = 'none';
     };
+    var consumptionForm = document.getElementById('consumptionForm');
+    if (consumptionForm) {
+        consumptionForm.addEventListener('submit', SalonForm.handleSubmit.bind(SalonForm));
+    }
 });
 </script>
 </body>
