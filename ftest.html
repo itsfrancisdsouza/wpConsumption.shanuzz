@@ -1632,9 +1632,8 @@
                 console.log('Canvas clicked at:', e.clientX, e.clientY);
                 // Draw a small dot to test if drawing works
                 const rect = canvas.getBoundingClientRect();
-                const dpr = window.devicePixelRatio || 1;
-                const x = (e.clientX - rect.left) * dpr;
-                const y = (e.clientY - rect.top) * dpr;
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
                 
                 ctx.beginPath();
                 ctx.arc(x, y, 3, 0, 2 * Math.PI);
@@ -1690,9 +1689,8 @@
             console.log('Signature: startDrawing', e.type);
             state.isDrawing = true;
             const rect = e.target.getBoundingClientRect();
-            const dpr = window.devicePixelRatio || 1;
-            const x = (e.clientX - rect.left) * dpr;
-            const y = (e.clientY - rect.top) * dpr;
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
             
             state.signaturePad.beginPath();
             state.signaturePad.moveTo(x, y);
@@ -1705,9 +1703,8 @@
             if (!state.isDrawing) return;
             
             const rect = e.target.getBoundingClientRect();
-            const dpr = window.devicePixelRatio || 1;
-            const x = (e.clientX - rect.left) * dpr;
-            const y = (e.clientY - rect.top) * dpr;
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
             
             state.signaturePad.lineTo(x, y);
             state.signaturePad.stroke();
