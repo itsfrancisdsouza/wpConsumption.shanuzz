@@ -1,0 +1,2435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Salon Client Consultation & Product Consumption Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <style>
+        :root {
+            --lk-golden: 1.618;
+            --lk-base: 15px;
+            --lk-space-xs: calc(var(--lk-base) / var(--lk-golden) / var(--lk-golden));
+            --lk-space-sm: calc(var(--lk-base) / var(--lk-golden));
+            --lk-space-md: var(--lk-base);
+            --lk-space-lg: calc(var(--lk-base) * var(--lk-golden));
+            --lk-space-xl: calc(var(--lk-base) * var(--lk-golden) * var(--lk-golden));
+            --lk-space-2xl: calc(var(--lk-base) * var(--lk-golden) * var(--lk-golden) * var(--lk-golden));
+            --lk-text-caption: calc(var(--lk-base) / var(--lk-golden) / var(--lk-golden));
+            --lk-text-label: calc(var(--lk-base) / var(--lk-golden));
+            --lk-text-body: var(--lk-base);
+            --lk-text-subtitle: calc(var(--lk-base) * var(--lk-golden));
+            --lk-text-title: calc(var(--lk-base) * var(--lk-golden) * var(--lk-golden));
+            --lk-text-display: calc(var(--lk-base) * var(--lk-golden) * var(--lk-golden) * var(--lk-golden));
+            --lk-radius-sm: 7px;
+            --lk-radius-md: 10px;
+            --lk-radius-lg: 14px;
+            --lk-primary: #8B5CF6;
+            --lk-primary-light: #A78BFA;
+            --lk-secondary: #06B6D4;
+            --lk-accent: #F59E0B;
+            --lk-surface: #FFFFFF;
+            --lk-surface-variant: #F8FAFC;
+            --lk-surface-container: #F1F5F9;
+            --lk-outline: #E2E8F0;
+            --lk-outline-variant: #CBD5E1;
+            --lk-on-surface: #0F172A;
+            --lk-on-surface-variant: #475569;
+            --lk-success: #10B981;
+            --lk-error: #EF4444;
+            --lk-sage-green: #87A96B;
+            --lk-sage-green-light: #9BB77D;
+            --lk-sage-green-bg: #F0F4EC;
+        }
+
+        html { box-sizing: border-box; }
+        *, *:before, *:after { box-sizing: inherit; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-size: var(--lk-text-body);
+            line-height: var(--lk-golden);
+            background: var(--lk-surface-variant);
+            color: var(--lk-on-surface);
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0;
+            padding: var(--lk-space-xl) var(--lk-space-md);
+            background: var(--lk-surface);
+            border-radius: 0;
+            box-shadow: none;
+            min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: var(--lk-space-xl);
+        }
+
+        .title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--lk-primary);
+            margin-bottom: var(--lk-space-xs);
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: var(--lk-text-label);
+            color: var(--lk-on-surface-variant);
+            font-weight: 400;
+        }
+
+        .section {
+            margin-bottom: var(--lk-space-xl);
+            padding: var(--lk-space-md);
+            background: var(--lk-surface);
+            border: 1px solid var(--lk-outline-variant);
+            border-radius: var(--lk-radius-md);
+            box-shadow: 0 1px 2px rgba(139,92,246,0.03);
+        }
+
+        .consent-section {
+            margin-bottom: var(--lk-space-xl);
+            padding: var(--lk-space-lg);
+            background: var(--lk-sage-green-bg);
+            border: 2px solid var(--lk-sage-green);
+            border-radius: var(--lk-radius-md);
+            box-shadow: 0 2px 8px rgba(135, 169, 107, 0.1);
+        }
+
+        .signature-section {
+            margin-bottom: var(--lk-space-xl);
+            padding: var(--lk-space-lg);
+            background: var(--lk-surface);
+            border: 2px solid var(--lk-primary);
+            border-radius: var(--lk-radius-md);
+            box-shadow: 0 2px 8px rgba(139, 92, 246, 0.1);
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--lk-on-surface);
+            margin-bottom: var(--lk-space-md);
+            padding-bottom: var(--lk-space-xs);
+            border-bottom: 2px solid var(--lk-primary);
+            display: flex;
+            align-items: center;
+            gap: var(--lk-space-sm);
+        }
+
+        .consent-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--lk-sage-green);
+            margin-bottom: var(--lk-space-lg);
+            text-align: center;
+            padding-bottom: var(--lk-space-sm);
+            border-bottom: 2px solid var(--lk-sage-green);
+        }
+
+        .signature-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--lk-primary);
+            margin-bottom: var(--lk-space-lg);
+            text-align: center;
+            padding-bottom: var(--lk-space-sm);
+            border-bottom: 2px solid var(--lk-primary);
+        }
+
+        .consent-content {
+            font-size: var(--lk-text-body);
+            line-height: 1.6;
+            color: var(--lk-on-surface);
+            margin-bottom: var(--lk-space-lg);
+        }
+
+        .consent-item {
+            margin-bottom: var(--lk-space-md);
+            padding-left: var(--lk-space-sm);
+            position: relative;
+        }
+
+        .consent-item:before {
+            content: "•";
+            color: var(--lk-sage-green);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .consent-agreement {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--lk-space-lg);
+            margin-top: var(--lk-space-lg);
+            padding: var(--lk-space-md);
+            background: white;
+            border-radius: var(--lk-radius-sm);
+            border: 1px solid var(--lk-sage-green-light);
+        }
+
+        .consent-option {
+            display: flex;
+            align-items: center;
+            gap: var(--lk-space-sm);
+            cursor: pointer;
+            padding: var(--lk-space-sm) var(--lk-space-md);
+            border-radius: var(--lk-radius-sm);
+            transition: background-color 0.2s;
+        }
+
+        .consent-option:hover {
+            background: var(--lk-sage-green-bg);
+        }
+
+        .consent-radio {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--lk-sage-green);
+        }
+
+        .consent-label {
+            font-weight: 500;
+            color: var(--lk-on-surface);
+        }
+
+        /* Signature Pad Styles */
+        .signature-container {
+            text-align: center;
+            margin-bottom: var(--lk-space-lg);
+        }
+
+        .signature-instructions {
+            font-size: var(--lk-text-body);
+            color: var(--lk-on-surface-variant);
+            margin-bottom: var(--lk-space-md);
+        }
+
+        .signature-pad-wrapper {
+            position: relative;
+            border: 2px dashed var(--lk-primary);
+            border-radius: var(--lk-radius-md);
+            background: var(--lk-surface-variant);
+            margin: 0 auto var(--lk-space-md);
+            max-width: 400px;
+        }
+
+        .signature-pad {
+            display: block;
+            width: 100%;
+            height: 150px;
+            border: none;
+            border-radius: var(--lk-radius-md);
+            background: transparent;
+            cursor: crosshair;
+        }
+
+        .signature-controls {
+            display: flex;
+            justify-content: center;
+            gap: var(--lk-space-md);
+            flex-wrap: wrap;
+        }
+
+        .signature-btn {
+            padding: var(--lk-space-sm) var(--lk-space-md);
+            border: 1px solid var(--lk-primary);
+            border-radius: var(--lk-radius-sm);
+            background: white;
+            color: var(--lk-primary);
+            cursor: pointer;
+            font-size: var(--lk-text-caption);
+            transition: all 0.2s;
+        }
+
+        .signature-btn:hover {
+            background: var(--lk-primary);
+            color: white;
+        }
+
+        .signature-status {
+            margin-top: var(--lk-space-md);
+            padding: var(--lk-space-sm);
+            border-radius: var(--lk-radius-sm);
+            text-align: center;
+            font-size: var(--lk-text-caption);
+            display: none;
+        }
+
+        .signature-status.signed {
+            background: #ECFDF5;
+            color: var(--lk-success);
+            border: 1px solid var(--lk-success);
+            display: block;
+        }
+
+        .signature-status.empty {
+            background: #FEF2F2;
+            color: var(--lk-error);
+            border: 1px solid var(--lk-error);
+            display: block;
+        }
+
+        /* Photo Upload Styles */
+        .photo-section {
+            margin-top: var(--lk-space-lg);
+            border-top: 1px solid var(--lk-outline-variant);
+            padding-top: var(--lk-space-lg);
+        }
+
+        .photo-upload-box {
+            border: 2px dashed var(--lk-outline);
+            border-radius: var(--lk-radius-md);
+            padding: var(--lk-space-lg);
+            text-align: center;
+            background: var(--lk-surface-variant);
+            transition: all 0.2s;
+            cursor: pointer;
+            position: relative;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .photo-upload-box:hover {
+            border-color: var(--lk-primary);
+            background: rgba(139, 92, 246, 0.02);
+        }
+
+        .photo-upload-box.has-photo {
+            border-color: var(--lk-success);
+            background: #ECFDF5;
+        }
+
+        .photo-input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .photo-preview {
+            max-width: 100%;
+            max-height: 200px;
+            border-radius: var(--lk-radius-sm);
+            margin-bottom: var(--lk-space-sm);
+            display: none;
+        }
+
+        .photo-upload-text {
+            font-size: var(--lk-text-body);
+            color: var(--lk-on-surface-variant);
+            margin-bottom: var(--lk-space-sm);
+        }
+
+        .photo-upload-icon {
+            font-size: 2rem;
+            color: var(--lk-primary);
+            margin-bottom: var(--lk-space-sm);
+        }
+
+        .photo-controls {
+            display: flex;
+            justify-content: center;
+            gap: var(--lk-space-sm);
+            margin-top: var(--lk-space-sm);
+        }
+
+        .photo-btn {
+            padding: var(--lk-space-xs) var(--lk-space-sm);
+            border: 1px solid var(--lk-primary);
+            border-radius: var(--lk-radius-sm);
+            background: white;
+            color: var(--lk-primary);
+            cursor: pointer;
+            font-size: var(--lk-text-caption);
+            transition: all 0.2s;
+        }
+
+        .photo-btn:hover {
+            background: var(--lk-primary);
+            color: white;
+        }
+
+        .photo-btn.remove {
+            border-color: var(--lk-error);
+            color: var(--lk-error);
+        }
+
+        .photo-btn.remove:hover {
+            background: var(--lk-error);
+            color: white;
+        }
+
+        .grid-1 {
+            display: grid;
+            gap: var(--lk-space-md);
+            grid-template-columns: 1fr;
+        }
+        .grid-2 { 
+            display: grid;
+            gap: var(--lk-space-md);
+            grid-template-columns: 1fr; 
+        }
+
+        .quantity-unit-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: var(--lk-space-sm);
+        }
+
+        .field {
+            margin-bottom: var(--lk-space-sm);
+            position: relative;
+        }
+
+        .label {
+            display: block;
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--lk-on-surface);
+            margin-bottom: var(--lk-space-xs);
+        }
+
+        .required { color: var(--lk-error); margin-left: 2px; }
+
+        .input,
+        .textarea,
+        .select {
+            width: 100%;
+            min-height: 44px;
+            padding: 12px;
+            border: 1px solid var(--lk-outline);
+            border-radius: var(--lk-radius-sm);
+            font-size: 1rem;
+            background: var(--lk-surface);
+            color: var(--lk-on-surface);
+            transition: border-color 0.2s, box-shadow 0.2s;
+            font-family: inherit;
+        }
+
+        .input[readonly] {
+            background: var(--lk-surface-variant);
+            color: var(--lk-on-surface-variant);
+            font-weight: 500;
+        }
+
+        /* Remove spinner controls from number inputs */
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type="number"] {
+            -moz-appearance: textfield;
+        }
+
+        .input:focus,
+        .textarea:focus,
+        .select:focus {
+            outline: none;
+            border-color: var(--lk-primary);
+            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.1);
+        }
+
+        .input.error,
+        .textarea.error,
+        .select.error {
+            border-color: var(--lk-error);
+            box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.1);
+        }
+
+        .textarea { resize: vertical; min-height: 64px; }
+
+        .error-message {
+            color: var(--lk-error);
+            font-size: var(--lk-text-caption);
+            margin-top: 4px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--lk-space-xs);
+            margin-top: 4px;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px;
+            border-radius: var(--lk-radius-sm);
+            font-size: 1rem;
+            min-height: 36px;
+            user-select: none;
+            cursor: pointer;
+        }
+        .checkbox-item:hover { background: var(--lk-surface-container); }
+        .checkbox { width: 22px; height: 22px; accent-color: var(--lk-primary); }
+
+        .product-entry, .stylist-entry, .product-sale-entry {
+            border: 1px solid var(--lk-outline-variant);
+            border-radius: var(--lk-radius-md);
+            padding: var(--lk-space-md);
+            margin-bottom: var(--lk-space-md);
+            background: var(--lk-surface-container);
+            position: relative;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn {
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 500;
+            padding: 12px 20px;
+            border: none;
+            border-radius: var(--lk-radius-sm);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            letter-spacing: 0.005em;
+            text-decoration: none;
+            user-select: none;
+        }
+        .btn-primary { background: var(--lk-primary); color: white; }
+        .btn-primary:hover { 
+            background: var(--lk-primary-light); 
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(139, 92, 246, 0.2);
+        }
+        .btn-success { background: var(--lk-success); color: white; }
+        .btn-success:hover { 
+            background: #059669; 
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(16, 185, 129, 0.2);
+        }
+        .btn-error {
+            background: var(--lk-error); 
+            color: white;
+            font-size: 0.87rem; 
+            padding: 8px 16px;
+        }
+        .btn-error:hover { 
+            background: #DC2626; 
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(239, 68, 68, 0.2);
+        }
+        .btn-submit {
+            width: 100%;
+            font-size: 1.2rem;
+            padding: 18px var(--lk-space-xl);
+            margin-top: var(--lk-space-xl);
+            background: linear-gradient(135deg, var(--lk-primary), var(--lk-secondary));
+        }
+        .btn-submit:hover {
+            transform: translateY(-1px) scale(1.01);
+            box-shadow: 0 7px 14px rgba(139,92,246,0.12);
+        }
+        .icon { margin-left: -3px; }
+        .space-after-btn {
+            display: block;
+            height: 18px;
+            width: 100%;
+        }
+
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--lk-success);
+            color: white;
+            padding: 12px 20px;
+            border-radius: var(--lk-radius-sm);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 9999;
+            max-width: 300px;
+            font-weight: 500;
+        }
+        .toast.show {
+            transform: translateX(0);
+        }
+        .toast.error {
+            background: var(--lk-error);
+        }
+
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        /* Submit ID Display */
+        .submit-id-display {
+            background: var(--lk-primary);
+            color: white;
+            padding: var(--lk-space-sm);
+            border-radius: var(--lk-radius-sm);
+            margin-bottom: var(--lk-space-md);
+            text-align: center;
+            font-size: var(--lk-text-caption);
+            font-family: monospace;
+            display: none;
+        }
+
+        /* Autocomplete Styles */
+        .autocomplete-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--lk-surface);
+            border: 1px solid var(--lk-outline);
+            border-top: none;
+            border-radius: 0 0 var(--lk-radius-sm) var(--lk-radius-sm);
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(139,92,246,0.08);
+            display: none;
+        }
+
+        .autocomplete-suggestion {
+            padding: 12px;
+            cursor: pointer;
+            border-bottom: 1px solid var(--lk-outline-variant);
+            font-size: 1rem;
+            transition: background-color 0.2s;
+        }
+
+        .autocomplete-suggestion:hover {
+            background: var(--lk-surface-container);
+        }
+
+        .autocomplete-suggestion:last-child {
+            border-bottom: none;
+        }
+
+        .autocomplete-suggestion .product-type {
+            color: var(--lk-on-surface-variant);
+            font-size: 0.9rem;
+            margin-left: 8px;
+        }
+
+        /* Unit Pills Styles */
+        .unit-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 6px;
+        }
+
+        .unit-pill {
+            background: var(--lk-primary);
+            color: white;
+            font-size: 0.85rem;
+            padding: 4px 10px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            font-family: inherit;
+        }
+
+        .unit-pill:hover {
+            background: var(--lk-primary-light);
+            transform: translateY(-1px);
+        }
+
+        .unit-pill.exact-match {
+            background: var(--lk-accent);
+        }
+
+        .entry-controls {
+            margin-top: var(--lk-space-md);
+            padding-top: var(--lk-space-md);
+            border-top: 1px solid var(--lk-outline-variant);
+            text-align: right;
+            display: flex;
+            justify-content: flex-end;
+            gap: var(--lk-space-sm);
+        }
+
+        .section-controls {
+            margin-top: var(--lk-space-lg);
+            text-align: center;
+            padding-top: var(--lk-space-md);
+            border-top: 1px solid var(--lk-outline-variant);
+        }
+
+        .remove-product-btn,
+        .remove-stylist-btn,
+        .remove-product-sale-btn {
+            position: static !important;
+            top: auto !important;
+            right: auto !important;
+            margin: 0 !important;
+            padding: 8px 16px !important;
+            font-size: 0.9rem !important;
+        }
+
+        @media (min-width: 600px) {
+            .grid-2 { grid-template-columns: repeat(2, 1fr); }
+            .container {
+                max-width: 490px;
+                margin: 32px auto;
+                border-radius: var(--lk-radius-lg);
+                box-shadow: 0 2px 14px 0 rgba(0,0,0,0.05);
+            }
+            .space-after-btn { height: 22px; }
+        }
+        @media (min-width: 900px) {
+            .container { max-width: 700px; }
+            .label, .input, .select, .checkbox-item { font-size: 1.1rem; }
+        }
+        @media (min-width: 1200px) {
+            .container { max-width: 900px; }
+        }
+    </style>
+</head>
+<body>
+<div id="form-chooser" class="container">
+    <div class="header">
+        <h1 class="title">Choose Form</h1>
+        <p class="subtitle">Select which form you want to fill</p>
+        <button id="show-client-consultation" class="btn btn-primary" style="margin: 16px;">Client Consultation</button>
+        <button id="show-consumption-form" class="btn btn-success" style="margin: 16px;">Consumption Form</button>
+    </div>
+</div>
+
+<div id="client-consultation-section" class="container" style="display: none;">
+    <div class="header">
+        <h1 class="title">Client Consultation</h1>
+        <p class="subtitle">Complete client assessment and service record</p>
+        <div id="submitIdDisplay" class="submit-id-display"></div>
+    </div>
+
+    <form id="salonForm" autocomplete="off" novalidate>
+        <!-- Consent & Acknowledgment Section -->
+        <div class="consent-section">
+            <div class="consent-title">📋 Consent & Acknowledgment</div>
+            
+            <div class="consent-content">
+                <div class="consent-item">
+                    I confirm that the information provided above is accurate and complete to the best of my knowledge.
+                </div>
+                
+                <div class="consent-item">
+                    I understand that providing false or incomplete information may affect the quality or safety of the service.
+                </div>
+                
+                <div class="consent-item">
+                    I agree to inform my stylist/therapist of any changes to my health or medication during future visits.
+                </div>
+                
+                <div class="consent-item">
+                    I consent to Shanuzz Salon using my anonymous health information solely for the purpose of providing safe and effective treatments.
+                </div>
+                
+                <div class="consent-item">
+                    I consent to Shanuzz Salon the full rights to use photos/videos of my hair/skin/nails transformation for promotional purposes (e.g., social media, website). My identity will be kept confidential unless otherwise agreed.
+                </div>
+            </div>
+            
+            <div class="consent-agreement">
+                <label class="consent-option">
+                    <input type="radio" name="consent" value="yes" class="consent-radio" required>
+                    <span class="consent-label">✅ Yes</span>
+                </label>
+                <label class="consent-option">
+                    <input type="radio" name="consent" value="no" class="consent-radio" required>
+                    <span class="consent-label">❌ No</span>
+                </label>
+            </div>
+            <div class="error-message" id="consent-error">Please select your consent preference</div>
+        </div>
+
+        <!-- Digital Signature Section -->
+        <div class="signature-section">
+            <div class="signature-title">✍️ Digital Signature</div>
+            
+            <div class="signature-container">
+                <div class="signature-instructions">
+                    Please sign below to confirm your consent and agreement to the terms above
+                </div>
+                
+                <div class="signature-pad-wrapper">
+                    <canvas id="signaturePad" class="signature-pad" width="400" height="150"></canvas>
+                </div>
+                
+                <div class="signature-controls">
+                    <button type="button" id="clearSignature" class="signature-btn">🗑️ Clear</button>
+                    <button type="button" id="undoSignature" class="signature-btn">↶ Undo</button>
+                </div>
+                
+                <div id="signatureStatus" class="signature-status">
+                    ✅ Signature captured successfully
+                </div>
+                <div class="error-message" id="signature-error">Please provide your digital signature</div>
+            </div>
+        </div>
+
+        <!-- Client Information Section -->
+        <div class="section">
+            <div class="section-title">
+                <span>👤</span> Client Information
+            </div>
+
+            <div class="grid-1">
+                <div class="field">
+                    <label class="label" for="clientName">Full Name<span class="required">*</span></label>
+                    <input type="text" id="clientName" name="clientName" class="input" required>
+                    <div class="error-message" id="clientName-error">Please enter the client's full name</div>
+                </div>
+                <div class="field">
+                    <label class="label" for="phone">Phone Number<span class="required">*</span></label>
+                    <input type="tel" id="phone" name="phone" class="input" required>
+                    <div class="error-message" id="phone-error">Please enter a valid phone number</div>
+                </div>
+                <div class="field">
+                    <label class="label" for="email">Email Address</label>
+                    <input type="email" id="email" name="email" class="input">
+                    <div class="error-message" id="email-error">Please enter a valid email address</div>
+                </div>
+                <div class="field">
+                    <label class="label" for="visitDate">Visit Date<span class="required">*</span></label>
+                    <input type="date" id="visitDate" name="visitDate" class="input" required>
+                    <div class="error-message" id="visitDate-error">Please select a valid visit date</div>
+                </div>
+                <div class="field">
+                    <label class="label" for="clientType">Client Type</label>
+                    <select id="clientType" name="clientType" class="select">
+                        <option value="new">New Client</option>
+                        <option value="returning">Returning Client</option>
+                        <option value="walk-in">Walk-in</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Consultation Section -->
+        <div class="section">
+            <div class="section-title">
+                <span>💬</span> Client Consultation
+            </div>
+
+            <div class="field">
+                <label class="label">
+                    Desired Services<span class="required">*</span>
+                </label>
+                <div class="checkbox-grid" role="group" aria-labelledby="services-label">
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="checkbox" name="services" value="haircut">
+                        Haircut
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="checkbox" name="services" value="coloring">
+                        Hair Coloring
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="checkbox" name="services" value="styling">
+                        Hair Styling
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="checkbox" name="services" value="treatment">
+                        Hair Treatment
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="checkbox" name="services" value="facial">
+                        Facial
+                    </label>
+                    <label class="checkbox-item">
+                        <input type="checkbox" class="checkbox" name="services" value="manicure">
+                        Manicure/Pedicure
+                    </label>
+                </div>
+                <div class="error-message" id="services-error">Please select at least one service</div>
+            </div>
+
+            <div class="grid-1">
+                <div class="field">
+                    <label class="label" for="hairType">Hair Type</label>
+                    <select id="hairType" name="hairType" class="select">
+                        <option value="">Select Hair Type</option>
+                        <option value="straight">Straight</option>
+                        <option value="wavy">Wavy</option>
+                        <option value="curly">Curly</option>
+                        <option value="coily">Coily</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label class="label" for="hairTexture">Hair Texture</label>
+                    <select id="hairTexture" name="hairTexture" class="select">
+                        <option value="">Select Texture</option>
+                        <option value="fine">Fine</option>
+                        <option value="medium">Medium</option>
+                        <option value="thick">Thick</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label class="label" for="scalpCondition">Scalp Condition</label>
+                    <select id="scalpCondition" name="scalpCondition" class="select">
+                        <option value="">Select Condition</option>
+                        <option value="normal">Normal</option>
+                        <option value="oily">Oily</option>
+                        <option value="dry">Dry</option>
+                        <option value="sensitive">Sensitive</option>
+                        <option value="dandruff">Dandruff</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label class="label" for="previousTreatments">Previous Chemical Treatments</label>
+                    <input type="text" id="previousTreatments" name="previousTreatments" class="input" placeholder="e.g., Last color, relaxer, perm">
+                </div>
+                <div class="field">
+                    <label class="label" for="allergies">Allergies/Sensitivities</label>
+                    <textarea id="allergies" name="allergies" class="textarea" placeholder="Please list any known allergies or sensitivities"></textarea>
+                </div>
+                <div class="field">
+                    <label class="label" for="clientExpectations">Client Expectations & Notes</label>
+                    <textarea id="clientExpectations" name="clientExpectations" class="textarea" placeholder="Describe what the client wants to achieve, any concerns, or special requests"></textarea>
+                </div>
+            </div>
+        </div>
+        <!-- Place the Before Photo section here -->
+        <div class="photo-section">
+            <h3 style="margin-bottom: var(--lk-space-md); font-size: 1.1rem; color: var(--lk-on-surface);">📸 Before Photo</h3>
+            <div class="photo-upload-box" id="beforePhotoBox">
+                <input type="file" id="beforePhoto" name="beforePhoto" class="photo-input" accept="image/*" capture="environment">
+                <div class="photo-upload-icon">📷</div>
+                <div class="photo-upload-text">📷 Take Before Photo</div>
+                <img id="beforePhotoPreview" class="photo-preview" alt="Before photo preview">
+                <div class="photo-controls" style="display: none;">
+                    <button type="button" class="photo-btn" onclick="SalonForm.retakePhoto('before')">🔄 Retake</button>
+                    <button type="button" class="photo-btn remove" onclick="SalonForm.removePhoto('before')">🗑️ Remove</button>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-submit">
+            <span class="icon">💾</span> Save Client Record
+        </button>
+    </form>
+</div>
+
+<div id="consumption-form-section" class="container" style="display: none;">
+    <div class="header">
+        <h1 class="title">Consumption Form</h1>
+        <p class="subtitle">Complete Consumption record</p>
+        <div id="submitIdDisplay2" class="submit-id-display"></div>
+    </div>
+    <form id="consumptionForm" autocomplete="off" novalidate>
+        <div class="grid-1">
+            <div class="field">
+                <label class="label" for="consultationId">Consultation ID<span class="required">*</span></label>
+                <input type="text" id="consultationId" name="consultationId" class="input" required placeholder="Enter Consultation ID">
+                <div class="autocomplete-suggestions"></div>
+                <div class="error-message" id="consultationId-error">Please enter the Consultation ID</div>
+            </div>
+        </div>
+        <!-- After Photo Section -->
+        <div class="photo-section" style="margin-top: var(--lk-space-xl); margin-bottom: var(--lk-space-xl);">
+            <h3 style="margin-bottom: var(--lk-space-md); font-size: 1.1rem; color: var(--lk-on-surface);">📸 After Photo</h3>
+            <div class="photo-upload-box" id="afterPhotoBox">
+                <input type="file" id="afterPhoto" name="afterPhoto" class="photo-input" accept="image/*" capture="environment">
+                <div class="photo-upload-icon">📷</div>
+                <div class="photo-upload-text">📷 Take After Photo</div>
+                <img id="afterPhotoPreview" class="photo-preview" alt="After photo preview">
+                <div class="photo-controls" style="display: none;">
+                    <button type="button" class="photo-btn" onclick="SalonForm.retakePhoto('after')">🔄 Retake</button>
+                    <button type="button" class="photo-btn remove" onclick="SalonForm.removePhoto('after')">🗑️ Remove</button>
+                </div>
+            </div>
+        </div>
+        <!-- Product Consumption Section -->
+        <div class="section">
+            <div class="section-title">
+                <span>🧴</span> Product Consumption & Inventory
+            </div>
+            <div id="productContainer">
+                <div class="product-entry">
+                    <div class="grid-1">
+                        <div class="field">
+                            <label class="label">Product Name</label>
+                            <input type="text" name="productName[]" class="input product-name-input" placeholder="Start typing product name..." autocomplete="off">
+                            <div class="autocomplete-suggestions"></div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Product Type</label>
+                            <input type="text" name="productType[]" class="input product-type-input" readonly placeholder="Auto-filled when product selected">
+                        </div>
+                        <div class="quantity-unit-grid">
+                            <div class="field">
+                                <label class="label">Quantity Used</label>
+                                <input type="text" name="quantityUsed[]" class="input" placeholder="e.g., 50, 100, 2">
+                            </div>
+                            <div class="field">
+                                <label class="label">Unit</label>
+                                <input type="text" name="unit[]" class="input unit-input" placeholder="Auto-filled">
+                                <div class="unit-pills"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="entry-controls">
+                        <button type="button" class="btn btn-error remove-product-btn" aria-label="Remove product entry">Remove</button>
+                    </div>
+                </div>
+            </div>
+            <div class="section-controls">
+                <button type="button" class="btn btn-success" id="addProductBtn">
+                    <span class="icon">+</span> Add Product Used
+                </button>
+            </div>
+        </div>
+        <!-- Product Sale & Inventory Section -->
+        <div class="section">
+            <div class="section-title">
+                <span>💰</span> Product Sale & Inventory
+            </div>
+            <div id="productSaleContainer">
+                <div class="product-sale-entry">
+                    <div class="grid-1">
+                        <div class="field">
+                            <label class="label">Product Name</label>
+                            <input type="text" name="saleProductName[]" class="input sale-product-name-input" placeholder="Start typing product name..." autocomplete="off">
+                            <div class="autocomplete-suggestions"></div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Stylist/Technician</label>
+                            <input type="text" name="saleStylistName[]" class="input sale-stylist-name-input" placeholder="Start typing stylist name..." autocomplete="off">
+                            <div class="autocomplete-suggestions"></div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Price (₹)</label>
+                            <input type="number" name="salePrice[]" class="input sale-price-input" step="0.01" placeholder="0.00" min="0">
+                        </div>
+                    </div>
+                    <div class="entry-controls">
+                        <button type="button" class="btn btn-error remove-product-sale-btn" aria-label="Remove product sale entry">Remove</button>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-1">
+                <div class="field">
+                    <label class="label">Total (₹)</label>
+                    <input type="number" name="saleTotal[]" class="input sale-total-input" step="0.01" placeholder="Auto-calculated" readonly>
+                </div>
+            </div>
+            <div class="section-controls">
+                <button type="button" class="btn btn-success" id="addProductSaleBtn">
+                    <span class="icon">+</span> Add Product Sale
+                </button>
+            </div>
+        </div>
+        <!-- Service Details Section -->
+        <div class="section">
+            <div class="section-title">
+                <span>✨</span> Service Details & Results
+            </div>
+            <div id="stylistContainer">
+                <div class="stylist-entry">
+                    <div class="grid-1">
+                        <div class="field">
+                            <label class="label" for="stylistName0">
+                                Stylist/Technician Name<span class="required">*</span>
+                            </label>
+                            <input type="text" id="stylistName0" name="stylistName[]" class="input stylist-name-input" required placeholder="Start typing stylist name..." autocomplete="off">
+                            <div class="autocomplete-suggestions"></div>
+                        </div>
+                        <div class="field">
+                            <label class="label" for="incentiveSplit0">Incentive Split (₹)</label>
+                            <input type="number" id="incentiveSplit0" name="incentiveSplit[]" class="input stylist-incentive-input" step="0.01" placeholder="Incentive amount">
+                        </div>
+                    </div>
+                    <div class="entry-controls">
+                        <button type="button" class="btn btn-error remove-stylist-btn" aria-label="Remove stylist entry">Remove</button>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-1">
+                <div class="field">
+                    <label class="label" for="totalCost">Total Amount (₹)</label>
+                    <input type="number" id="totalCost" name="totalCost" class="input" readonly placeholder="Auto-calculated total" aria-live="polite">
+                </div>
+            </div>
+            <div class="section-controls">
+                <button type="button" class="btn btn-success" id="addStylistBtn">
+                    <span class="icon">+</span> Add Stylist / Incentive
+                </button>
+            </div>
+        </div>
+        <!-- Service Notes Section -->
+        <div class="section">
+            <div class="section-title">
+                <span>📝</span> Service Notes & Techniques
+            </div>
+            <div class="field">
+                <label class="label" for="serviceNotes">Service Notes & Techniques Used</label>
+                <textarea id="serviceNotes" name="serviceNotes" class="textarea" placeholder="Document the process, techniques, formulations, timing, and important details"></textarea>
+            </div>
+            <div class="field">
+                <label class="label" for="clientSatisfaction">Client Satisfaction</label>
+                <select id="clientSatisfaction" name="clientSatisfaction" class="select">
+                    <option value="">Rate Satisfaction</option>
+                    <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+                    <option value="4">⭐⭐⭐⭐ Very Good</option>
+                    <option value="3">⭐⭐⭐ Good</option>
+                    <option value="2">⭐⭐ Fair</option>
+                    <option value="1">⭐ Needs Improvement</option>
+                </select>
+            </div>
+            <div class="field">
+                <label class="label" for="followUp">Follow-up Recommendations</label>
+                <textarea id="followUp" name="followUp" class="textarea" placeholder="Next appointment suggestions, home care recommendations"></textarea>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-submit">
+            <span class="icon">💾</span> Save Consumption Record
+        </button>
+    </form>
+</div>
+
+<div id="toast" class="toast" role="alert" aria-live="assertive"></div>
+
+<template id="productTemplate">
+    <div class="product-entry">
+        <div class="grid-1">
+            <div class="field">
+                <label class="label">Product Name</label>
+                <input type="text" name="productName[]" class="input product-name-input" placeholder="Start typing product name..." autocomplete="off">
+                <div class="autocomplete-suggestions"></div>
+            </div>
+            <div class="field">
+                <label class="label">Product Type</label>
+                <input type="text" name="productType[]" class="input product-type-input" readonly placeholder="Auto-filled when product selected">
+            </div>
+            <div class="quantity-unit-grid">
+                <div class="field">
+                    <label class="label">Quantity Used</label>
+                    <input type="text" name="quantityUsed[]" class="input" placeholder="e.g., 50, 100, 2">
+                </div>
+                <div class="field">
+                    <label class="label">Unit</label>
+                    <input type="text" name="unit[]" class="input unit-input" placeholder="Auto-filled">
+                    <div class="unit-pills"></div>
+                </div>
+            </div>
+        </div>
+        <div class="entry-controls">
+            <button type="button" class="btn btn-error remove-product-btn" aria-label="Remove product entry">Remove</button>
+        </div>
+    </div>
+</template>
+
+<template id="stylistTemplate">
+    <div class="stylist-entry">
+        <div class="grid-1">
+            <div class="field">
+                <label class="label">
+                    Stylist/Technician Name<span class="required">*</span>
+                </label>
+                <input type="text" name="stylistName[]" class="input stylist-name-input" required placeholder="Start typing stylist name..." autocomplete="off">
+                <div class="autocomplete-suggestions"></div>
+            </div>
+            <div class="field">
+                <label class="label">Incentive Split (₹)</label>
+                <input type="number" name="incentiveSplit[]" class="input stylist-incentive-input" step="0.01" placeholder="Incentive amount">
+            </div>
+        </div>
+        <div class="entry-controls">
+            <button type="button" class="btn btn-error remove-stylist-btn" aria-label="Remove stylist entry">Remove</button>
+        </div>
+    </div>
+</template>
+
+<template id="productSaleTemplate">
+    <div class="product-sale-entry">
+        <div class="grid-1">
+            <div class="field">
+                <label class="label">Product Name</label>
+                <input type="text" name="saleProductName[]" class="input sale-product-name-input" placeholder="Start typing product name..." autocomplete="off">
+                <div class="autocomplete-suggestions"></div>
+            </div>
+            <div class="field">
+                <label class="label">Stylist/Technician</label>
+                <input type="text" name="saleStylistName[]" class="input sale-stylist-name-input" placeholder="Start typing stylist name..." autocomplete="off">
+                <div class="autocomplete-suggestions"></div>
+            </div>
+            <div class="field">
+                <label class="label">Price (₹)</label>
+                <input type="number" name="salePrice[]" class="input sale-price-input" step="0.01" placeholder="0.00" min="0">
+            </div>
+        </div>
+        <div class="entry-controls">
+            <button type="button" class="btn btn-error remove-product-sale-btn" aria-label="Remove product sale entry">Remove</button>
+        </div>
+    </div>
+</template>
+
+<script>
+(function() {
+    'use strict';
+    
+    const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQwMeJAvIhiingIL1otFVM08kZedwZKC-u3uXplgXJmwcBlcWRFGuMQbcH-gSLu7Iqr-GFSyLKTxJdO/pub?gid=970040881&single=true&output=csv";
+    
+    // REPLACE WITH YOUR GOOGLE APPS SCRIPT WEB APP URL
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbynE1KRwABodBVmrzC3jep5LweAP0B53pUPW89PgL_EGrx8IKH5ikMj2EN3QWY6a2ZThQ/exec';
+    
+    let products = [];
+    let stylists = [];
+    let consultationIds = [];
+    let saleProducts = [];
+    let salePrices = [];
+    
+    // Signature Pad functionality
+    let signaturePad = null;
+    let isDrawing = false;
+    let signatureData = [];
+    
+    // Photo storage (only before photo)
+    let beforePhotoData = null;
+    let afterPhotoData = null;
+    let isFormSubmitting = false;
+    
+    // Unique Submit ID generator
+    function generateSubmitId() {
+        const timestamp = new Date().toISOString().replace(/[-:.]/g, '').slice(0, 15);
+        const random = Math.random().toString(36).substr(2, 4).toUpperCase();
+        return `SLN${timestamp}${random}`;
+    }
+    
+    const SalonForm = {
+        init() {
+            this.setInitialDate();
+            this.bindEvents();
+            this.updateTotalCost();
+            this.loadProducts();
+            this.initSignaturePad();
+            this.initPhotoHandlers();
+            
+            // ✅ ADD REMOVE BUTTON FUNCTIONALITY
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.remove-product-btn')) {
+                    alert('Remove product clicked!'); // DEBUG
+                    const entry = e.target.closest('.product-entry');
+                    const allEntries = document.querySelectorAll('.product-entry');
+                    if (allEntries.length > 1) {
+                        entry.remove();
+                        SalonForm.showToast('Product removed', 'success');
+                    } else {
+                        SalonForm.showToast('At least one product is required', 'error');
+                    }
+                }
+                
+                if (e.target.closest('.remove-stylist-btn')) {
+                    alert('Remove stylist clicked!'); // DEBUG
+                    const entry = e.target.closest('.stylist-entry');
+                    const allEntries = document.querySelectorAll('.stylist-entry');
+                    if (allEntries.length > 1) {
+                        entry.remove();
+                        SalonForm.updateTotalCost();
+                        SalonForm.showToast('Stylist removed', 'success');
+                    } else {
+                        SalonForm.showToast('At least one stylist is required', 'error');
+                    }
+                }
+                
+                if (e.target.closest('.remove-product-sale-btn')) {
+                    alert('Remove product sale clicked!'); // DEBUG
+                    const entry = e.target.closest('.product-sale-entry');
+                    const allEntries = document.querySelectorAll('.product-sale-entry');
+                    if (allEntries.length > 1) {
+                        entry.remove();
+                        SalonForm.showToast('Product sale removed', 'success');
+                    } else {
+                        SalonForm.showToast('At least one product sale is required', 'error');
+                    }
+                }
+            });
+        },
+
+        initPhotoHandlers() {
+            const beforeInput = document.getElementById('beforePhoto');
+            if (beforeInput) beforeInput.addEventListener('change', (e) => this.handlePhotoSelection(e, 'before'));
+            const afterInput = document.getElementById('afterPhoto');
+            if (afterInput) afterInput.addEventListener('change', (e) => this.handlePhotoSelection(e, 'after'));
+        },
+
+        handlePhotoSelection(event, type) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            // Validate file size (max 5MB)
+            if (file.size > 5 * 1024 * 1024) {
+                this.showToast('Photo file size must be less than 5MB', 'error');
+                return;
+            }
+            
+            // Validate file type
+            if (!file.type.startsWith('image/')) {
+                this.showToast('Please select a valid image file', 'error');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const photoData = e.target.result;
+                if (type === 'before') {
+                    beforePhotoData = photoData;
+                } else if (type === 'after') {
+                    afterPhotoData = photoData;
+                }
+                this.displayPhotoPreview(type, photoData, !isFormSubmitting);
+            };
+            reader.readAsDataURL(file);
+        },
+
+        displayPhotoPreview(type, photoData, showToast = true) {
+            const preview = document.getElementById(`${type}PhotoPreview`);
+            const box = document.getElementById(`${type}PhotoBox`);
+            const controls = box.querySelector('.photo-controls');
+            const uploadText = box.querySelector('.photo-upload-text');
+            const uploadIcon = box.querySelector('.photo-upload-icon');
+            
+            preview.src = photoData;
+            preview.style.display = 'block';
+            controls.style.display = 'flex';
+            uploadText.style.display = 'none';
+            uploadIcon.style.display = 'none';
+            box.classList.add('has-photo');
+            
+            if (showToast) {
+                this.showToast(`${type.charAt(0).toUpperCase() + type.slice(1)} photo uploaded successfully!`, 'success');
+            }
+        },
+
+        retakePhoto(type) {
+            const input = document.getElementById(`${type}Photo`);
+            input.click();
+        },
+
+        removePhoto(type) {
+            const preview = document.getElementById(`${type}PhotoPreview`);
+            const box = document.getElementById(`${type}PhotoBox`);
+            const controls = box.querySelector('.photo-controls');
+            const uploadText = box.querySelector('.photo-upload-text');
+            const uploadIcon = box.querySelector('.photo-upload-icon');
+            const input = document.getElementById(`${type}Photo`);
+            
+            preview.style.display = 'none';
+            preview.src = '';
+            controls.style.display = 'none';
+            uploadText.style.display = 'block';
+            uploadIcon.style.display = 'block';
+            box.classList.remove('has-photo');
+            input.value = '';
+            
+            if (type === 'before') {
+                beforePhotoData = null;
+            } else if (type === 'after') {
+                afterPhotoData = null;
+            }
+            this.showToast(`${type.charAt(0).toUpperCase() + type.slice(1)} photo removed`, 'success');
+        },
+
+        removePhotoSilently(type) {
+            const preview = document.getElementById(`${type}PhotoPreview`);
+            const box = document.getElementById(`${type}PhotoBox`);
+            const controls = box.querySelector('.photo-controls');
+            const uploadText = box.querySelector('.photo-upload-text');
+            const uploadIcon = box.querySelector('.photo-upload-icon');
+            const input = document.getElementById(`${type}Photo`);
+            
+            preview.style.display = 'none';
+            preview.src = '';
+            controls.style.display = 'none';
+            uploadText.style.display = 'block';
+            uploadIcon.style.display = 'block';
+            box.classList.remove('has-photo');
+            input.value = '';
+            
+            if (type === 'before') {
+                beforePhotoData = null;
+            } else if (type === 'after') {
+                afterPhotoData = null;
+            }
+            // No toast message for silent removal
+        },
+
+        initSignaturePad() {
+            const canvas = document.getElementById('signaturePad');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas size
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+            
+            // Set up drawing context
+            ctx.strokeStyle = '#0F172A';
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            
+            // Drawing event listeners
+            canvas.addEventListener('mousedown', this.startDrawing.bind(this));
+            canvas.addEventListener('mousemove', this.draw.bind(this));
+            canvas.addEventListener('mouseup', this.stopDrawing.bind(this));
+            canvas.addEventListener('mouseout', this.stopDrawing.bind(this));
+            
+            // Touch events for mobile
+            canvas.addEventListener('touchstart', this.handleTouchStart.bind(this));
+            canvas.addEventListener('touchmove', this.handleTouchMove.bind(this));
+            canvas.addEventListener('touchend', this.stopDrawing.bind(this));
+            
+            // Control buttons
+            document.getElementById('clearSignature').addEventListener('click', this.clearSignature.bind(this));
+            document.getElementById('undoSignature').addEventListener('click', this.undoSignature.bind(this));
+            
+            signaturePad = ctx;
+        },
+
+        startDrawing(e) {
+            isDrawing = true;
+            const rect = e.target.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            signaturePad.beginPath();
+            signaturePad.moveTo(x, y);
+            
+            // Save state for undo
+            this.saveSignatureState();
+        },
+
+        draw(e) {
+            if (!isDrawing) return;
+            
+            const rect = e.target.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            signaturePad.lineTo(x, y);
+            signaturePad.stroke();
+            
+            this.updateSignatureStatus();
+        },
+
+        stopDrawing() {
+            isDrawing = false;
+            signaturePad.beginPath();
+        },
+
+        handleTouchStart(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const mouseEvent = new MouseEvent('mousedown', {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            });
+            e.target.dispatchEvent(mouseEvent);
+        },
+
+        handleTouchMove(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const mouseEvent = new MouseEvent('mousemove', {
+                clientX: touch.clientX,
+                clientY: touch.clientY
+            });
+            e.target.dispatchEvent(mouseEvent);
+        },
+
+        saveSignatureState() {
+            const canvas = document.getElementById('signaturePad');
+            signatureData.push(canvas.toDataURL());
+            
+            // Keep only last 10 states for performance
+            if (signatureData.length > 10) {
+                signatureData.shift();
+            }
+        },
+
+        clearSignature() {
+            const canvas = document.getElementById('signaturePad');
+            signaturePad.clearRect(0, 0, canvas.width, canvas.height);
+            signatureData = [];
+            this.updateSignatureStatus();
+            this.clearSignatureError();
+        },
+
+        undoSignature() {
+            if (signatureData.length > 1) {
+                signatureData.pop(); // Remove current state
+                const previousState = signatureData[signatureData.length - 1];
+                
+                const canvas = document.getElementById('signaturePad');
+                const img = new Image();
+                img.onload = () => {
+                    signaturePad.clearRect(0, 0, canvas.width, canvas.height);
+                    signaturePad.drawImage(img, 0, 0);
+                    this.updateSignatureStatus();
+                };
+                img.src = previousState;
+            } else {
+                this.clearSignature();
+            }
+        },
+
+        updateSignatureStatus() {
+            const canvas = document.getElementById('signaturePad');
+            const isEmpty = this.isSignatureEmpty(canvas);
+            const statusElement = document.getElementById('signatureStatus');
+            
+            if (isEmpty) {
+                statusElement.className = 'signature-status empty';
+                statusElement.textContent = '⚠️ Please provide your signature';
+            } else {
+                statusElement.className = 'signature-status signed';
+                statusElement.textContent = '✅ Signature captured successfully';
+            }
+        },
+
+        isSignatureEmpty(canvas) {
+            const ctx = canvas.getContext('2d');
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            
+            for (let i = 0; i < imageData.data.length; i += 4) {
+                // Check if any pixel has been modified (not transparent)
+                if (imageData.data[i + 3] !== 0) {
+                    return false;
+                }
+            }
+            return true;
+        },
+
+        validateSignature() {
+            const canvas = document.getElementById('signaturePad');
+            const isEmpty = this.isSignatureEmpty(canvas);
+            
+            if (isEmpty) {
+                this.showSignatureError('Please provide your digital signature');
+                return false;
+            }
+            
+            this.clearSignatureError();
+            return true;
+        },
+
+        showSignatureError(message) {
+            const errorElement = document.getElementById('signature-error');
+            errorElement.textContent = message;
+            errorElement.classList.add('show');
+        },
+
+        clearSignatureError() {
+            const errorElement = document.getElementById('signature-error');
+            errorElement.classList.remove('show');
+        },
+
+        getSignatureData() {
+            const canvas = document.getElementById('signaturePad');
+            return canvas.toDataURL();
+        },
+
+        async loadProducts() {
+            try {
+                const response = await fetch(CSV_URL);
+                const csvText = await response.text();
+                const parsed = this.parseCSV(csvText);
+                products = parsed.products;
+                stylists = parsed.stylists;
+                consultationIds = parsed.consultationIds;
+                saleProducts = parsed.saleProducts;
+                salePrices = parsed.salePrices;
+                console.log('Loaded sale products:', saleProducts);
+                console.log('Loaded sale prices:', salePrices);
+                            this.setupAutocomplete();
+            this.setupInitialUnitSuggestions();
+            this.setupStylistAutocomplete();
+            this.setupProductSaleAutocomplete();
+            this.setupConsultationIdAutocomplete();
+                console.log(`Loaded ${products.length} products, ${stylists.length} stylists, ${consultationIds.length} consultation IDs, ${saleProducts.length} sale products from Google Sheets`);
+            } catch (error) {
+                console.error('Failed to load data:', error);
+                this.showToast('Failed to load data. Autocomplete will be limited.', 'error');
+            }
+        },
+
+        parseCSV(text) {
+            const lines = text.trim().split('\n');
+            const parsedProducts = [];
+            const parsedStylists = [];
+            const parsedConsultationIds = [];
+            const parsedSaleProducts = [];
+            const salePrices = {};
+            let headerSkipped = false;
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (!line) continue;
+                // Simple CSV parsing - handles quoted fields
+                const fields = [];
+                let current = '';
+                let inQuotes = false;
+                for (let j = 0; j < line.length; j++) {
+                    const char = line[j];
+                    if (char === '"') {
+                        inQuotes = !inQuotes;
+                    } else if (char === ',' && !inQuotes) {
+                        fields.push(current.trim());
+                        current = '';
+                    } else {
+                        current += char;
+                    }
+                }
+                fields.push(current.trim());
+                // Skip header row (first row)
+                if (!headerSkipped) {
+                    headerSkipped = true;
+                    continue;
+                }
+                // Column mapping: B=Product Name, C=Product Type, E=Unit, J=Stylist Name, R=Consultation ID, L=Sale Product Name, M=Sale Price
+                const productName = fields[1] ? fields[1].replace(/^"|"$/g, '').trim() : '';
+                const productType = fields[2] ? fields[2].replace(/^"|"$/g, '').trim() : '';
+                const unit = fields[4] ? fields[4].replace(/^"|"$/g, '').trim() : '';
+                const stylistName = fields[9] ? fields[9].replace(/^"|"$/g, '').trim() : '';
+                const consultationId = fields[17] ? fields[17].replace(/^"|"$/g, '').trim() : '';
+                const saleProductName = fields[11] ? fields[11].replace(/^"|"$/g, '').trim() : ''; // Column L (index 11)
+                const salePrice = fields[12] ? fields[12].replace(/^"|"$/g, '').trim() : ''; // Column M (index 12)
+                // Add product if valid
+                if (productName && productType && productName !== 'Product Name') {
+                    parsedProducts.push({ 
+                        name: productName, 
+                        type: productType, 
+                        unit: unit || 'ml'
+                    });
+                }
+                // Add stylist if valid and unique
+                if (stylistName && stylistName.toLowerCase() !== 'stylist name' && !parsedStylists.includes(stylistName)) {
+                    parsedStylists.push(stylistName);
+                }
+                // Add consultation ID if valid and unique
+                if (consultationId && !parsedConsultationIds.includes(consultationId)) {
+                    parsedConsultationIds.push(consultationId);
+                }
+                
+                // Add sale product if valid and unique
+                if (saleProductName && saleProductName !== 'Product Name' && saleProductName !== '' && !parsedSaleProducts.includes(saleProductName)) {
+                    parsedSaleProducts.push(saleProductName);
+                    console.log('Added sale product:', saleProductName);
+                }
+                
+                // Add sale price if valid
+                if (salePrice && salePrice !== 'Price (₹)' && salePrice !== '' && saleProductName) {
+                    salePrices[saleProductName] = salePrice;
+                    console.log('Added sale price for', saleProductName, ':', salePrice);
+                }
+            }
+            console.log('Consultation IDs loaded:', parsedConsultationIds);
+            return {
+                products: parsedProducts,
+                stylists: parsedStylists,
+                consultationIds: parsedConsultationIds,
+                saleProducts: parsedSaleProducts,
+                salePrices: salePrices
+            };
+        },
+
+        setupAutocomplete() {
+            document.querySelectorAll('.product-name-input').forEach(input => {
+                this.bindAutocomplete(input);
+            });
+        },
+
+        setupStylistAutocomplete() {
+            document.querySelectorAll('.stylist-name-input').forEach(input => {
+                this.bindStylistAutocomplete(input);
+            });
+        },
+
+        setupProductSaleAutocomplete() {
+            console.log('Setting up Product Sale autocomplete');
+            const saleProductInputs = document.querySelectorAll('.sale-product-name-input');
+            console.log('Found sale product inputs:', saleProductInputs.length);
+            saleProductInputs.forEach(input => {
+                this.bindSaleProductAutocomplete(input);
+            });
+            document.querySelectorAll('.sale-stylist-name-input').forEach(input => {
+                this.bindStylistAutocomplete(input);
+            });
+        },
+
+        setupConsultationIdAutocomplete() {
+            document.querySelectorAll('#consultationId').forEach(input => {
+                this.bindConsultationIdAutocomplete(input);
+            });
+        },
+
+        setupInitialUnitSuggestions() {
+            document.querySelectorAll('.unit-input').forEach(input => {
+                this.bindUnitSuggestions(input);
+            });
+        },
+
+        bindAutocomplete(input) {
+            const suggestionBox = input.nextElementSibling;
+            const productEntry = input.closest('.product-entry');
+            const productTypeInput = productEntry.querySelector('.product-type-input');
+            const unitInput = productEntry.querySelector('.unit-input');
+            
+            input.addEventListener('input', (e) => {
+                const value = e.target.value.toLowerCase();
+                suggestionBox.innerHTML = '';
+                
+                if (!value) {
+                    suggestionBox.style.display = 'none';
+                    return;
+                }
+                
+                const matches = products
+                    .filter(p => p.name.toLowerCase().includes(value))
+                    .slice(0, 8);
+                
+                if (matches.length === 0) {
+                    suggestionBox.style.display = 'none';
+                    return;
+                }
+                
+                matches.forEach(product => {
+                    const option = document.createElement('div');
+                    option.className = 'autocomplete-suggestion';
+                    
+                    const nameIndex = product.name.toLowerCase().indexOf(value);
+                    let displayName = product.name;
+                    if (nameIndex !== -1) {
+                        displayName = product.name.substring(0, nameIndex) + 
+                                    '<strong>' + product.name.substring(nameIndex, nameIndex + value.length) + '</strong>' +
+                                    product.name.substring(nameIndex + value.length);
+                    }
+                    
+                    option.innerHTML = `${displayName}<span class="product-type">${product.type}</span>`;
+                    
+                    option.addEventListener('click', () => {
+                        input.value = product.name;
+                        productTypeInput.value = product.type;
+                        unitInput.value = product.unit;
+                        suggestionBox.innerHTML = '';
+                        suggestionBox.style.display = 'none';
+                        
+                        this.updateUnitSuggestions(unitInput, product);
+                    });
+                    
+                    suggestionBox.appendChild(option);
+                });
+                
+                suggestionBox.style.display = 'block';
+            });
+            
+            this.addKeyboardAndClickHandlers(input, suggestionBox);
+        },
+
+        bindSaleProductAutocomplete(input) {
+            console.log('Setting up sale product autocomplete for:', input);
+            const suggestionBox = input.nextElementSibling;
+            const productSaleEntry = input.closest('.product-sale-entry');
+            const priceInput = productSaleEntry.querySelector('.sale-price-input');
+            
+            input.addEventListener('input', (e) => {
+                const value = e.target.value.toLowerCase();
+                console.log('Sale product input:', value);
+                suggestionBox.innerHTML = '';
+                
+                if (!value) {
+                    suggestionBox.style.display = 'none';
+                    return;
+                }
+                
+                // Check if saleProducts array exists
+                if (!saleProducts || !Array.isArray(saleProducts)) {
+                    console.warn('saleProducts array not available for autocomplete');
+                    console.log('saleProducts:', saleProducts);
+                    return;
+                }
+                
+                const matches = saleProducts
+                    .filter(name => name && name.toLowerCase().includes(value))
+                    .slice(0, 8);
+                
+                if (matches.length === 0) {
+                    suggestionBox.style.display = 'none';
+                    return;
+                }
+                
+                matches.forEach(productName => {
+                    const option = document.createElement('div');
+                    option.className = 'autocomplete-suggestion';
+                    
+                    const nameIndex = productName.toLowerCase().indexOf(value);
+                    let displayName = productName;
+                    if (nameIndex !== -1) {
+                        displayName = productName.substring(0, nameIndex) + 
+                                    '<strong>' + productName.substring(nameIndex, nameIndex + value.length) + '</strong>' +
+                                    productName.substring(nameIndex + value.length);
+                    }
+                    
+                    option.innerHTML = displayName;
+                    
+                    option.addEventListener('click', () => {
+                        input.value = productName;
+                        // Auto-fill price if available
+                        if (salePrices && salePrices[productName] && priceInput) {
+                            priceInput.value = salePrices[productName];
+                            // Trigger total calculation when price is auto-filled
+                            this.updateSaleTotal();
+                        }
+                        suggestionBox.innerHTML = '';
+                        suggestionBox.style.display = 'none';
+                    });
+                    
+                    suggestionBox.appendChild(option);
+                });
+                
+                suggestionBox.style.display = 'block';
+            });
+            
+            this.addKeyboardAndClickHandlers(input, suggestionBox);
+        },
+
+        bindStylistAutocomplete(input) {
+            const suggestionBox = input.nextElementSibling;
+            
+            input.addEventListener('input', (e) => {
+                const value = e.target.value.toLowerCase();
+                suggestionBox.innerHTML = '';
+                
+                if (!value) {
+                    suggestionBox.style.display = 'none';
+                    return;
+                }
+                
+                const matches = stylists
+                    .filter(name => name.toLowerCase().includes(value))
+                    .slice(0, 6);
+                
+                if (matches.length === 0) {
+                    suggestionBox.style.display = 'none';
+                    return;
+                }
+                
+                matches.forEach(stylistName => {
+                    const option = document.createElement('div');
+                    option.className = 'autocomplete-suggestion';
+                    
+                    const nameIndex = stylistName.toLowerCase().indexOf(value);
+                    let displayName = stylistName;
+                    if (nameIndex !== -1) {
+                        displayName = stylistName.substring(0, nameIndex) + 
+                                    '<strong>' + stylistName.substring(nameIndex, nameIndex + value.length) + '</strong>' +
+                                    stylistName.substring(nameIndex + value.length);
+                    }
+                    
+                    option.innerHTML = displayName;
+                    
+                    option.addEventListener('click', () => {
+                        input.value = stylistName;
+                        suggestionBox.innerHTML = '';
+                        suggestionBox.style.display = 'none';
+                    });
+                    
+                    suggestionBox.appendChild(option);
+                });
+                
+                suggestionBox.style.display = 'block';
+            });
+            
+            this.addKeyboardAndClickHandlers(input, suggestionBox);
+        },
+
+        bindConsultationIdAutocomplete(input) {
+            const suggestionBox = input.nextElementSibling;
+            
+            input.addEventListener('input', (e) => {
+                const value = e.target.value.toLowerCase();
+                suggestionBox.innerHTML = '';
+                
+                if (!value) {
+                    suggestionBox.style.display = 'none';
+                    return;
+                }
+                
+                const matches = consultationIds
+                    .filter(id => id.toLowerCase().includes(value))
+                    .slice(0, 6);
+                
+                if (matches.length === 0) {
+                    suggestionBox.style.display = 'none';
+                    return;
+                }
+                
+                matches.forEach(id => {
+                    const option = document.createElement('div');
+                    option.className = 'autocomplete-suggestion';
+                    
+                    const idIndex = id.toLowerCase().indexOf(value);
+                    let displayName = id;
+                    if (idIndex !== -1) {
+                        displayName = id.substring(0, idIndex) + 
+                                    '<strong>' + id.substring(idIndex, idIndex + value.length) + '</strong>' +
+                                    id.substring(idIndex + value.length);
+                    }
+                    
+                    option.innerHTML = displayName;
+                    
+                    option.addEventListener('click', () => {
+                        input.value = id;
+                        suggestionBox.innerHTML = '';
+                        suggestionBox.style.display = 'none';
+                    });
+                    
+                    suggestionBox.appendChild(option);
+                });
+                
+                suggestionBox.style.display = 'block';
+            });
+            
+            this.addKeyboardAndClickHandlers(input, suggestionBox);
+        },
+
+        addKeyboardAndClickHandlers(input, suggestionBox) {
+            input.addEventListener('keydown', (e) => {
+                const suggestions = suggestionBox.querySelectorAll('.autocomplete-suggestion');
+                if (e.key === 'Enter' && suggestions.length > 0) {
+                    e.preventDefault();
+                    suggestions[0].click();
+                } else if (e.key === 'Escape') {
+                    suggestionBox.style.display = 'none';
+                }
+            });
+            
+            document.addEventListener('click', (e) => {
+                if (!input.contains(e.target) && !suggestionBox.contains(e.target)) {
+                    suggestionBox.style.display = 'none';
+                }
+            });
+        },
+
+        bindUnitSuggestions(unitInput) {
+            const unitPills = unitInput.nextElementSibling;
+            this.updateUnitSuggestions(unitInput, null);
+            
+            unitInput.addEventListener('focus', () => {
+                unitPills.style.display = 'flex';
+            });
+        },
+
+        updateUnitSuggestions(unitInput, selectedProduct) {
+            const unitPills = unitInput.nextElementSibling;
+            unitPills.innerHTML = '';
+            
+            const allUnits = [...new Set(products.map(p => p.unit).filter(Boolean))];
+            
+            let suggestedUnits = [];
+            if (selectedProduct && selectedProduct.unit) {
+                suggestedUnits = [selectedProduct.unit];
+                allUnits.forEach(unit => {
+                    if (!suggestedUnits.includes(unit)) {
+                        suggestedUnits.push(unit);
+                    }
+                });
+            } else {
+                suggestedUnits = allUnits;
+            }
+            
+            suggestedUnits.slice(0, 8).forEach((unit, index) => {
+                const pill = document.createElement('button');
+                pill.type = 'button';
+                pill.className = 'unit-pill';
+                pill.textContent = unit;
+                
+                if (selectedProduct && unit === selectedProduct.unit) {
+                    pill.classList.add('exact-match');
+                }
+                
+                pill.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    unitInput.value = unit;
+                    unitPills.style.display = 'none';
+                });
+                
+                unitPills.appendChild(pill);
+            });
+        },
+
+        setInitialDate() {
+            const today = new Date();
+            const yesterday = new Date(today);
+            yesterday.setDate(yesterday.getDate() - 1);
+            const nextMonth = new Date(today);
+            nextMonth.setMonth(nextMonth.getMonth() + 1);
+            
+            const visitDateInput = document.getElementById('visitDate');
+            visitDateInput.valueAsDate = today;
+            visitDateInput.min = yesterday.toISOString().split('T')[0];
+            visitDateInput.max = nextMonth.toISOString().split('T')[0];
+        },
+
+        bindEvents() {
+            const form = document.getElementById('salonForm');
+            form.addEventListener('submit', this.handleSubmit.bind(this));
+            
+            document.getElementById('addProductBtn').addEventListener('click', () => {
+                this.addProductEntry();
+            });
+            
+            document.getElementById('addStylistBtn').addEventListener('click', () => {
+                this.addStylistEntry();
+            });
+            
+            document.getElementById('addProductSaleBtn').addEventListener('click', () => {
+                this.addProductSaleEntry();
+            });
+            
+            document.querySelectorAll('.stylist-incentive-input').forEach(input => {
+                input.addEventListener('input', this.updateTotalCost.bind(this));
+            });
+            
+            document.getElementById('stylistContainer').addEventListener('input', (e) => {
+                if (e.target && e.target.classList.contains('stylist-incentive-input')) {
+                    this.updateTotalCost();
+                }
+            });
+
+            // Add event listeners for sale price inputs
+            document.querySelectorAll('.sale-price-input').forEach(input => {
+                input.addEventListener('input', this.updateSaleTotal.bind(this));
+            });
+            
+            document.getElementById('productSaleContainer').addEventListener('input', (e) => {
+                if (e.target && e.target.classList.contains('sale-price-input')) {
+                    this.updateSaleTotal();
+                }
+            });
+            
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.field')) {
+                    document.querySelectorAll('.unit-pills').forEach(pills => {
+                        pills.style.display = 'none';
+                    });
+                    document.querySelectorAll('.autocomplete-suggestions').forEach(suggestions => {
+                        suggestions.style.display = 'none';
+                    });
+                }
+            });
+            
+            form.addEventListener('input', this.clearFieldError.bind(this));
+            form.addEventListener('change', this.clearFieldError.bind(this));
+        },
+
+        addProductEntry() {
+            const container = document.getElementById('productContainer');
+            const template = document.getElementById('productTemplate');
+            const clone = document.importNode(template.content, true);
+            
+            container.appendChild(clone);
+            
+            const addedEntry = container.lastElementChild;
+            const newProductInput = addedEntry.querySelector('.product-name-input');
+            const newUnitInput = addedEntry.querySelector('.unit-input');
+            
+            this.bindAutocomplete(newProductInput);
+            this.bindUnitSuggestions(newUnitInput);
+            // DEBUG LOGS
+            console.log('Added product row:', addedEntry);
+            console.log('All .remove-product-btn:', document.querySelectorAll('.remove-product-btn'));
+        },
+
+        addStylistEntry() {
+            const container = document.getElementById('stylistContainer');
+            const template = document.getElementById('stylistTemplate');
+            const clone = document.importNode(template.content, true);
+            
+            const count = container.querySelectorAll('.stylist-entry').length;
+            const inputs = clone.querySelectorAll('input');
+            inputs.forEach((input, index) => {
+                if (input.type === 'text') {
+                    input.id = `stylistName${count}`;
+                } else if (input.type === 'number') {
+                    input.id = `incentiveSplit${count}`;
+                }
+            });
+            
+            container.appendChild(clone);
+            
+            const addedEntry = container.lastElementChild;
+            const newStylistInput = addedEntry.querySelector('.stylist-name-input');
+            this.bindStylistAutocomplete(newStylistInput);
+            
+            this.updateTotalCost();
+            // DEBUG LOGS
+            console.log('Added stylist row:', addedEntry);
+            console.log('All .remove-stylist-btn:', document.querySelectorAll('.remove-stylist-btn'));
+        },
+
+        addProductSaleEntry() {
+            const container = document.getElementById('productSaleContainer');
+            const template = document.getElementById('productSaleTemplate');
+            const clone = document.importNode(template.content, true);
+            
+            container.appendChild(clone);
+            
+            const addedEntry = container.lastElementChild;
+            const newProductInput = addedEntry.querySelector('.sale-product-name-input');
+            const newStylistInput = addedEntry.querySelector('.sale-stylist-name-input');
+            
+            this.bindSaleProductAutocomplete(newProductInput);
+            this.bindStylistAutocomplete(newStylistInput);
+            
+            // Add event listener for the new sale price input
+            const newPriceInput = addedEntry.querySelector('.sale-price-input');
+            if (newPriceInput) {
+                newPriceInput.addEventListener('input', this.updateSaleTotal.bind(this));
+            }
+            
+            // DEBUG LOGS
+            console.log('Added product sale row:', addedEntry);
+            console.log('All .remove-product-sale-btn:', document.querySelectorAll('.remove-product-sale-btn'));
+        },
+
+        updateTotalCost() {
+            const incentiveInputs = document.querySelectorAll('.stylist-incentive-input');
+            let total = 0;
+            incentiveInputs.forEach(input => {
+                const val = parseFloat(input.value);
+                if (!isNaN(val)) {
+                    total += val;
+                }
+            });
+            document.getElementById('totalCost').value = total.toFixed(2);
+        },
+
+        updateSaleTotal() {
+            const salePriceInputs = document.querySelectorAll('.sale-price-input');
+            let total = 0;
+            salePriceInputs.forEach(input => {
+                const val = parseFloat(input.value);
+                if (!isNaN(val)) {
+                    total += val;
+                }
+            });
+            const saleTotalInput = document.querySelector('.sale-total-input');
+            if (saleTotalInput) {
+                saleTotalInput.value = total.toFixed(2);
+            }
+            console.log('Updated sale total:', total.toFixed(2));
+        },
+
+        validateField(field) {
+            const value = field.value.trim();
+            let isValid = true;
+            let errorMessage = '';
+
+            field.classList.remove('error');
+            
+            if (field.hasAttribute('required') && !value) {
+                isValid = false;
+                errorMessage = `${this.getFieldLabel(field)} is required`;
+            } else if (field.type === 'email' && value && !this.isValidEmail(value)) {
+                isValid = false;
+                errorMessage = 'Please enter a valid email address';
+            } else if (field.type === 'tel' && value && value.length < 10) {
+                isValid = false;
+                errorMessage = 'Please enter a valid phone number';
+            }
+
+            if (!isValid) {
+                this.showFieldError(field, errorMessage);
+            }
+
+            return isValid;
+        },
+
+        validateServices() {
+            const services = document.querySelectorAll('input[name="services"]:checked');
+            if (services.length === 0) {
+                this.showFieldError(document.querySelector('input[name="services"]'), 'Please select at least one service');
+                return false;
+            }
+            return true;
+        },
+
+        validateConsent() {
+            const consent = document.querySelector('input[name="consent"]:checked');
+            if (!consent) {
+                this.showFieldError(document.querySelector('input[name="consent"]'), 'Please select your consent preference');
+                return false;
+            }
+            return true;
+        },
+
+        showFieldError(field, message) {
+            field.classList.add('error');
+            const errorElement = document.getElementById(`${field.id || field.name}-error`) || 
+                               document.getElementById('services-error') ||
+                               document.getElementById('consent-error');
+            if (errorElement) {
+                errorElement.textContent = message;
+                errorElement.classList.add('show');
+            }
+        },
+
+        clearFieldError(e) {
+            const field = e.target;
+            field.classList.remove('error');
+            const errorElement = document.getElementById(`${field.id || field.name}-error`);
+            if (errorElement) {
+                errorElement.classList.remove('show');
+            }
+            
+            if (field.name === 'services') {
+                const servicesError = document.getElementById('services-error');
+                if (servicesError) {
+                    servicesError.classList.remove('show');
+                }
+            }
+            
+            if (field.name === 'consent') {
+                const consentError = document.getElementById('consent-error');
+                if (consentError) {
+                    consentError.classList.remove('show');
+                }
+            }
+        },
+
+        getFieldLabel(field) {
+            const label = document.querySelector(`label[for="${field.id}"]`);
+            return label ? label.textContent.replace('*', '').trim() : field.name;
+        },
+
+        isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        },
+
+        async handleSubmit(e) {
+            e.preventDefault();
+            
+            const form = e.target;
+            const submitButton = form.querySelector('.btn-submit');
+            const formType = form.id === 'salonForm' ? 'consultation' : 'consumption';
+            
+            submitButton.classList.add('loading');
+            submitButton.textContent = 'Saving...';
+            isFormSubmitting = true;
+            
+            let isValid = true;
+            
+            // Validate consent first (only for consultation form)
+            if (formType === 'consultation') {
+                if (!this.validateConsent()) {
+                    isValid = false;
+                }
+                
+                // Validate signature (only for consultation form)
+                if (!this.validateSignature()) {
+                    isValid = false;
+                }
+            }
+            
+            // Validate required fields
+            const requiredFields = form.querySelectorAll('[required]');
+            requiredFields.forEach(field => {
+                if (!this.validateField(field)) {
+                    isValid = false;
+                }
+            });
+            
+            // Validate email if provided
+            const emailField = document.getElementById('email');
+            if (emailField && emailField.value && !this.validateField(emailField)) {
+                isValid = false;
+            }
+            
+            // Validate services (only for consultation form)
+            if (formType === 'consultation' && !this.validateServices()) {
+                isValid = false;
+            }
+            
+            if (!isValid) {
+                submitButton.classList.remove('loading');
+                submitButton.innerHTML = formType === 'consultation' ? 
+                    '<span class="icon">💾</span> Save Client Record' : 
+                    '<span class="icon">💾</span> Save Consumption Record';
+                this.showToast('Please fix the errors above', 'error');
+                return;
+            }
+            
+            // Generate unique Submit ID
+            const submitId = generateSubmitId();
+            
+            // Show Submit ID to user
+            const submitIdDisplay = formType === 'consultation' ? 
+                document.getElementById('submitIdDisplay') : 
+                document.getElementById('submitIdDisplay2');
+            submitIdDisplay.textContent = `Submit ID: ${submitId}`;
+            submitIdDisplay.style.display = 'block';
+            
+            // Collect form data
+            const formData = new FormData(form);
+            const data = this.processFormData(formData);
+            
+            // Add form type and unique Submit ID
+            data.formType = formType;
+            data.submitId = submitId;
+            
+            // Add signature data and photos based on form type
+            if (formType === 'consultation') {
+                data.clientSignature = this.getSignatureData();
+                data.beforePhoto = beforePhotoData;
+            } else if (formType === 'consumption') {
+                data.afterPhoto = afterPhotoData;
+            }
+            
+            console.log(`Sending ${formType} data to Google Sheets with Submit ID:`, submitId, data);
+            
+            try {
+                const response = await fetch(APPS_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: 'formData=' + encodeURIComponent(JSON.stringify(data))
+                });
+                
+                // Always show success toast since no-cors doesn't give us response details
+                if (formType === 'consultation') {
+                    this.showToast(`✅ Client Consultation saved successfully! 📋\nSubmit ID: ${submitId}\nClient: ${data.clientName || 'N/A'}`, 'success');
+                } else if (formType === 'consumption') {
+                    this.showToast(`✅ Consumption Record saved successfully! 📊\nSubmit ID: ${submitId}\nConsultation ID: ${data.consultationId || 'N/A'}`, 'success');
+                }
+                
+                // Reset form after a short delay to ensure success message is shown first
+                setTimeout(() => {
+                    form.reset();
+                    if (formType === 'consultation') {
+                        this.setInitialDate();
+                        this.updateTotalCost();
+                        this.clearSignature();
+                        this.removePhotoSilently('before');
+                        this.removePhotoSilently('after');
+                    } else if (formType === 'consumption') {
+                        this.removePhotoSilently('after');
+                    }
+                }, 1000);
+                
+                // Keep Submit ID visible for reference
+                submitIdDisplay.textContent = `✅ Last Submit ID: ${submitId}`;
+                
+            } catch (error) {
+                console.error('Error saving to Google Sheets:', error);
+                // Even if there's an error, the data might have been saved due to no-cors mode
+                if (formType === 'consultation') {
+                    this.showToast(`⚠️ Client Consultation submitted (ID: ${submitId})\nPlease verify in Google Sheets\nClient: ${data.clientName || 'N/A'}`, 'success');
+                } else if (formType === 'consumption') {
+                    this.showToast(`⚠️ Consumption Record submitted (ID: ${submitId})\nPlease verify in Google Sheets\nConsultation ID: ${data.consultationId || 'N/A'}`, 'success');
+                }
+                
+                if (this.isDevelopment()) {
+                    console.log(`${formType} Form Data (fallback):`, data);
+                }
+            } finally {
+                submitButton.classList.remove('loading');
+                submitButton.innerHTML = formType === 'consultation' ? 
+                    '<span class="icon">💾</span> Save Client Record' : 
+                    '<span class="icon">💾</span> Save Consumption Record';
+                isFormSubmitting = false;
+            }
+        },
+
+        processFormData(formData) {
+            const data = {};
+            
+            for (let [key, value] of formData.entries()) {
+                if (key.endsWith('[]')) {
+                    const arrayKey = key.slice(0, -2);
+                    if (!data[arrayKey]) data[arrayKey] = [];
+                    data[arrayKey].push(value);
+                } else {
+                    data[key] = value;
+                }
+            }
+            
+            const services = [];
+            document.querySelectorAll('input[name="services"]:checked').forEach(cb => {
+                services.push(cb.value);
+            });
+            data.services = services;
+            
+            return data;
+        },
+
+        showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = `toast ${type}`;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 6000);
+        },
+
+        isDevelopment() {
+            return window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        }
+    };
+
+    window.SalonForm = SalonForm;
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => SalonForm.init());
+    } else {
+        SalonForm.init();
+    }
+})();
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('show-client-consultation').onclick = function() {
+        document.getElementById('form-chooser').style.display = 'none';
+        document.getElementById('client-consultation-section').style.display = 'block';
+        document.getElementById('consumption-form-section').style.display = 'none';
+        if (window.SalonForm && typeof SalonForm.initSignaturePad === 'function') {
+            setTimeout(function() { SalonForm.initSignaturePad(); }, 100);
+        }
+    };
+    document.getElementById('show-consumption-form').onclick = function() {
+        document.getElementById('form-chooser').style.display = 'none';
+        document.getElementById('client-consultation-section').style.display = 'none';
+        document.getElementById('consumption-form-section').style.display = 'block';
+    };
+
+    var consumptionForm = document.getElementById('consumptionForm');
+    if (consumptionForm) {
+        consumptionForm.addEventListener('submit', SalonForm.handleSubmit.bind(SalonForm));
+    }
+});
+</script>
+</body>
+</html>
