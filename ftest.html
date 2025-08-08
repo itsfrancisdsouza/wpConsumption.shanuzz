@@ -2935,7 +2935,7 @@
             
             try {
                 // Add rate limiting delay
-                await this.delay(CONFIG.RATE_LIMIT_DELAY);
+                await utils.delay(CONFIG.RATE_LIMIT_DELAY);
                 
                 // Retry logic with exponential backoff
                 let lastError;
@@ -2975,7 +2975,7 @@
                         if (attempt < CONFIG.MAX_RETRIES) {
                             // Wait before retry with exponential backoff
                             const delay = CONFIG.RETRY_DELAY * Math.pow(2, attempt - 1);
-                            await this.delay(delay);
+                            await utils.delay(delay);
                         }
                     }
                 }
