@@ -855,7 +855,7 @@
                 </div>
                 
                 <div class="signature-pad-wrapper">
-                    <canvas id="signaturePad" class="signature-pad" width="400" height="150"></canvas>
+                    <canvas id="signaturePad" class="signature-pad"></canvas>
                 </div>
                 
                 <div class="signature-controls">
@@ -1599,15 +1599,20 @@
                 return;
             }
             
-            // Set canvas size with proper scaling
-            const rect = canvas.getBoundingClientRect();
+            // Force canvas to have proper dimensions
+            const container = canvas.parentElement;
+            const containerRect = container.getBoundingClientRect();
+            
+            // Set canvas dimensions based on container or use default
+            const width = Math.max(containerRect.width, 400);
+            const height = 150;
             const dpr = window.devicePixelRatio || 1;
             
             // Set canvas dimensions
-            canvas.width = rect.width * dpr;
-            canvas.height = rect.height * dpr;
-            canvas.style.width = rect.width + 'px';
-            canvas.style.height = rect.height + 'px';
+            canvas.width = width * dpr;
+            canvas.height = height * dpr;
+            canvas.style.width = width + 'px';
+            canvas.style.height = height + 'px';
             
             // Scale context for high DPI displays
             ctx.scale(dpr, dpr);
@@ -1663,13 +1668,21 @@
             console.log('Signature pad initialized successfully');
             console.log('Canvas dimensions:', canvas.width, 'x', canvas.height);
             console.log('Canvas style dimensions:', canvas.style.width, 'x', canvas.style.height);
-            console.log('Canvas rect:', rect);
+            console.log('Container rect:', containerRect);
             
             // Test if canvas is visible and clickable
             setTimeout(() => {
                 const testRect = canvas.getBoundingClientRect();
                 console.log('Canvas test rect:', testRect);
                 console.log('Canvas is visible:', testRect.width > 0 && testRect.height > 0);
+                
+                // If canvas is still not visible, retry initialization
+                if (testRect.width === 0 || testRect.height === 0) {
+                    console.log('Canvas not visible, retrying initialization...');
+                    setTimeout(() => this.initSignaturePad(), 500);
+                } else {
+                    console.log('Canvas is properly initialized and visible');
+                }
             }, 100);
         },
 
@@ -2828,7 +2841,7 @@
         
         // Initialize signature pad with delay to ensure DOM is ready
         if (window.SalonForm && typeof SalonForm.initSignaturePad === 'function') {
-            setTimeout(() => SalonForm.initSignaturePad(), 100);
+            setTimeout(() => SalonForm.initSignaturePad(), 300);
         }
     }
     
