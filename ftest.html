@@ -2047,6 +2047,7 @@
                     continue;
                 }
                 // Column mapping: B=Product Name, C=Product Type, E=Unit, J=Stylist Name, R=Consultation ID, L=Sale Product Name, M=Sale Price
+                // Note: New columns added for Sale Product Name, Stylist/Technician, Price, Total Price in consumption sheet
                 const productName = fields[1] ? fields[1].replace(/^"|"$/g, '').trim() : '';
                 const productType = fields[2] ? fields[2].replace(/^"|"$/g, '').trim() : '';
                 const unit = fields[4] ? fields[4].replace(/^"|"$/g, '').trim() : '';
