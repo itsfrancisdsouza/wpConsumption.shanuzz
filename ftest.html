@@ -7,7 +7,6 @@
     <!-- Production Security Headers -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://script.google.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src https://docs.google.com https://script.google.com https://*.googleusercontent.com; font-src 'self' data:;">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="X-Frame-Options" content="DENY">
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
     <meta name="robots" content="noindex, nofollow">
@@ -1407,13 +1406,22 @@
          * Initialize the form application
          */
         init() {
-            this.setInitialDate();
-            this.bindEvents();
-            this.updateTotalCost();
-            this.loadProducts();
-            this.initSignaturePad();
-            this.initPhotoHandlers();
-            this.setupEventDelegation();
+            try {
+                this.setInitialDate();
+                this.bindEvents();
+                this.updateTotalCost();
+                this.loadProducts();
+                this.initSignaturePad();
+                this.initPhotoHandlers();
+                this.setupEventDelegation();
+                
+                if (utils.isDevelopment()) {
+                    console.log('Salon Form initialized successfully');
+                }
+            } catch (error) {
+                console.error('Error initializing Salon Form:', error);
+                this.showToast('Error initializing form. Please refresh the page.', 'error');
+            }
         },
 
         /**
@@ -3090,11 +3098,43 @@
     // Expose SalonForm globally
     window.SalonForm = SalonForm;
     
+    // Global error handler for production
+    window.addEventListener('error', (event) => {
+        console.error('Global error caught:', event.error);
+        if (utils.isDevelopment()) {
+            console.error('Error details:', {
+                message: event.message,
+                filename: event.filename,
+                lineno: event.lineno,
+                colno: event.colno,
+                error: event.error
+            });
+        }
+    });
+    
+    // Performance monitoring
+    window.addEventListener('load', () => {
+        if (utils.isDevelopment()) {
+            const loadTime = performance.now();
+            console.log(`Page loaded in ${loadTime.toFixed(2)}ms`);
+        }
+    });
+    
     // Initialize when DOM is ready
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => SalonForm.init());
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                SalonForm.init();
+            } catch (error) {
+                console.error('Failed to initialize SalonForm:', error);
+            }
+        });
     } else {
-        SalonForm.init();
+        try {
+            SalonForm.init();
+        } catch (error) {
+            console.error('Failed to initialize SalonForm:', error);
+        }
     }
 })();
 
