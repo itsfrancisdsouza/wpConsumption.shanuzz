@@ -4,10 +4,14 @@
     <title>Salon Client Consultation & Product Consumption Form</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8">
+    <!-- Google Fonts - Roboto Condensed -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;500;700&display=swap" rel="stylesheet">
     <!-- Content Security Policy - Uncomment for production -->
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; connect-src https://docs.google.com https://script.google.com https://*.googleusercontent.com;"> -->
     <style>
-        /* CSS Variables for consistent theming */
+        /* CSS Variables for Amazon-like theming */
         :root {
             --lk-golden: 1.618;
             --lk-base: 15px;
@@ -19,24 +23,24 @@
             --lk-space-2xl: calc(var(--lk-base) * var(--lk-golden) * var(--lk-golden) * var(--lk-golden));
             --lk-text-caption: calc(var(--lk-base) / var(--lk-golden) / var(--lk-golden));
             --lk-text-label: calc(var(--lk-base) / var(--lk-golden));
-            --lk-text-body: var(--lk-base);
-            --lk-text-subtitle: calc(var(--lk-base) * var(--lk-golden));
-            --lk-text-title: calc(var(--lk-base) * var(--lk-golden) * var(--lk-golden));
+            --lk-text-body: 16px; /* Amazon body size */
+            --lk-text-subtitle: 18px; /* Amazon subtitle size */
+            --lk-text-title: 24px; /* Amazon title size */
             --lk-text-display: calc(var(--lk-base) * var(--lk-golden) * var(--lk-golden) * var(--lk-golden));
             --lk-radius-sm: 7px;
             --lk-radius-md: 10px;
             --lk-radius-lg: 14px;
-            --lk-primary: #8B5CF6;
-            --lk-primary-light: #A78BFA;
+            --lk-primary: #FF9900; /* Amazon accent "Error Text Orange" */
+            --lk-primary-light: #FFB84D; /* lighter yellow for hover */
             --lk-secondary: #06B6D4;
             --lk-accent: #F59E0B;
             --lk-surface: #FFFFFF;
-            --lk-surface-variant: #F8FAFC;
+            --lk-surface-variant: #F7F7F7;
             --lk-surface-container: #F1F5F9;
-            --lk-outline: #E2E8F0;
-            --lk-outline-variant: #CBD5E1;
-            --lk-on-surface: #0F172A;
-            --lk-on-surface-variant: #475569;
+            --lk-outline: #E5E7EB; /* light divider */
+            --lk-outline-variant: #D1D5DB;
+            --lk-on-surface: #111111; /* very dark text */
+            --lk-on-surface-variant: #555555; /* secondary text */
             --lk-success: #10B981;
             --lk-error: #EF4444;
             --lk-sage-green: #87A96B;
@@ -64,7 +68,7 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: 'Roboto Condensed', 'sans-serif-condensed', Roboto, system-ui, sans-serif;
             font-size: var(--lk-text-body);
             line-height: var(--lk-golden);
             background: var(--lk-surface-variant);
@@ -89,18 +93,20 @@
         .header {
             text-align: center;
             margin-bottom: var(--lk-space-xl);
+            border-bottom: 1px solid var(--lk-outline);
+            padding-bottom: var(--lk-space-md);
         }
 
         .title {
-            font-size: 1.8rem;
+            font-size: var(--lk-text-title);
             font-weight: 700;
-            color: var(--lk-primary);
+            color: var(--lk-on-surface);
             margin-bottom: var(--lk-space-xs);
             letter-spacing: -0.02em;
         }
 
         .subtitle {
-            font-size: var(--lk-text-label);
+            font-size: var(--lk-text-subtitle);
             color: var(--lk-on-surface-variant);
             font-weight: 400;
         }
@@ -112,34 +118,34 @@
             background: var(--lk-surface);
             border: 1px solid var(--lk-outline-variant);
             border-radius: var(--lk-radius-md);
-            box-shadow: 0 1px 2px rgba(139,92,246,0.03);
+            box-shadow: none;
         }
 
         .consent-section {
             margin-bottom: var(--lk-space-xl);
             padding: var(--lk-space-lg);
-            background: var(--lk-sage-green-bg);
-            border: 2px solid var(--lk-sage-green);
+            background: var(--lk-surface);
+            border: 1px solid var(--lk-outline);
             border-radius: var(--lk-radius-md);
-            box-shadow: 0 2px 8px rgba(135, 169, 107, 0.1);
+            box-shadow: none;
         }
 
         .signature-section {
             margin-bottom: var(--lk-space-xl);
             padding: var(--lk-space-lg);
             background: var(--lk-surface);
-            border: 2px solid var(--lk-primary);
+            border: 1px solid var(--lk-outline);
             border-radius: var(--lk-radius-md);
-            box-shadow: 0 2px 8px rgba(139, 92, 246, 0.1);
+            box-shadow: none;
         }
 
         .section-title {
-            font-size: 1.1rem;
-            font-weight: 600;
+            font-size: 17px;
+            font-weight: 700;
             color: var(--lk-on-surface);
             margin-bottom: var(--lk-space-md);
             padding-bottom: var(--lk-space-xs);
-            border-bottom: 2px solid var(--lk-primary);
+            border-bottom: 2px solid var(--lk-outline);
             display: flex;
             align-items: center;
             gap: var(--lk-space-sm);
@@ -148,21 +154,21 @@
         .consent-title {
             font-size: 1.2rem;
             font-weight: 700;
-            color: var(--lk-sage-green);
+            color: var(--lk-on-surface);
             margin-bottom: var(--lk-space-lg);
             text-align: center;
             padding-bottom: var(--lk-space-sm);
-            border-bottom: 2px solid var(--lk-sage-green);
+            border-bottom: 2px solid var(--lk-outline);
         }
 
         .signature-title {
             font-size: 1.2rem;
             font-weight: 700;
-            color: var(--lk-primary);
+            color: var(--lk-on-surface);
             margin-bottom: var(--lk-space-lg);
             text-align: center;
             padding-bottom: var(--lk-space-sm);
-            border-bottom: 2px solid var(--lk-primary);
+            border-bottom: 2px solid var(--lk-outline);
         }
 
         .consent-content {
@@ -180,7 +186,7 @@
 
         .consent-item:before {
             content: "•";
-            color: var(--lk-sage-green);
+            color: var(--lk-primary);
             font-weight: bold;
             position: absolute;
             left: 0;
@@ -196,7 +202,7 @@
             padding: var(--lk-space-md);
             background: white;
             border-radius: var(--lk-radius-sm);
-            border: 1px solid var(--lk-sage-green-light);
+            border: 1px solid var(--lk-outline-variant);
         }
 
         .consent-option {
@@ -210,13 +216,13 @@
         }
 
         .consent-option:hover {
-            background: var(--lk-sage-green-bg);
+            background: var(--lk-surface-variant);
         }
 
         .consent-radio {
             width: 20px;
             height: 20px;
-            accent-color: var(--lk-sage-green);
+            accent-color: var(--lk-primary);
         }
 
         .consent-label {
@@ -238,7 +244,7 @@
 
         .signature-pad-wrapper {
             position: relative;
-            border: 2px dashed var(--lk-primary);
+            border: 2px dashed var(--lk-outline);
             border-radius: var(--lk-radius-md);
             background: var(--lk-surface-variant);
             margin: 0 auto var(--lk-space-md);
@@ -274,10 +280,10 @@
 
         .signature-btn {
             padding: var(--lk-space-sm) var(--lk-space-md);
-            border: 1px solid var(--lk-primary);
+            border: 1px solid var(--lk-outline-variant);
             border-radius: var(--lk-radius-sm);
             background: white;
-            color: var(--lk-primary);
+            color: var(--lk-on-surface);
             cursor: pointer;
             font-size: var(--lk-text-caption);
             transition: all var(--lk-transition-normal);
@@ -333,7 +339,7 @@
 
         .photo-upload-box:hover {
             border-color: var(--lk-primary);
-            background: rgba(139, 92, 246, 0.02);
+            background: rgba(255, 153, 0, 0.02);
         }
 
         .photo-upload-box.has-photo {
@@ -430,8 +436,8 @@
 
         .label {
             display: block;
-            font-size: 1rem;
-            font-weight: 500;
+            font-size: 15px;
+            font-weight: 700;
             color: var(--lk-on-surface);
             margin-bottom: var(--lk-space-xs);
         }
@@ -447,9 +453,9 @@
             width: 100%;
             min-height: 44px;
             padding: 12px;
-            border: 1px solid var(--lk-outline);
-            border-radius: var(--lk-radius-sm);
-            font-size: 1rem;
+            border: 1px solid var(--lk-outline-variant);
+            border-radius: 10px;
+            font-size: 16px;
             background: var(--lk-surface);
             color: var(--lk-on-surface);
             transition: border-color var(--lk-transition-normal), box-shadow var(--lk-transition-normal);
@@ -478,7 +484,7 @@
         .select:focus {
             outline: none;
             border-color: var(--lk-primary);
-            box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.1);
+            box-shadow: 0 0 0 2px rgba(255,153,0,0.25);
         }
 
         .input.error,
@@ -531,49 +537,49 @@
         }
 
         .product-entry, .stylist-entry, .product-sale-entry {
-            border: 1px solid var(--lk-outline-variant);
-            border-radius: var(--lk-radius-md);
+            border: 1px solid var(--lk-outline);
+            border-radius: 12px;
             padding: var(--lk-space-md);
             margin-bottom: var(--lk-space-md);
-            background: var(--lk-surface-container);
+            background: var(--lk-surface);
             position: relative;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            box-shadow: none;
         }
 
         /* Button styles */
         .btn {
             font-family: inherit;
             font-size: 1rem;
-            font-weight: 500;
+            font-weight: 700;
             padding: 12px 20px;
             border: none;
-            border-radius: var(--lk-radius-sm);
+            border-radius: 10px;
             cursor: pointer;
             transition: all var(--lk-transition-normal) ease;
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            letter-spacing: 0.005em;
+            letter-spacing: 0;
             text-decoration: none;
             user-select: none;
         }
         .btn-primary { 
             background: var(--lk-primary); 
-            color: white; 
+            color: #111; 
         }
         .btn-primary:hover { 
-            background: var(--lk-primary-light); 
+            background: #FFA31A; 
             transform: translateY(-1px);
-            box-shadow: 0 4px 8px rgba(139, 92, 246, 0.2);
+            box-shadow: 0 4px 8px rgba(255, 153, 0, 0.2);
         }
         .btn-success { 
-            background: var(--lk-success); 
+            background: #111111; 
             color: white; 
         }
         .btn-success:hover { 
-            background: #059669; 
+            background: #333333; 
             transform: translateY(-1px);
-            box-shadow: 0 4px 8px rgba(16, 185, 129, 0.2);
+            box-shadow: 0 4px 8px rgba(17, 17, 17, 0.2);
         }
         .btn-error {
             background: var(--lk-error); 
@@ -591,11 +597,12 @@
             font-size: 1.2rem;
             padding: 18px var(--lk-space-xl);
             margin-top: var(--lk-space-xl);
-            background: linear-gradient(135deg, var(--lk-primary), var(--lk-secondary));
+            background: var(--lk-primary);
+            color: #111;
         }
         .btn-submit:hover {
             transform: translateY(-1px) scale(1.01);
-            box-shadow: 0 7px 14px rgba(139,92,246,0.12);
+            box-shadow: 0 7px 14px rgba(255,153,0,0.12);
         }
         .icon { 
             margin-left: -3px; 
@@ -634,13 +641,13 @@
             background: var(--lk-success);
             color: white;
             padding: 12px 20px;
-            border-radius: var(--lk-radius-sm);
+            border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             transform: translateX(400px);
             transition: transform var(--lk-transition-slow) ease;
             z-index: var(--lk-z-toast);
             max-width: 300px;
-            font-weight: 500;
+            font-weight: 700;
         }
         .toast.show {
             transform: translateX(0);
@@ -657,7 +664,7 @@
         /* Submit ID Display */
         .submit-id-display {
             background: var(--lk-primary);
-            color: white;
+            color: #111;
             padding: var(--lk-space-sm);
             border-radius: var(--lk-radius-sm);
             margin-bottom: var(--lk-space-md);
@@ -680,7 +687,7 @@
             max-height: 200px;
             overflow-y: auto;
             z-index: var(--lk-z-dropdown);
-            box-shadow: 0 4px 12px rgba(139,92,246,0.08);
+            box-shadow: 0 4px 12px rgba(255,153,0,0.08);
             display: none;
         }
 
@@ -716,7 +723,7 @@
 
         .unit-pill {
             background: var(--lk-primary);
-            color: white;
+            color: #111;
             font-size: 0.85rem;
             padding: 4px 10px;
             border-radius: 12px;
@@ -790,6 +797,689 @@
             .container { 
                 max-width: 900px; 
             }
+        }
+
+        /* Linktree-style transformation CSS */
+        /* 1) Page background and centering */
+        body {
+            background: linear-gradient(180deg, #f7f7fb 0%, #eef1f7 100%);
+        }
+
+        .container {
+            max-width: 520px;
+            margin: 0 auto;
+            padding: 24px 20px 48px;
+            background: transparent;
+            border: 0;
+            box-shadow: none;
+            min-height: unset;
+        }
+
+        /* 2) Head area like Linktree profile */
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .title {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #111827;
+            margin: 8px 0 6px;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: #6b7280;
+            font-weight: 400;
+        }
+
+        /* 3) Hide visual chrome: borders, boxes, shadows */
+        .section,
+        .consent-section,
+        .signature-section {
+            border: 0 !important;
+            background: transparent !important;
+            box-shadow: none !important;
+            padding: 0 !important;
+            margin-bottom: 24px !important;
+        }
+
+        .section-title {
+            border: 0;
+            padding: 0;
+            margin: 20px 0 10px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #374151;
+        }
+
+        /* 4) Convert all primary interactions into big Linktree-style buttons */
+        .btn,
+        .btn-submit {
+            width: 100%;
+            justify-content: center;
+            height: 54px;
+            border-radius: 14px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            background: #111827;
+            color: #fff;
+            border: 0;
+            box-shadow: 0 6px 16px rgba(17, 24, 39, 0.12);
+            transform: translateZ(0);
+            transition: transform .15s ease, box-shadow .15s ease, background .15s ease, opacity .15s ease;
+        }
+
+        .btn:hover,
+        .btn-submit:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 10px 24px rgba(17, 24, 39, 0.16);
+            background: #0f172a;
+        }
+
+        .btn:active,
+        .btn-submit:active {
+            transform: translateY(0);
+            box-shadow: 0 4px 12px rgba(17, 24, 39, 0.12);
+        }
+
+        /* Keep success and error as styles, but flatter */
+        .btn-success { background: #10b981; }
+        .btn-success:hover { background: #059669; }
+        .btn-error { background: #ef4444; }
+        .btn-error:hover { background: #dc2626; }
+
+        /* 5) Make "form chooser" the top stack buttons like Linktree links */
+        .form-chooser-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-top: 22px;
+        }
+
+        .form-chooser-buttons .btn {
+            height: 56px;
+            border-radius: 16px;
+            background: #ffffff;
+            color: #111827;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+        }
+
+        .form-chooser-buttons .btn:hover {
+            background: #f9fafb;
+            transform: translateY(-1px);
+            box-shadow: 0 10px 24px rgba(0,0,0,0.10);
+        }
+
+        /* 6) Inputs: minimal, pill-ish, clean */
+        .input,
+        .textarea,
+        .select {
+            border: 1px solid #e5e7eb;
+            background: #ffffff;
+            border-radius: 14px;
+            min-height: 48px;
+            padding: 12px 14px;
+            font-size: 1rem;
+            box-shadow: 0 1px 0 rgba(0,0,0,0.02);
+        }
+
+        .textarea { min-height: 100px; }
+
+        .input:focus,
+        .textarea:focus,
+        .select:focus {
+            border-color: #111827;
+            box-shadow: 0 0 0 3px rgba(17,24,39,0.12);
+        }
+
+        .label {
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        /* 7) Make action rows look like stacked links */
+        .entry-controls,
+        .section-controls {
+            border-top: 0;
+            padding-top: 0;
+            text-align: center;
+        }
+
+        /* 8) Turn checkbox grid and radios into cleaner tap targets */
+        .checkbox-grid {
+            grid-template-columns: 1fr;
+            gap: 10px;
+        }
+
+        .checkbox-item {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 10px 12px;
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            accent-color: #111827;
+        }
+
+        .consent-agreement {
+            background: transparent;
+            border: 0;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .consent-option {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 10px 14px;
+        }
+
+        .consent-option:hover { background: #f9fafb; }
+
+        /* 9) Signature: keep minimal frame */
+        .signature-pad-wrapper {
+            border: 2px dashed #e5e7eb;
+            background: #fff;
+            border-radius: 14px;
+        }
+
+        /* 10) Photo upload boxes -> match button cards */
+        .photo-upload-box {
+            border: 1px dashed #e5e7eb;
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.04);
+        }
+
+        .photo-upload-box.has-photo {
+            border-color: #10b981;
+            background: #ecfdf5;
+        }
+
+        /* 11) Autocomplete dropdown clean */
+        .autocomplete-suggestions {
+            border: 1px solid #e5e7eb;
+            border-top: none;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+        }
+
+        .autocomplete-suggestion { font-size: 0.98rem; }
+
+        /* 12) Toast subtle */
+        .toast {
+            border-radius: 12px;
+            box-shadow: 0 8px 22px rgba(0,0,0,0.12);
+        }
+
+        /* 13) Hide heavy dividers around entries to keep the list clean */
+        .product-entry,
+        .stylist-entry,
+        .product-sale-entry {
+            border: 0;
+            background: transparent;
+            box-shadow: none;
+            padding: 0;
+            margin: 0 0 16px;
+        }
+
+        /* 14) Make all "Add …" buttons look like Linktree links */
+        #addProductBtn,
+        #addProductSaleBtn,
+        #addStylistBtn {
+            background: #ffffff;
+            color: #111827;
+            border: 1px solid #e5e7eb;
+            height: 52px;
+            border-radius: 14px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+        }
+
+        #addProductBtn:hover,
+        #addProductSaleBtn:hover,
+        #addStylistBtn:hover {
+            background: #f9fafb;
+        }
+
+        /* 15) Submit buttons pinned as big links */
+        .btn-submit {
+            margin-top: 18px;
+            background: #111827 !important;
+        }
+
+        /* 16) Small screens */
+        @media (min-width: 600px) {
+            .container {
+                max-width: 520px !important;
+                margin: 32px auto;
+            }
+        }
+
+        /* Loading States */
+        .loading-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(255,255,255,0.92);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 20000; /* higher than toast (9999) and modal (10000) */
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+        }
+
+        .loading-overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #loadingOverlay > div {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid #e5e7eb;
+            border-top: 3px solid #111827;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            flex-shrink: 0;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            margin-top: 12px;
+            font-size: 0.95rem;
+            color: #6b7280;
+            font-weight: 500;
+            text-align: center;
+            max-width: 80vw;
+        }
+
+        /* Button loading states */
+        .btn.loading,
+        .btn-submit.loading {
+            position: relative;
+            color: transparent !important;
+            pointer-events: none;
+        }
+
+        .btn.loading::after,
+        .btn-submit.loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 16px;
+            height: 16px;
+            margin: -8px 0 0 -8px;
+            border: 2px solid transparent;
+            border-top: 2px solid #111827; /* dark spinner */
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        /* Form field loading states */
+        .field.loading {
+            position: relative;
+            pointer-events: none;
+        }
+
+        .field.loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 12px;
+            width: 12px;
+            height: 12px;
+            margin-top: -6px;
+            border: 2px solid #e5e7eb;
+            border-top: 2px solid #111827;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        /* Enhanced Mobile Responsiveness */
+        @media (max-width: 480px) {
+            .container {
+                padding: 16px 12px 32px;
+                margin: 0;
+            }
+
+            .title {
+                font-size: 1.4rem;
+            }
+
+            .subtitle {
+                font-size: 0.9rem;
+            }
+
+            .btn,
+            .btn-submit {
+                height: 48px;
+                font-size: 1rem;
+                border-radius: 12px;
+            }
+
+            .form-chooser-buttons .btn {
+                height: 52px;
+                border-radius: 14px;
+            }
+
+            .input,
+            .textarea,
+            .select {
+                min-height: 44px;
+                padding: 10px 12px;
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+
+            .checkbox-grid {
+                gap: 8px;
+            }
+
+            .checkbox-item {
+                padding: 8px 10px;
+                font-size: 0.95rem;
+            }
+
+            .consent-option {
+                padding: 8px 12px;
+                font-size: 0.9rem;
+            }
+
+            .signature-pad-wrapper {
+                max-width: 100%;
+            }
+
+            .photo-upload-box {
+                padding: 16px;
+            }
+
+            .section-title {
+                font-size: 0.9rem;
+                margin: 16px 0 8px;
+            }
+
+            .label {
+                font-size: 0.95rem;
+            }
+
+            /* Improve touch targets */
+            .btn,
+            .btn-submit,
+            .checkbox-item,
+            .consent-option {
+                min-height: 44px;
+            }
+
+            /* Better spacing for mobile */
+            .section,
+            .consent-section,
+            .signature-section {
+                margin-bottom: 20px !important;
+            }
+
+            /* Optimize autocomplete for mobile */
+            .autocomplete-suggestions {
+                max-height: 150px;
+                font-size: 0.95rem;
+            }
+
+            .autocomplete-suggestion {
+                padding: 10px 12px;
+                font-size: 0.95rem;
+            }
+
+            /* Improve toast positioning on mobile */
+            .toast {
+                top: 10px;
+                right: 10px;
+                left: 10px;
+                max-width: none;
+                border-radius: 8px;
+            }
+
+            /* Mobile loading overlay optimizations */
+            .loading-overlay {
+                padding: 20px;
+            }
+
+            .loading-spinner {
+                width: 36px;
+                height: 36px;
+                border-width: 2px;
+            }
+
+            .loading-text {
+                font-size: 0.9rem;
+                margin-top: 10px;
+                max-width: 90vw;
+            }
+        }
+
+        /* Tablet optimizations */
+        @media (min-width: 481px) and (max-width: 768px) {
+            .container {
+                padding: 20px 16px 40px;
+            }
+
+            .btn,
+            .btn-submit {
+                height: 50px;
+            }
+
+            .form-chooser-buttons .btn {
+                height: 54px;
+            }
+        }
+
+        /* Landscape mobile optimizations */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .container {
+                padding: 12px 16px 24px;
+            }
+
+            .header {
+                margin-bottom: 16px;
+            }
+
+            .title {
+                font-size: 1.3rem;
+                margin: 4px 0 4px;
+            }
+
+            .subtitle {
+                font-size: 0.85rem;
+            }
+
+            /* Landscape loading overlay adjustments */
+            .loading-overlay {
+                padding: 16px;
+            }
+
+            .loading-spinner {
+                width: 32px;
+                height: 32px;
+            }
+
+            .loading-text {
+                font-size: 0.85rem;
+                margin-top: 8px;
+            }
+        }
+
+        /* High DPI displays */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .btn,
+            .btn-submit,
+            .input,
+            .textarea,
+            .select {
+                border-width: 0.5px;
+            }
+        }
+
+        /* Reduced motion for accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            .btn,
+            .btn-submit,
+            .loading-spinner,
+            .btn.loading::after,
+            .btn-submit.loading::after,
+            .field.loading::after {
+                animation: none;
+                transition: none;
+            }
+
+            /* Ensure loading overlay still shows without animations */
+            .loading-overlay {
+                transition: none;
+            }
+
+            .loading-overlay.show {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+
+        /* Distinct section theming */
+        .section.is-consumption {
+            --sec-color: #0ea5e9; /* blue */
+            --sec-bg: #eff6ff;
+            --sec-badge: #dbeafe;
+        }
+        .section.is-sale {
+            --sec-color: #f59e0b; /* amber */
+            --sec-bg: #fffbeb;
+            --sec-badge: #fef3c7;
+        }
+        .section.is-details {
+            --sec-color: #10b981; /* green */
+            --sec-bg: #ecfdf5;
+            --sec-badge: #d1fae5;
+        }
+        .section.is-notes {
+            --sec-color: #8b5cf6; /* violet */
+            --sec-bg: #f5f3ff;
+            --sec-badge: #ede9fe;
+        }
+
+        /* Base visual treatment for all themed sections */
+        .section.is-consumption,
+        .section.is-sale,
+        .section.is-details,
+        .section.is-notes {
+            position: relative;
+            padding: 16px 14px 12px !important;
+            margin-bottom: 22px !important;
+            border-radius: 14px !important;
+            border: 1px solid color-mix(in srgb, var(--sec-color) 20%, #e5e7eb) !important;
+            background: color-mix(in srgb, var(--sec-bg) 70%, #ffffff 30%) !important;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.04);
+        }
+
+        /* Colored left rail */
+        .section.is-consumption::before,
+        .section.is-sale::before,
+        .section.is-details::before,
+        .section.is-notes::before {
+            content: '';
+            position: absolute;
+            left: -2px;
+            top: 10px;
+            bottom: 10px;
+            width: 4px;
+            border-radius: 4px;
+            background: var(--sec-color);
+        }
+
+        /* Section header row */
+        .section .section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 6px 2px 12px !important;
+            font-size: 1.05rem !important;
+            font-weight: 800 !important;
+            color: #111827 !important;
+            border: 0 !important;
+            padding: 0 !important;
+        }
+
+        /* Icon badge */
+        .section .section-title .icon-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            background: var(--sec-badge);
+            color: var(--sec-color);
+            font-size: 18px;
+            box-shadow: inset 0 0 0 2px color-mix(in srgb, var(--sec-color) 25%, #ffffff);
+        }
+
+        /* Subtitle/helper line (optional) */
+        .section .section-sub {
+            margin: 4px 2px 10px;
+            font-size: 0.92rem;
+            color: #475569;
+        }
+
+        /* Slight card spacing for children */
+        .section .grid-1,
+        .section .grid-2,
+        .section .field,
+        .section .photo-section,
+        .section .entry-controls,
+        .section .section-controls {
+            margin-left: 2px;
+            margin-right: 2px;
+        }
+
+        /* Sticky section chip (optional, small floating label) */
+        .section-chip {
+            position: sticky;
+            top: 6px;
+            z-index: 5;
+            align-self: flex-start;
+            display: inline-flex;
+            gap: 8px;
+            padding: 6px 10px;
+            margin: -6px 0 8px 0;
+            border-radius: 999px;
+            background: #111827;
+            color: #fff;
+            font-size: 0.82rem;
+            font-weight: 700;
+            box-shadow: 0 6px 18px rgba(17,24,39,0.16);
+        }
+
+        @media (max-width: 480px) {
+            .section .section-title { font-size: 1rem !important; }
+            .section .section-title .icon-badge { width: 32px; height: 32px; font-size: 17px; }
+            .section-chip { top: 8px; font-size: 0.8rem; }
         }
     </style>
 </head>
@@ -1050,9 +1740,10 @@
             </div>
         </div>
         <!-- Product Consumption Section -->
-        <div class="section">
+        <div class="section is-consumption">
+            <div class="section-chip">🧴 Product Consumption</div>
             <div class="section-title">
-                <span>🧴</span> Product Consumption & Inventory
+                <span class="icon-badge">🧴</span> Product Consumption & Inventory
             </div>
             <div id="productContainer">
                 <div class="product-entry">
@@ -1090,9 +1781,10 @@
             </div>
         </div>
         <!-- Product Sale & Inventory Section -->
-        <div class="section">
+        <div class="section is-sale">
+            <div class="section-chip">💰 Product Sale</div>
             <div class="section-title">
-                <span>💰</span> Product Sale & Inventory
+                <span class="icon-badge">💰</span> Product Sale & Inventory
             </div>
             <div id="productSaleContainer">
                 <div class="product-sale-entry">
@@ -1130,9 +1822,10 @@
             </div>
         </div>
         <!-- Service Details Section -->
-        <div class="section">
+        <div class="section is-details">
+            <div class="section-chip">✨ Service Details</div>
             <div class="section-title">
-                <span>✨</span> Service Details & Results
+                <span class="icon-badge">✨</span> Service Details & Results
             </div>
             <div id="stylistContainer">
                 <div class="stylist-entry">
@@ -1167,9 +1860,10 @@
             </div>
         </div>
         <!-- Service Notes Section -->
-        <div class="section">
+        <div class="section is-notes">
+            <div class="section-chip">📝 Notes</div>
             <div class="section-title">
-                <span>📝</span> Service Notes & Techniques
+                <span class="icon-badge">📝</span> Service Notes & Techniques
             </div>
             <div class="field">
                 <label class="label" for="serviceNotes">Service Notes & Techniques Used</label>
@@ -1198,6 +1892,14 @@
 </div>
 
 <div id="toast" class="toast" role="alert" aria-live="assertive"></div>
+
+<!-- Loading Overlay -->
+<div id="loadingOverlay" class="loading-overlay">
+    <div style="text-align: center;">
+        <div class="loading-spinner"></div>
+        <div class="loading-text" id="loadingText">Loading...</div>
+    </div>
+</div>
 
 <template id="productTemplate">
     <div class="product-entry">
@@ -1285,7 +1987,10 @@
         MAX_FILE_SIZE: 5 * 1024 * 1024, // 5MB
         MAX_SIGNATURE_STATES: 10,
         DEBOUNCE_DELAY: 300,
-        TOAST_DURATION: 6000
+        TOAST_DURATION: 6000,
+        RETRY_ATTEMPTS: 3,
+        RETRY_DELAY: 1000,
+        CACHE_DURATION: 5 * 60 * 1000 // 5 minutes
     };
     
     // State management
@@ -1306,19 +2011,42 @@
         beforePhotoData: null,
         afterPhotoData: null,
         isFormSubmitting: false,
-        debounceTimers: new Map()
+        debounceTimers: new Map(),
+        // Performance and loading state management
+        isLoading: false,
+        loadingText: '',
+        dataCache: new Map(),
+        lastDataFetch: 0,
+        retryCount: 0,
+        isOnline: navigator.onLine,
+        // Performance optimizations
+        observer: null,
+        intersectionObserver: null,
+        resizeObserver: null
     };
     
     // Utility functions
     const utils = {
         /**
-         * Generate unique submit ID
+         * Generate unique submit ID in format AA01AA1111
          * @returns {string} Unique submit ID
          */
         generateSubmitId() {
-            const timestamp = new Date().toISOString().replace(/[-:.]/g, '').slice(0, 15);
-            const random = Math.random().toString(36).substr(2, 4).toUpperCase();
-            return `SLN${timestamp}${random}`;
+            // Generate 2 random uppercase letters
+            const letters1 = String.fromCharCode(65 + Math.floor(Math.random() * 26)) + 
+                           String.fromCharCode(65 + Math.floor(Math.random() * 26));
+            
+            // Generate 2 random digits
+            const digits1 = Math.floor(Math.random() * 100).toString().padStart(2, '0');
+            
+            // Generate 2 more random uppercase letters
+            const letters2 = String.fromCharCode(65 + Math.floor(Math.random() * 26)) + 
+                           String.fromCharCode(65 + Math.floor(Math.random() * 26));
+            
+            // Generate 4 random digits
+            const digits2 = Math.floor(Math.random() * 10000).toString().padStart(4, '0');
+            
+            return `${letters1}${digits1}${letters2}${digits2}`;
         },
         
         /**
@@ -1375,15 +2103,141 @@
             return window.location.hostname === 'localhost' || 
                    window.location.hostname === '127.0.0.1' ||
                    window.location.protocol === 'file:';
+        },
+
+        /**
+         * Show loading overlay
+         * @param {string} text - Loading text to display
+         */
+        showLoading(text = 'Loading...') {
+            state.isLoading = true;
+            state.loadingText = text;
+            const overlay = document.getElementById('loadingOverlay');
+            const loadingText = document.getElementById('loadingText');
+            
+            if (overlay && loadingText) {
+                loadingText.textContent = text;
+                overlay.classList.add('show');
+            }
+        },
+
+        /**
+         * Hide loading overlay
+         */
+        hideLoading() {
+            state.isLoading = false;
+            state.loadingText = '';
+            const overlay = document.getElementById('loadingOverlay');
+            
+            if (overlay) {
+                overlay.classList.remove('show');
+            }
+        },
+
+        /**
+         * Show button loading state
+         * @param {HTMLButtonElement} button - Button to show loading for
+         * @param {string} loadingText - Text to show while loading
+         */
+        showButtonLoading(button, loadingText = 'Loading...') {
+            if (button) {
+                button.classList.add('loading');
+                button.setAttribute('data-original-text', button.innerHTML);
+                button.innerHTML = loadingText;
+                button.disabled = true;
+            }
+        },
+
+        /**
+         * Hide button loading state
+         * @param {HTMLButtonElement} button - Button to hide loading for
+         */
+        hideButtonLoading(button) {
+            if (button) {
+                button.classList.remove('loading');
+                const originalText = button.getAttribute('data-original-text');
+                if (originalText) {
+                    button.innerHTML = originalText;
+                    button.removeAttribute('data-original-text');
+                }
+                button.disabled = false;
+            }
+        },
+
+        /**
+         * Check if data is cached and not expired
+         * @param {string} key - Cache key
+         * @returns {boolean} Is data cached and valid
+         */
+        isDataCached(key) {
+            const cached = state.dataCache.get(key);
+            if (!cached) return false;
+            
+            const now = Date.now();
+            return (now - cached.timestamp) < CONFIG.CACHE_DURATION;
+        },
+
+        /**
+         * Get cached data
+         * @param {string} key - Cache key
+         * @returns {*} Cached data or null
+         */
+        getCachedData(key) {
+            const cached = state.dataCache.get(key);
+            return cached ? cached.data : null;
+        },
+
+        /**
+         * Set cached data
+         * @param {string} key - Cache key
+         * @param {*} data - Data to cache
+         */
+        setCachedData(key, data) {
+            state.dataCache.set(key, {
+                data: data,
+                timestamp: Date.now()
+            });
+        },
+
+        /**
+         * Retry function with exponential backoff
+         * @param {Function} fn - Function to retry
+         * @param {number} maxAttempts - Maximum retry attempts
+         * @returns {Promise} Promise that resolves with function result
+         */
+        async retryWithBackoff(fn, maxAttempts = CONFIG.RETRY_ATTEMPTS) {
+            let lastError;
+            
+            for (let attempt = 1; attempt <= maxAttempts; attempt++) {
+                try {
+                    return await fn();
+                } catch (error) {
+                    lastError = error;
+                    
+                    if (attempt === maxAttempts) {
+                        throw error;
+                    }
+                    
+                    // Exponential backoff
+                    const delay = CONFIG.RETRY_DELAY * Math.pow(2, attempt - 1);
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                }
+            }
+            
+            throw lastError;
         }
     };
     
     // Main SalonForm object with improved modularity
     const SalonForm = {
         /**
-         * Initialize the form application
+         * Initialize the form application with performance optimizations
          */
         init() {
+            // Set up performance optimizations
+            this.setupPerformanceOptimizations();
+            
+            // Initialize core functionality
             this.setInitialDate();
             this.bindEvents();
             this.updateTotalCost();
@@ -1391,6 +2245,136 @@
             this.initSignaturePad();
             this.initPhotoHandlers();
             this.setupEventDelegation();
+            
+            // Set up mobile-specific optimizations
+            this.setupMobileOptimizations();
+            
+            // Monitor online/offline status
+            this.setupConnectivityMonitoring();
+        },
+
+        /**
+         * Set up performance optimizations
+         */
+        setupPerformanceOptimizations() {
+            // Use Intersection Observer for lazy loading if needed
+            if ('IntersectionObserver' in window) {
+                state.intersectionObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            // Optimize elements when they come into view
+                            entry.target.classList.add('optimized');
+                        }
+                    });
+                }, { threshold: 0.1 });
+            }
+            
+            // Use Resize Observer for responsive optimizations
+            if ('ResizeObserver' in window) {
+                state.resizeObserver = new ResizeObserver((entries) => {
+                    entries.forEach(entry => {
+                        // Handle responsive adjustments
+                        this.handleResize(entry);
+                    });
+                });
+            }
+            
+            // Optimize scroll performance
+            let ticking = false;
+            const handleScroll = () => {
+                if (!ticking) {
+                    requestAnimationFrame(() => {
+                        // Handle scroll optimizations
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            };
+            
+            window.addEventListener('scroll', handleScroll, { passive: true });
+        },
+
+        /**
+         * Set up mobile-specific optimizations
+         */
+        setupMobileOptimizations() {
+            // Prevent zoom on input focus (iOS)
+            const inputs = document.querySelectorAll('input, textarea, select');
+            inputs.forEach(input => {
+                input.addEventListener('focus', () => {
+                    if (window.innerWidth <= 768) {
+                        // Add viewport meta tag if not present
+                        let viewport = document.querySelector('meta[name="viewport"]');
+                        if (!viewport) {
+                            viewport = document.createElement('meta');
+                            viewport.name = 'viewport';
+                            document.head.appendChild(viewport);
+                        }
+                        viewport.content = 'width=device-width, initial-scale=1, maximum-scale=1';
+                    }
+                });
+            });
+            
+            // Optimize touch targets
+            const touchTargets = document.querySelectorAll('.btn, .checkbox-item, .consent-option');
+            touchTargets.forEach(target => {
+                target.style.minHeight = '44px';
+                target.style.minWidth = '44px';
+            });
+            
+            // Handle orientation changes
+            window.addEventListener('orientationchange', () => {
+                setTimeout(() => {
+                    this.handleOrientationChange();
+                }, 100);
+            });
+        },
+
+        /**
+         * Set up connectivity monitoring
+         */
+        setupConnectivityMonitoring() {
+            window.addEventListener('online', () => {
+                state.isOnline = true;
+                this.showToast('Connection restored', 'success');
+            });
+            
+            window.addEventListener('offline', () => {
+                state.isOnline = false;
+                this.showToast('Connection lost. Some features may be limited.', 'error');
+            });
+        },
+
+        /**
+         * Handle resize events
+         */
+        handleResize(entry) {
+            const { width, height } = entry.contentRect;
+            
+            // Adjust layout based on screen size
+            if (width < 480) {
+                document.body.classList.add('mobile-view');
+            } else {
+                document.body.classList.remove('mobile-view');
+            }
+        },
+
+        /**
+         * Handle orientation change
+         */
+        handleOrientationChange() {
+            // Reinitialize signature pad after orientation change
+            if (document.getElementById('signaturePad')) {
+                setTimeout(() => {
+                    this.initSignaturePad();
+                }, 200);
+            }
+            
+            // Adjust container height
+            const container = document.querySelector('.container');
+            if (container) {
+                container.style.minHeight = window.innerHeight + 'px';
+            }
         },
 
         /**
@@ -1963,55 +2947,107 @@
         },
 
         /**
-         * Load product and stylist data from Google Sheets
+         * Load product and stylist data from Google Sheets with caching and retry logic
          */
         async loadProducts() {
-            try {
-                const response = await fetch(CONFIG.CSV_URL);
+            const cacheKey = 'products_data';
+            
+            // Check cache first
+            if (utils.isDataCached(cacheKey)) {
+                const cachedData = utils.getCachedData(cacheKey);
+                this.updateStateWithData(cachedData);
+                this.setupAllAutocomplete();
                 
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                if (utils.isDevelopment()) {
+                    console.log('Loaded data from cache');
                 }
+                return;
+            }
+            
+            // Show loading state
+            utils.showLoading('Loading salon data...');
+            
+            try {
+                const data = await utils.retryWithBackoff(async () => {
+                    const response = await fetch(CONFIG.CSV_URL, {
+                        method: 'GET',
+                        headers: {
+                            'Cache-Control': 'no-cache',
+                            'Pragma': 'no-cache'
+                        }
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    
+                    const csvText = await response.text();
+                    return this.parseCSV(csvText);
+                });
                 
-                const csvText = await response.text();
-                const parsed = this.parseCSV(csvText);
+                // Cache the data
+                utils.setCachedData(cacheKey, data);
+                state.lastDataFetch = Date.now();
                 
                 // Update state with parsed data
-                state.products = parsed.products;
-                state.stylists = parsed.stylists;
-                state.consultationIds = parsed.consultationIds;
-                state.saleProducts = parsed.saleProducts;
-                state.salePrices = parsed.salePrices;
+                this.updateStateWithData(data);
                 
                 // Setup autocomplete after data is loaded
-                this.setupAutocomplete();
-                this.setupInitialUnitSuggestions();
-                this.setupStylistAutocomplete();
-                this.setupProductSaleAutocomplete();
-                this.setupConsultationIdAutocomplete();
+                this.setupAllAutocomplete();
                 
                 if (utils.isDevelopment()) {
                     console.log(`Loaded ${state.products.length} products, ${state.stylists.length} stylists, ${state.consultationIds.length} consultation IDs, ${state.saleProducts.length} sale products from Google Sheets`);
                 }
                 
+                this.showToast('Data loaded successfully', 'success');
+                
             } catch (error) {
                 console.error('Failed to load data:', error);
-                this.showToast('Failed to load data. Autocomplete will be limited.', 'error');
                 
-                // Initialize with empty data to prevent further errors
-                state.products = [];
-                state.stylists = [];
-                state.consultationIds = [];
-                state.saleProducts = [];
-                state.salePrices = {};
-                
-                // Still setup autocomplete with empty data
-                this.setupAutocomplete();
-                this.setupInitialUnitSuggestions();
-                this.setupStylistAutocomplete();
-                this.setupProductSaleAutocomplete();
-                this.setupConsultationIdAutocomplete();
+                // Try to use cached data even if expired
+                const cachedData = utils.getCachedData(cacheKey);
+                if (cachedData) {
+                    this.updateStateWithData(cachedData);
+                    this.setupAllAutocomplete();
+                    this.showToast('Using cached data. Some features may be limited.', 'error');
+                } else {
+                    // Initialize with empty data to prevent further errors
+                    this.updateStateWithData({
+                        products: [],
+                        stylists: [],
+                        consultationIds: [],
+                        saleProducts: [],
+                        salePrices: {}
+                    });
+                    this.setupAllAutocomplete();
+                    this.showToast('Failed to load data. Autocomplete will be limited.', 'error');
+                }
+            } finally {
+                utils.hideLoading();
             }
+        },
+
+        /**
+         * Update state with parsed data
+         * @param {Object} data - Parsed data object
+         */
+        updateStateWithData(data) {
+            state.products = data.products || [];
+            state.stylists = data.stylists || [];
+            state.consultationIds = data.consultationIds || [];
+            state.saleProducts = data.saleProducts || [];
+            state.salePrices = data.salePrices || {};
+        },
+
+        /**
+         * Setup all autocomplete functionality
+         */
+        setupAllAutocomplete() {
+            this.setupAutocomplete();
+            this.setupInitialUnitSuggestions();
+            this.setupStylistAutocomplete();
+            this.setupProductSaleAutocomplete();
+            this.setupConsultationIdAutocomplete();
         },
 
         parseCSV(text) {
@@ -2688,7 +3724,7 @@
         },
 
         /**
-         * Handle form submission with improved validation and error handling
+         * Handle form submission with improved validation, loading states, and enhanced Google Sheets integration
          * @param {Event} e - Form submit event
          */
         async handleSubmit(e) {
@@ -2703,8 +3739,8 @@
                 return;
             }
             
-            submitButton.classList.add('loading');
-            submitButton.textContent = 'Saving...';
+            // Show button loading state
+            utils.showButtonLoading(submitButton, 'Validating...');
             state.isFormSubmitting = true;
             
             let isValid = true;
@@ -2741,10 +3777,15 @@
             }
             
             if (!isValid) {
+                utils.hideButtonLoading(submitButton);
                 this.resetSubmitButton(submitButton, formType);
                 this.showToast('Please fix the errors above', 'error');
+                state.isFormSubmitting = false;
                 return;
             }
+            
+            // Update button text for submission
+            utils.showButtonLoading(submitButton, 'Preparing data...');
             
             // Generate unique Submit ID
             const submitId = utils.generateSubmitId();
@@ -2763,6 +3804,9 @@
             // Add form type and unique Submit ID
             data.formType = formType;
             data.submitId = submitId;
+            data.timestamp = new Date().toISOString();
+            data.userAgent = navigator.userAgent;
+            data.screenSize = `${window.screen.width}x${window.screen.height}`;
             
             // Add signature data and photos based on form type
             if (formType === 'consultation') {
@@ -2776,14 +3820,24 @@
                 console.log(`Sending ${formType} data to Google Sheets with Submit ID:`, submitId, data);
             }
             
+            // Update button text for actual submission
+            utils.showButtonLoading(submitButton, 'Saving to Google Sheets...');
+            
             try {
-                const response = await fetch(CONFIG.APPS_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: 'formData=' + encodeURIComponent(JSON.stringify(data))
+                // Enhanced Google Sheets submission with retry logic
+                await utils.retryWithBackoff(async () => {
+                    const response = await fetch(CONFIG.APPS_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: 'formData=' + encodeURIComponent(JSON.stringify(data))
+                    });
+                    
+                    // Since we're using no-cors, we can't check response status
+                    // But we can assume success if no error is thrown
+                    return response;
                 });
                 
                 // Show success message
@@ -2801,6 +3855,7 @@
                 console.error('Error saving to Google Sheets:', error);
                 this.showFallbackMessage(formType, submitId, data);
             } finally {
+                utils.hideButtonLoading(submitButton);
                 this.resetSubmitButton(submitButton, formType);
                 state.isFormSubmitting = false;
             }
@@ -2906,6 +3961,36 @@
             setTimeout(() => {
                 toast.classList.remove('show');
             }, CONFIG.TOAST_DURATION);
+        },
+
+        /**
+         * Cleanup function for performance optimizations
+         */
+        cleanup() {
+            // Disconnect observers
+            if (state.intersectionObserver) {
+                state.intersectionObserver.disconnect();
+            }
+            if (state.resizeObserver) {
+                state.resizeObserver.disconnect();
+            }
+            
+            // Clear timers
+            if (state.statusUpdateTimer) {
+                clearTimeout(state.statusUpdateTimer);
+            }
+            
+            // Clear debounce timers
+            state.debounceTimers.forEach(timer => {
+                clearTimeout(timer);
+            });
+            state.debounceTimers.clear();
+            
+            // Cleanup signature pad
+            this.cleanupSignaturePad();
+            
+            // Clear data cache
+            state.dataCache.clear();
         }
     };
 
